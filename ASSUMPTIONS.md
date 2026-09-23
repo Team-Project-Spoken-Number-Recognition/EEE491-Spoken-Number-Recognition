@@ -1,0 +1,96 @@
+# Assumptions and Unknowns
+
+Anything not confirmed by a released manual, the syllabus, an official datasheet, or a test result is
+listed here. Status: **UNVERIFIED → VERIFIED** (with evidence) or **REJECTED** (with the correct fact).
+
+## 1. Assumptions
+
+### ASSUMPTION-001 — FPGA part number
+- **Statement:** The Basys-3 FPGA is the XC7A35T-1CPG236C (Artix-7).
+- **Reason:** Digilent's published Basys-3 specification.
+- **Source:** General knowledge of Digilent documentation — not yet checked against our board.
+- **Status:** UNVERIFIED
+- **How to verify:** Vivado Hardware Manager auto-detect on our board; chip marking; Basys-3 Reference Manual.
+
+### ASSUMPTION-002 — Board revision
+- **Statement:** Board revision is irrelevant for our pins as long as Digilent's current `Basys3_Master.xdc` is used.
+- **Status:** UNVERIFIED · **How to verify:** Read revision on the PCB silkscreen; compare with the XDC revision notes.
+
+### ASSUMPTION-003 — UART TX pin
+- **Statement:** FPGA → PC transmit (`txd_out`) is on FPGA pin **A18** (`RsTx` in `Basys3_Master.xdc`); B18 is PC → FPGA.
+- **Source:** DBG §1 figure (FT2232 TXD → B18, RXD ← A18).
+- **Status:** UNVERIFIED · **How to verify:** Official `Basys3_Master.xdc`; hardware test HW-DEBUG-01.
+
+### ASSUMPTION-004 — Vivado version
+- **Statement:** Team uses Vivado ML Standard 2023.2 (observed on one member's PC; Block Memory Generator 8.4 in the manual screenshots is consistent).
+- **Status:** UNVERIFIED · **How to verify:** Each member + lab PC report `Help → About`.
+
+### ASSUMPTION-005 — MATLAB version and serial API
+- **Statement:** MATLAB R2023b (observed on one PC); `serialport` (base MATLAB, R2019b+) is available.
+- **Status:** UNVERIFIED · **How to verify:** `ver` on each PC.
+
+### ASSUMPTION-006 — Byte order inside a 32-bit word
+- **Statement:** Bytes are sent most-significant first (W[31:24] first).
+- **Source:** DERIVED from the DBG §1 header table: start word 55AACC03 is listed as bytes 55, AA, CC, 03 and end word AA5503CC as AA, 55, 03, CC. The manual says "1st 8-bit of first 32-bit data" without defining which byte is "1st".
+- **Status:** UNVERIFIED · **How to verify:** Ask assistant (INSTRUCTOR_QUESTIONS Q-02). Keep the choice consistent in RTL, testbench and MATLAB.
+
+### ASSUMPTION-007 — `ready_out` after reset
+- **Statement:** `ready_out` = '1' after reset (idle = ready).
+- **Source:** Waveforms in DBG §1 and CTRL §1 show `ready_out` high before `start_in`.
+- **Status:** UNVERIFIED · **How to verify:** INSTRUCTOR_QUESTIONS Q-03.
+
+### ASSUMPTION-008 — `start_in` while busy
+- **Statement:** A `start_in` pulse during an active transfer is ignored.
+- **Source:** Not specified in the manuals; defensive design choice.
+- **Status:** UNVERIFIED · **How to verify:** INSTRUCTOR_QUESTIONS Q-03.
+
+### ASSUMPTION-009 — FT2232HQ supports ≥ 115 200 baud
+- **Statement:** The FT2232HQ supports 115 200 baud (and higher, e.g. 1 Mbaud).
+- **Status:** UNVERIFIED · **How to verify:** FT2232H datasheet + AN232B-05; hardware test at each rate.
+
+### ASSUMPTION-010 — ADC sample RAM address width
+- **Statement:** Lab-ADC sample RAM is addressed with 14 bits (≤ 16 384 samples), because `frame_addr_out` is 14 bits.
+- **Status:** UNVERIFIED — inferred from Lab-CTRL only · **How to verify:** Lab-ADC manual when released.
+
+### ASSUMPTION-011 — Memory read latency of the demo ROM
+- **Statement:** Block Memory Generator ROM latency is 1 cycle without, 2 cycles with the primitive output register.
+- **Source:** DBG §3 ("usually one or two clock cycles, check the summary tab").
+- **Status:** UNVERIFIED · **How to verify:** Read the IP *Summary* tab after configuration; record value in the subsystem doc.
+
+### ASSUMPTION-012 — RECORD & NUMBER switches
+- **Statement:** They select template-recording mode and the number being recorded for Lab-COMPARE.
+- **Source:** Only their appearance in the CTRL §1 block diagram.
+- **Status:** UNVERIFIED — **do not design for it** until the COMPARE manual is released.
+
+### ASSUMPTION-013 — Lab schedule dates
+- **Statement:** Lab due dates are the Saturdays listed in the syllabus; they "may be advanced by three days" (to the Wednesday before).
+- **Source:** Syllabus Lab Schedule (tentative).
+- **Status:** UNVERIFIED — plan against the earlier (Wednesday) date until confirmed (Q-01).
+
+## 2. Unknown parameters register
+
+| # | Parameter | Needed by stage | Resolved by | Status |
+|---|---|---|---|---|
+| U-01 | Exact FPGA part / board revision | DEBUG | ASSUMPTION-001/002 | UNVERIFIED |
+| U-02 | Team-wide Vivado / MATLAB versions | DEBUG | DEC-008 | UNKNOWN |
+| U-03 | Byte order in 32-bit word | DEBUG | Q-02 | ASSUMED |
+| U-04 | Baud rate to use above 115 200 | DEBUG (optional) | HW test | UNKNOWN |
+| U-05 | Block RAM latency of demo ROM | DEBUG | IP summary | UNKNOWN |
+| U-06 | Which board input is RESET / START (button vs. switch) | DEBUG / CTRL | Q-05 | UNKNOWN |
+| U-07 | Minimum Lab-CTRL function required in the Lab-DEBUG demo | DEBUG | Q-04 | UNKNOWN |
+| U-08 | ADC part, resolution, SPI mode, SCLK limit | ADC | Lab-ADC manual + datasheet | UNKNOWN |
+| U-09 | Sampling frequency | ADC | Lab-ADC manual / team decision | UNKNOWN |
+| U-10 | Recording length / ADC RAM depth | ADC, CTRL | Lab-ADC manual | UNKNOWN |
+| U-11 | Frame length, number of frames | CTRL, WINDOW | Lab-WINDOW manual | UNKNOWN |
+| U-12 | Window function | WINDOW | Lab-WINDOW manual | UNKNOWN |
+| U-13 | FFT size, scaling, IP configuration | FFT | Lab-FFT manual | UNKNOWN |
+| U-14 | Where magnitude/power and log are computed | FFT / MEL / DCT | manuals | UNKNOWN |
+| U-15 | Number and spacing of MEL filters | MEL | Lab-MEL manual | UNKNOWN |
+| U-16 | Number of DCT coefficients | DCT | Lab-DCT manual (not received) | UNKNOWN |
+| U-17 | Classification method, templates, distance metric | COMPARE | Lab-COMPARE manual (not received) | UNKNOWN |
+| U-18 | Vocabulary: which numbers (0–9?), which language, speaker-dependent? | MATLAB, COMPARE | Q-08 | UNKNOWN |
+| U-19 | Required recognition rate | Final | Q-09 | UNKNOWN |
+| U-20 | Microphone type, amplifier gain, filter corner, supply rails | PCB | Lab-PCB manual | UNKNOWN |
+| U-21 | PCB manufacturing process and lead time at the lab | PCB | Q-10 | UNKNOWN |
+| U-22 | Fixed-point formats of every numeric signal | WINDOW onward | per-stage analysis | UNKNOWN |
+| U-23 | 7-segment display format for the result | COMPARE | Lab-COMPARE manual | UNKNOWN |

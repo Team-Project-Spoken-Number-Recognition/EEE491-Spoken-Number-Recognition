@@ -1,0 +1,78 @@
+# ---------- Vivado (projects are re-created from Tcl; see fpga/vivado/README.md) ----------
+*.jou
+*.log
+*.str
+*.pb
+*.wdb
+*.wcfg.bak
+*.cache/
+*.hw/
+*.runs/
+*.sim/
+*.gen/
+*.ip_user_files/
+*.srcs/
+*.xpr
+.Xil/
+NA/
+xsim.dir/
+webtalk*
+vivado_pid*.zip
+usage_statistics_webtalk.*
+# IP: keep .xci / .coe, ignore generated output products
+fpga/ip/**/*
+!fpga/ip/**/
+!fpga/ip/**/*.xci
+!fpga/ip/**/*.coe
+!fpga/ip/**/README.md
+!fpga/ip/**/.gitkeep
+# Bitstreams are build outputs; release bitstreams are attached to GitHub releases, not committed
+*.bit
+*.bin
+*.mcs
+*.ltx
+*.dcp
+
+# ---------- Simulators ----------
+work/
+transcript
+*.wlf
+modelsim.ini
+*.vcd
+*.ghw
+*.o
+*.cf
+
+# ---------- MATLAB ----------
+*.asv
+*.autosave
+*.mex*
+slprj/
+*.slxc
+codegen/
+
+# ---------- LTspice ----------
+*.raw
+*.net
+*.op.raw
+*.log.txt
+
+# ---------- KiCad ----------
+*-backups/
+*.kicad_prl
+fp-info-cache
+*.bak
+_autosave-*
+
+# ---------- OS / editors ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*~
+
+# ---------- Keep exported evidence ----------
+!simulation/results/**
+!simulation/waveforms/**
+!docs/verification/**
