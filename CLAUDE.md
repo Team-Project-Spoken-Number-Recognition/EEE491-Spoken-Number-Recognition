@@ -43,6 +43,15 @@ manuals → 5 approved team decisions → 6 HANDOFF.md → 7 previous AI convers
 - Never call a stage complete because it compiles; use the checklist in `PROJECT_STATUS.md`.
 - Unknown facts are tagged **ASSUMPTION / TO VERIFY** and logged in `ASSUMPTIONS.md`.
 
+## Team workflow
+- `TEAM_MANUAL.md` describes the weekly Lead/Partner/off-week rotation and the Thursday → Wednesday
+  lab cycle. Ask the user which role they have this week if it is not clear.
+- All three members are organization owners. **Do not perform administrative GitHub actions**
+  (visibility, settings, members, deleting/renaming repos or others' branches, force-push) unless the
+  user confirms the team agreed.
+- The repository is **public** (DEC-016): never write secrets, tokens, personal data or voice recordings
+  into tracked files; check AI chat exports before they are committed (`TEAM_MANUAL.md` §9).
+
 ## Git
 - Never commit to `main` directly; work on `feature/<block>` or `fix/<topic>` branches.
 - Conventional commits: `feat(adc): ...`, `test(debug): ...`, `fix(fft): ...`, `docs(arch): ...`.

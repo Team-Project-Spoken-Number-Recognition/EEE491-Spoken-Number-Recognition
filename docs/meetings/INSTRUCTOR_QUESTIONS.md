@@ -5,7 +5,7 @@ and the date. Then update the linked assumption/decision.
 
 | ID | Priority | Question | Why it matters | Linked | Answer | Answered by / date |
 |---|---|---|---|---|---|---|
-| Q-01 | **URGENT** | Is the Lab-DEBUG demonstration on **Sat Oct 03** or advanced to **Wed Sep 30**? Same question for Lab-CTRL (Oct 10 / Oct 07). | 6 vs. 9 days of work left; late factor 0.9/week | ASSUMPTION-013 | | |
+| Q-01 | **URGENT** | Is the Lab-DEBUG demonstration on **Sat Oct 03** or advanced to **Wed Sep 30**? Same question for Lab-CTRL (Oct 10 / Oct 07). | 6 vs. 9 days of work left; late factor 0.9/week | ASSUMPTION-013 | Lab-DEBUG deadline is **Wed Sep 30**; one lab deadline per week on Wednesdays. Later dates to confirm per lab. | Reported by eeerenbuyukbas, 2026-09-25 |
 | Q-02 | High | Byte order: is the 1st transmitted byte of each 32-bit word the most-significant byte (as in the 55 AA CC 03 start header)? | RTL, testbench and MATLAB must agree | ASSUMPTION-006, REQ-DEBUG-007 | | |
 | Q-03 | High | Should `ready_out` be '1' after reset? Should a `start_in` pulse during an active transfer be ignored? | Handshake behaviour for all blocks | ASSUMPTION-007/008, REQ-IF-003 | | |
 | Q-04 | High | For the Lab-DEBUG demo, how much of Lab-CTRL is required? (Only start/ready of Lab-DEBUG, or full framing with stubbed sub-systems?) | Scope for the first deadline | DEC-003, REQ-DEBUG-016 | | |

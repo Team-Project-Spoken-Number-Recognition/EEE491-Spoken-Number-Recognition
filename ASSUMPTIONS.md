@@ -65,7 +65,7 @@ listed here. Status: **UNVERIFIED → VERIFIED** (with evidence) or **REJECTED**
 ### ASSUMPTION-013 — Lab schedule dates
 - **Statement:** Lab due dates are the Saturdays listed in the syllabus; they "may be advanced by three days" (to the Wednesday before).
 - **Source:** Syllabus Lab Schedule (tentative).
-- **Status:** UNVERIFIED — plan against the earlier (Wednesday) date until confirmed (Q-01).
+- **Status:** PARTIALLY VERIFIED — the team was informed (2026-09-25) that there is one lab deadline per week on **Wednesday**, the first being Lab-DEBUG on **Wed Sep 30**. The other Wednesday dates (syllabus date − 3 days) are still to be confirmed per lab.
 
 ## 2. Unknown parameters register
 
