@@ -128,8 +128,8 @@ memory architecture, Vivado IP usage beyond the manuals.
 - **Chosen:** B. Supersedes the ownership matrix of CONTRIBUTING §3.
 - **Reason:** Continuity (each pair contains someone from the previous lab), no one leads two labs in a row, everyone rests one week in three.
 - **Trade-offs:** Knowledge of a lab is concentrated in two people → mandatory Thursday catch-up for the returning member; interface changes need all three.
-- **Details:** `TEAM_MANUAL.md` §3–4. Slot-to-person mapping still to be filled in.
-- **Date:** 2026-09-25 · **Status:** ACCEPTED (model) / PROPOSED (slot mapping) · **Team:** eeerenbuyukbas
+- **Details:** `TEAM_MANUAL.md` §3–4. Slot mapping: P1 = Eren, P2 = Ömer, P3 = Hande — follows from the team decision "Lab-PCB: Eren Lead, Ömer Partner"; Lab-DEBUG is all-hands.
+- **Date:** 2026-09-25 · **Status:** ACCEPTED · **Team:** eeerenbuyukbas
 
 ### DEC-014 — Repository location outside OneDrive
 - **Decision:** Keep the git working copy outside OneDrive-synced folders (e.g. `C:\dev\EEE491-Spoken-Number-Recognition`); GitHub is the sync mechanism.

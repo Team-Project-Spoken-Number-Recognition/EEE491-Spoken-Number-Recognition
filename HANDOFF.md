@@ -68,15 +68,13 @@ None.
 ## Next Steps
 1. Team reviews the Phase 1 documents; fills in names; accepts/rejects DEC-001…014.
 2. Repo is in the organization (DEC-015), all three are owners, temporarily public (DEC-016).
-   Still open: every member follows TEAM_MANUAL §2 (clone outside OneDrive, identity); fill the P1/P2/P3
-   slot mapping in TEAM_MANUAL §3.1; review and merge the `docs/team-manual` PR.
+   Still open: every member follows TEAM_MANUAL §2 (clone outside OneDrive, identity); review and merge the `docs/team-manual` PR.
 3. Ask Q-02 … Q-05 (`docs/meetings/INSTRUCTOR_QUESTIONS.md`) at the Sep 26 lab session (Q-01 answered).
 4. Write `docs/architecture/subsystems/debug.md` (FSM, timing, latency) and `ctrl.md` (subset) — review — then RTL.
 5. Download datasheets listed in `hardware/README.md`.
 6. Export this chat session into `ai/sessions/` (syllabus GenAI policy).
 
 ## Blockers
-- Slot mapping P1/P2/P3 (who leads which lab) not yet filled in.
 - Only 5 days until the Lab-DEBUG deadline.
 
 ## Assumptions

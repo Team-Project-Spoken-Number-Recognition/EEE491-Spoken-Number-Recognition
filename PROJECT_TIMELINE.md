@@ -34,24 +34,24 @@ MEL 15 (on MATLAB 5) · DCT 10 (on MATLAB 5) · COMPARE 10 (on MATLAB 5) · reco
 
 ## 2. Stage plan
 
-Each lab is done by a **Lead + Partner** pair while the third member is off (DEC-017). Slots P1/P2/P3
-and the full rotation are defined in [TEAM_MANUAL.md §3](TEAM_MANUAL.md#3-roles-and-weekly-rotation).
+Each lab is done by a **Lead + Partner** pair while the third member is off (DEC-017). Slots:
+P1 = Eren, P2 = Ömer, P3 = Hande; full rotation in [TEAM_MANUAL.md §3](TEAM_MANUAL.md#3-roles-and-weekly-rotation).
 Deadlines are Wednesdays (only Sep 30 confirmed). "Sim req." and "HW req." describe what must exist
 before the stage is complete.
 
 | Stage | Deliverable | Lead | Partner | Off | Prerequisite | Sim req. | HW req. | Deadline (Wed) | Status |
 |---|---|---|---|---|---|---|---|---|---|
 | Phase 1 | Repo, requirements, architecture, plans, team manual | ALL | — | — | — | n/a | n/a | — | DONE — pending team review |
-| DEBUG | UART debugger + CTRL subset + ROM demo + MATLAB receiver | P3 | P1 + P2 | — (all hands) | Phase 1 | Self-checking TB, waveforms | ROM → MATLAB, 0 mismatches | **Sep 30** | NOT STARTED |
-| CTRL | Controller with 50 % framing, all handshakes, LEDs | P1 | P2 | P3 | DEBUG handshake | TB with stubs, framing waveform | Button start, LED sequence | Oct 7 | NOT STARTED |
-| ADC | SPI capture into dual-port RAM, dump via DEBUG | P2 | P3 | P1 | DEBUG, CTRL | TB with ADC model | Real ADC samples in MATLAB | Oct 14 | Manual pending |
-| WINDOW | Framing × window → RAM | P3 | P1 | P2 | ADC, CTRL, MATLAB ref. of window | Bit-true vs. MATLAB | Dump via DEBUG | Oct 21 | Manual pending |
-| PCB | Mic amp + AA filter PCB interfaced to ADC | P1 | P2 | P3 | LTspice sim, ADC | LTspice | Speech captured in MATLAB | Nov 4 | Manual pending (start in Oct 28 buffer week) |
-| MATLAB | Complete recognition model on PC | P2 | P3 | P1 | Dataset | MATLAB tests | PC-mic demo | Nov 11 | Manual pending |
-| FFT | Vivado FFT IP stage | P3 | P1 | P2 | WINDOW, MATLAB | Bit-true vs. MATLAB | Dump via DEBUG | Nov 18 | Manual pending |
-| MEL | MEL filter-bank energies | P1 | P2 | P3 | FFT | Bit-true vs. MATLAB | Dump via DEBUG | Dec 2 | Manual pending |
-| DCT | DCT feature vector | P2 | P3 | P1 | MEL | Bit-true vs. MATLAB | Dump via DEBUG | Dec 9 | Manual not received |
-| COMPARE | Template store, decision, 7-segment | P3 | P1 | P2 | DCT | TB + MATLAB | Spoken digit on display | Dec 16 | Manual not received |
+| DEBUG | UART debugger + CTRL subset + ROM demo + MATLAB receiver | Hande (coordinator) | Eren + Ömer | — (all hands) | Phase 1 | Self-checking TB, waveforms | ROM → MATLAB, 0 mismatches | **Sep 30** | NOT STARTED |
+| CTRL | Controller with 50 % framing, all handshakes, LEDs | Eren | Ömer | Hande | DEBUG handshake | TB with stubs, framing waveform | Button start, LED sequence | Oct 7 | NOT STARTED |
+| ADC | SPI capture into dual-port RAM, dump via DEBUG | Ömer | Hande | Eren | DEBUG, CTRL | TB with ADC model | Real ADC samples in MATLAB | Oct 14 | Manual pending |
+| WINDOW | Framing × window → RAM | Hande | Eren | Ömer | ADC, CTRL, MATLAB ref. of window | Bit-true vs. MATLAB | Dump via DEBUG | Oct 21 | Manual pending |
+| PCB | Mic amp + AA filter PCB interfaced to ADC | Eren | Ömer | Hande | LTspice sim, ADC | LTspice | Speech captured in MATLAB | Nov 4 | Manual pending (start in Oct 28 buffer week) |
+| MATLAB | Complete recognition model on PC | Ömer | Hande | Eren | Dataset | MATLAB tests | PC-mic demo | Nov 11 | Manual pending |
+| FFT | Vivado FFT IP stage | Hande | Eren | Ömer | WINDOW, MATLAB | Bit-true vs. MATLAB | Dump via DEBUG | Nov 18 | Manual pending |
+| MEL | MEL filter-bank energies | Eren | Ömer | Hande | FFT | Bit-true vs. MATLAB | Dump via DEBUG | Dec 2 | Manual pending |
+| DCT | DCT feature vector | Ömer | Hande | Eren | MEL | Bit-true vs. MATLAB | Dump via DEBUG | Dec 9 | Manual not received |
+| COMPARE | Template store, decision, 7-segment | Hande | Eren | Ömer | DCT | TB + MATLAB | Spoken digit on display | Dec 16 | Manual not received |
 | FINAL | Integrated system + report | ALL | — | — | all | Top-level sim | Live demo | Jan 11 (Mon) | — |
 
 ## 3. Critical-path observations
@@ -68,18 +68,19 @@ before the stage is complete.
 
 ## 4. Lab-DEBUG week (Fri Sep 25 – Wed Sep 30) — all hands
 
-P3 = Lead (UART + debugger RTL). P1 builds the CTRL subset and the demo top level (P1 leads Lab-CTRL
-next week, so the CTRL work carries over). P2 does board bring-up, ROM IP and the MATLAB side.
+Everyone has a work package (team decision). Hande coordinates and writes the debugger RTL. Eren builds
+the CTRL subset and the demo top level (Eren leads Lab-CTRL next week, so the CTRL work carries over).
+Ömer does board bring-up, ROM IP and the MATLAB side.
 
-| Date | P3 — Lead (DEBUG RTL) | P1 — CTRL subset + top level | P2 — board, ROM, MATLAB |
+| Date | Hande — coordinator, DEBUG RTL | Eren — CTRL subset + top level | Ömer — board, ROM, MATLAB |
 |---|---|---|---|
-| Fri Sep 25 | Everyone: TEAM_MANUAL §2 setup, clone outside OneDrive, fill slot mapping, accept/reject DEC-001…017. Write `docs/architecture/subsystems/debug.md` (baud tick, UART byte TX, word/frame FSM, memory latency, timing). | Write `docs/architecture/subsystems/ctrl.md` — DEBUG-demo subset only. | Download Basys-3 manual, `Basys3_Master.xdc`, FT2232H datasheet, AN232B-05; install FTDI VCP driver. |
+| Fri Sep 25 | Everyone: TEAM_MANUAL §2 setup, clone outside OneDrive, accept/reject DEC-001…017. Write `docs/architecture/subsystems/debug.md` (baud tick, UART byte TX, word/frame FSM, memory latency, timing). | Write `docs/architecture/subsystems/ctrl.md` — DEBUG-demo subset only. | Download Basys-3 manual, `Basys3_Master.xdc`, FT2232H datasheet, AN232B-05; install FTDI VCP driver. |
 | Sat Sep 26 (lab) | Review design docs together; ask Q-02…Q-05 at the lab. | Button/reset conditioning block (sync + debounce + 1-cycle pulse) design. | Board bring-up: blinky with XDC; confirm part number (ASSUMPTION-001); COM port visible. |
 | Sun–Mon Sep 27–28 | UART TX + TB-UART-01..03; word/frame FSM + TB-DEBUG-01..09. | CTRL subset RTL + TB-CTRL-01/02; button conditioning TB. | MATLAB: COE generator (incl. delimiter values) + receiver/decoder + MT-DEBUG-01..04; Block Memory Generator ROM (14b × 32b). |
-| Tue Sep 29 | Review P1's PRs; integration sim TB-TOPDBG-01. | Demo top level + XDC + `fpga/vivado/create_debug_demo.tcl`; synthesis/implementation. | Hardware tests HW-DEBUG-01..05 with P3; review P3's PRs. **Evening: freeze.** |
+| Tue Sep 29 | Review Eren's PRs; integration sim TB-TOPDBG-01. | Demo top level + XDC + `fpga/vivado/create_debug_demo.tcl`; synthesis/implementation. | Hardware tests HW-DEBUG-01..05 with Hande; review Hande's PRs. **Evening: freeze.** |
 | **Wed Sep 30** | **Demo.** Tag `lab-debug-demo`, release with bitstream. | Evidence into `docs/verification/`. | AI sessions exported, records completed. |
 
-Thu Oct 1: Lab-CTRL kickoff (Lead P1, Partner P2, P3 off) — see TEAM_MANUAL §4.
+Thu Oct 1: Lab-CTRL kickoff (Lead Eren, Partner Ömer, Hande off) — see TEAM_MANUAL §4.
 
 ## 5. Actual progress log
 

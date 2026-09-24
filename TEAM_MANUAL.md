@@ -90,34 +90,35 @@ Every lab has a deadline on **Wednesday**. Each lab is done by **two people**; t
 member returns as Partner.* Every lab team therefore contains one person who worked on the previous lab
 (continuity), and nobody leads two labs in a row.
 
-### 3.1 Rotation plan (PROPOSED — fill in the mapping once, then agree)
+### 3.1 Rotation plan
 
-Map people to slots once:
+Slot mapping (agreed 2026-09-25 — fixed by the decision "Lab-PCB: Eren Lead, Ömer Partner"):
 
-| Slot | Member |
-|---|---|
-| P1 | _fill in_ |
-| P2 | _fill in_ |
-| P3 | _fill in_ |
+| Slot | Member | GitHub |
+|---|---|---|
+| P1 | Eren | `eeerenbuyukbas` |
+| P2 | Ömer | `omerkutlu1030` |
+| P3 | Hande | `handeery` |
 
 | Lab | Deadline (Wed) | Difficulty | Lead | Partner | Off | Note |
 |---|---|---|---|---|---|---|
-| Lab-DEBUG | **Sep 30** | 3 | P3 | P1 + P2 | — | **All three** recommended: first lab, 6 days, needs one-time setup + CTRL subset + ROM + MATLAB receiver |
-| Lab-CTRL | Oct 7 | 2 | P1 | P2 | P3 | Reuses the CTRL subset built in the DEBUG week |
-| Lab-ADC | Oct 14 | 4 | P2 | P3 | P1 | |
-| Lab-WINDOW | Oct 21 | 2 | P3 | P1 | P2 | |
-| _(no lab)_ | Oct 28 | — | — | — | — | Buffer week. **PCB pair (P1+P2) starts PCB design here** — manufacturing takes time |
-| Lab-PCB | Nov 4 | 5 | P1 | P2 | P3 | Consider all three if PCB is late |
-| Lab-MATLAB | Nov 11 | 3 | P2 | P3 | P1 | |
-| Lab-FFT | Nov 18 | 5 | P3 | P1 | P2 | |
+| Lab-DEBUG | **Sep 30** | 3 | Hande (P3) — coordinator | Eren (P1) + Ömer (P2) | — | **All three** work (team decision): Hande DEBUG RTL, Eren CTRL subset + top level, Ömer board/ROM/MATLAB |
+| Lab-CTRL | Oct 7 | 2 | Eren (P1) | Ömer (P2) | Hande (P3) | Reuses the CTRL subset Eren builds in the DEBUG week |
+| Lab-ADC | Oct 14 | 4 | Ömer (P2) | Hande (P3) | Eren (P1) | |
+| Lab-WINDOW | Oct 21 | 2 | Hande (P3) | Eren (P1) | Ömer (P2) | |
+| _(no lab)_ | Oct 28 | — | — | — | — | Buffer week. **Eren + Ömer start the PCB design here** — manufacturing takes time |
+| Lab-PCB | Nov 4 | 5 | **Eren (P1)** | **Ömer (P2)** | Hande (P3) | Lead/Partner fixed by team decision |
+| Lab-MATLAB | Nov 11 | 3 | Ömer (P2) | Hande (P3) | Eren (P1) | |
+| Lab-FFT | Nov 18 | 5 | Hande (P3) | Eren (P1) | Ömer (P2) | Heavy: consider all three |
 | _(lab study)_ | Nov 25 | — | — | — | — | Buffer / integration catch-up |
-| Lab-MEL | Dec 2 | 3 | P1 | P2 | P3 | |
-| Lab-DCT | Dec 9 | 2 | P2 | P3 | P1 | |
-| Lab-COMPARE | Dec 16 | 5 | P3 | P1 | P2 | |
+| Lab-MEL | Dec 2 | 3 | Eren (P1) | Ömer (P2) | Hande (P3) | |
+| Lab-DCT | Dec 9 | 2 | Ömer (P2) | Hande (P3) | Eren (P1) | |
+| Lab-COMPARE | Dec 16 | 5 | Hande (P3) | Eren (P1) | Ömer (P2) | Heavy: consider all three |
 | Final demo | Jan 11 (Mon) | — | ALL | ALL | — | Integration must be finished before exams (Dec 26) |
 
-Lead load (difficulty sum): P1 = 2+5+3 = 10, P2 = 4+3+2 = 9, P3 = 3+2+5+5 = 15 incl. DEBUG (12 without).
-Swap slots if someone prefers analog (PCB) vs. DSP (FFT/COMPARE).
+Lead load (difficulty sum, DEBUG excluded because it is all-hands): Eren 2+5+3 = 10, Ömer 4+3+2 = 9,
+Hande 2+5+5 = 12 — Hande leads both FFT and COMPARE (difficulty 5), so those two weeks are the first
+candidates for an all-three week.
 
 Only the DEBUG date (Sep 30) is confirmed. The others are the syllabus Saturday dates minus 3 days
 (ASSUMPTION-013) — confirm each at the lab session.
