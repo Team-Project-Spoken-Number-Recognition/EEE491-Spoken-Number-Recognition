@@ -102,8 +102,8 @@ Slot mapping (agreed 2026-09-25 — fixed by the decision "Lab-PCB: Eren Lead, �
 
 | Lab | Deadline (Wed) | Difficulty | Lead | Partner | Off | Note |
 |---|---|---|---|---|---|---|
-| Lab-DEBUG | **Sep 30** | 3 | Hande (P3) — coordinator | Eren (P1) + Ömer (P2) | — | **All three** work (team decision): Hande DEBUG RTL, Eren CTRL subset + top level, Ömer board/ROM/MATLAB |
-| Lab-CTRL | Oct 7 | 2 | Eren (P1) | Ömer (P2) | Hande (P3) | Reuses the CTRL subset Eren builds in the DEBUG week |
+| Lab-DEBUG | **Sep 30** | 3 | Hande (P3) — coordinator | Eren (P1) + Ömer (P2) | — | **All three** work (team decision): Hande DEBUG RTL, Eren top level (+ early CTRL design), Ömer board/ROM/MATLAB |
+| Lab-CTRL | Oct 7 | 2 | Eren (P1) | Ömer (P2) | Hande (P3) | Eren may start the design in the DEBUG week (no dependency — TA Q-04) |
 | Lab-ADC | Oct 14 | 4 | Ömer (P2) | Hande (P3) | Eren (P1) | |
 | Lab-WINDOW | Oct 21 | 2 | Hande (P3) | Eren (P1) | Ömer (P2) | |
 | _(no lab)_ | Oct 28 | — | — | — | — | Buffer week. **Eren + Ömer start the PCB design here** — manufacturing takes time |
@@ -232,7 +232,16 @@ automatically. You remain responsible for everything it does in your name.
 AI-NNNN numbers are global: pick the next free number in `ai/AI_USAGE_LOG.md` when you open your PR; if two
 PRs collide, the second one renumbers.
 
-### 6.5 What to let Claude do / not do
+### 6.5 Reference design from last semester
+
+`https://github.com/Borek-32/EEE491-Spoken-Digit-Recognizer-BASYS3` (public, MIT License) is last
+semester's complete project; instructors accept reusing it. **DEC-018:** where our manual and the TA leave
+a choice open, follow its specification. Released manual and TA answers always win; conflicts are logged
+(e.g. baud rate, DEC-005). Copied code keeps the MIT notice, names its source in the file header and the
+AI/decision log, and is re-verified with our own testbench. Don't read its future-stage code before that
+stage's manual is released.
+
+### 6.6 What to let Claude do / not do
 
 | OK | Only after you checked | Never without team agreement |
 |---|---|---|
