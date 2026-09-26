@@ -39,7 +39,7 @@ _Everything below is AI-generated and **not yet reviewed by the team**._
 ## Current Branch
 `test/debug-hw` (hardware evidence; PR to `main`). `main` = `f4ad383` (PR #7 merged). Build worktree on Eren's PC:
 `C:\dev\eee491_build` (Vivado cannot use the OneDrive\Masaüstü path, DEC-014); bitstream there in
-`fpgaivadouild\debug_demo	op_debug_demo.bit`.
+`fpga\vivado\build\debug_demo\top_debug_demo.bit`.
 Remote: https://github.com/Team-Project-Spoken-Number-Recognition/EEE491-Spoken-Number-Recognition (public, DEC-016).
 
 ## Build / simulation notes (all members)
