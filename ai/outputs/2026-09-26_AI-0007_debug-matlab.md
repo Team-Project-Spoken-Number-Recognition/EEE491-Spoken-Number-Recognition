@@ -28,6 +28,13 @@ New files (all AI-written, reviewed by Ömer before the PR):
 - `fpga/ip/debug_rom.coe` (generated, 16 384 × 32 bit)
 - `simulation/results/2026-09-26_mt_debug.log`
 
+Demo ROM IP (second step, same session, plan approved by Ömer):
+- `fpga/ip/create_debug_rom.tcl` → `fpga/ip/debug_rom/debug_rom.xci` (blk_mem_gen 8.4, Single Port ROM,
+  16384 × 32, always enabled, primitive output register ON, COE path stored relative)
+- `fpga/tb/debug/tb_debug_rom.vhd` (TB-ROM-01…03) and `fpga/vivado/sim_debug_rom.tcl`
+- `simulation/results/2026-09-26_tb_debug_rom.log` (host/CPU lines redacted)
+- `.gitignore`: `fpga/vivado/build/`
+
 Design choices (approved by Ömer before coding):
 - Test pattern: address k → `[k | NOT k]`; addresses 1, 2, 3, 4, last-1, last hold 55AACC03, AA5503CC,
   00000000, FFFFFFFF, 55AACC03, AA5503CC (delimiter right before the real end word).
@@ -38,14 +45,19 @@ Design choices (approved by Ömer before coding):
 ## Verification
 - MATLAB R2025b: `MT_RESULT: PASS (15/15 tests)` — log in `simulation/results/2026-09-26_mt_debug.log`.
 - MT-DEBUG-01 includes a frame written by hand from the manual's table, independent of the test encoder.
+- Vivado 2025.2 XSim: `tb_debug_rom` `TB_RESULT: PASS (11/11 checks)` — Vivado accepted the COE, all
+  16 384 words match, measured read latency 2. Mutation check: expecting latency 1 → FAIL 10/11 with
+  every word shifted by one address, so the testbench detects a wrong latency.
+- Environment issues met and worked around (not design problems): Vivado could not start `.bat`
+  scripts from `%TEMP%` on this PC, and `launch_simulation` crashed with redirected console output →
+  build folder moved to `fpga/vivado/build/`, `-tclargs scripts_only` option added.
 - PR #4 review: `tb_uart_tx` PASS 37/37 and `tb_debug` PASS 97/97 re-run in Vivado 2025.2 XSim on
   Ömer's PC, sources unmodified; RTL traced against debug.md, no blocking finding.
 
 ## Things the AI could not verify
 - `receive_debug_frame` / `run_debug_demo` against real hardware (needs board, top level, data cable) →
   HW-DEBUG-02…05.
-- That Vivado's Block Memory Generator accepts `debug_rom.coe` (second half of MT-DEBUG-04) and the ROM
-  read latency (ASSUMPTION-011) → when the ROM IP is created.
+- The latency value shown in the IP *Summary* tab (only measured in simulation; Ömer cross-checks in the GUI).
 - MATLAB R2023b compatibility (only R2025b tested; only R2019b+ functions used).
 
 ## Human Review / Final Decision

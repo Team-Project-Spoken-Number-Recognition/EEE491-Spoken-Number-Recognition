@@ -224,7 +224,7 @@ Lab-DEBUG itself contains **no memory** (registers only). The demo memory lives 
 |---|---|---|
 | Demo ROM | Block Memory Generator, Single Port ROM, 2^14 × 32 bit (512 Kbit), always enabled, COE-initialised | REQ-DEBUG-016 |
 | BRAM usage | 16 × RAMB36 of 50 on XC7A35T (32 %) — expected, read the IP summary | TO VERIFY |
-| Read latency | 1 cycle without, 2 cycles with the primitive output register | ASSUMPTION-011, TO VERIFY in IP *Summary* tab |
+| Read latency | **2 cycles** — IP `debug_rom` is built with the primitive output register ON (`fpga/ip/create_debug_rom.tcl`); 1 cycle would apply without it | VERIFIED 2026-09-26 (TB-ROM-01, ASSUMPTION-011) → `G_MEM_LATENCY` = 2 is exact |
 
 **Why `G_MEM_LATENCY` defaults to 2:** because `addr_reg` is held constant during `S_MEM_WAIT`,
 waiting *longer* than the real latency is always safe (the data simply stays valid), while waiting

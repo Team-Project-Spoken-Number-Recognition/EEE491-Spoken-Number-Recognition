@@ -1,4 +1,5 @@
 # ---------- Vivado (projects are re-created from Tcl; see fpga/vivado/README.md) ----------
+fpga/vivado/build/
 *.jou
 *.log
 *.str

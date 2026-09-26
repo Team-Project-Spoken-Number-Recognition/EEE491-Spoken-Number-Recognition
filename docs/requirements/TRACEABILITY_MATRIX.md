@@ -21,7 +21,7 @@ to committed evidence.
 | REQ-DEBUG-013 | DBG §1 ¶6 | fpga/rtl/debug/debug.vhd, uart_tx.vhd | TB-DEBUG-02/05, HW-DEBUG-04 | PASS 2026-09-26, [tb_debug log](../../simulation/results/2026-09-26_tb_debug.log) | open (HW-DEBUG-04/05, not required for status) | PR #4 (`d6bdd94`) | VERIFIED (sim) |
 | REQ-DEBUG-014 | DBG §1 ¶6 | fpga/rtl/debug/debug.vhd, uart_tx.vhd | TB-DEBUG-02 | PASS 2026-09-26, [tb_debug log](../../simulation/results/2026-09-26_tb_debug.log) | n/a | PR #4 (`d6bdd94`) | VERIFIED (sim) |
 | REQ-DEBUG-015 | DBG §1 ¶4 | matlab/debug/decode_debug_frame.m | MT-DEBUG-01..03, HW-DEBUG-02 | PASS 2026-09-26, [mt_debug log](../../simulation/results/2026-09-26_mt_debug.log) | open (HW-DEBUG-02) | PR #5 | IMPLEMENTED — NOT VERIFIED |
-| REQ-DEBUG-016 | DBG §2 | top, IP, COE | TB-TOPDBG-01, MT-DEBUG-04 | | | | OPEN |
+| REQ-DEBUG-016 | DBG §2 | top (open); fpga/ip/debug_rom/debug_rom.xci, fpga/ip/create_debug_rom.tcl, fpga/ip/debug_rom.coe | TB-TOPDBG-01, TB-ROM-01..03, MT-DEBUG-04 | ROM IP PASS 2026-09-26, [tb_debug_rom log](../../simulation/results/2026-09-26_tb_debug_rom.log); top level open | open | PR #5 | IN PROGRESS (ROM + COE done; top level Eren) |
 | REQ-DEBUG-017 | DBG §2 | | HW-DEBUG-02/03 | n/a | | | OPEN |
 | REQ-DEBUG-018 | DBG §1 ¶8 | | later stages | | | | OPEN |
 | REQ-DEBUG-019 | DBG §3 | fpga/rtl/debug/debug.vhd | TB-DEBUG-07 | PASS 2026-09-26, [tb_debug log](../../simulation/results/2026-09-26_tb_debug.log) | n/a | PR #4 (`d6bdd94`) | VERIFIED (sim) |
