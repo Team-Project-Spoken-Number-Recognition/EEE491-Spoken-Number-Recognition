@@ -93,7 +93,7 @@ Details: `docs/requirements/TRACEABILITY_MATRIX.md`.
 | R-16 | Lab-DCT / Lab-COMPARE likely replaced by NN-based labs → architecture after MEL unknown | High | Medium | Don't plan beyond MEL; ask Enis Hoca (Q-14) | ALL |
 | R-02 | Byte-order / handshake interpretation differs from the assistant's expectation | — | — | **CLOSED 2026-09-26** — TA Q-02/Q-03 answered (REQ-DEBUG-007, REQ-IF-006/007) | Hande |
 | R-03 | Git repo inside OneDrive → lock/corruption | Medium | High | DEC-014: move repo outside OneDrive | ALL |
-| R-04 | Vivado version mismatch between members / lab PC → IP upgrade issues | Medium | Medium | DEC-008 | ALL |
+| R-04 | Vivado version mismatch between members / lab PC → IP upgrade issues | Medium | Medium | DEC-008: everyone on 2025.2 (decided 2026-09-26) | ALL |
 | R-05 | AI-generated code accepted without understanding → exam and demo risk | Medium | High | PR review rule; owner + reviewer explain each block; AI log | ALL |
 | R-06 | PCB manufacturing lead time unknown; PCB is difficulty 5 and 20 final points | Medium | High | Q-10; consider early release of PCB manual | B |
 | R-07 | BRAM budget: demo ROM alone ≈ 16 of 50 BRAM36 (ASSUMED XC7A35T); final system has RAMs for ADC, WINDOW, FFT, MEL, DCT, templates | Medium | High (late-stage redesign) | Track BRAM use per stage in synthesis reports; budget table from ADC stage | A |

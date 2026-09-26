@@ -22,8 +22,8 @@ listed here. Status: **UNVERIFIED → VERIFIED** (with evidence) or **REJECTED**
 - **Status:** SUPPORTED — the reference design (Borek-32, `constraints/jc_homefab.xdc`) also uses A18 for `txd_out`. Still confirm with the official `Basys3_Master.xdc` and hardware test HW-DEBUG-01.
 
 ### ASSUMPTION-004 — Vivado version
-- **Statement:** Team uses Vivado ML Standard 2023.2 (observed on one member's PC; Block Memory Generator 8.4 in the manual screenshots is consistent).
-- **Status:** UNVERIFIED · **How to verify:** Each member + lab PC report `Help → About`.
+- **Statement:** Team uses Vivado ML Standard **2025.2** (DEC-008, 2026-09-26). Block Memory Generator in 2025.2 is newer than the 8.4 shown in the manual screenshots — check the configuration pages match.
+- **Status:** VERIFIED for Hande and Ömer (2025.2 installed); Eren installing · **How to verify:** `Help → About` on each PC.
 
 ### ASSUMPTION-005 — MATLAB version and serial API
 - **Statement:** MATLAB R2023b (observed on one PC); `serialport` (base MATLAB, R2019b+) is available.
@@ -72,7 +72,7 @@ listed here. Status: **UNVERIFIED → VERIFIED** (with evidence) or **REJECTED**
 | # | Parameter | Needed by stage | Resolved by | Status |
 |---|---|---|---|---|
 | U-01 | Exact FPGA part / board revision | DEBUG | ASSUMPTION-001/002 | UNVERIFIED |
-| U-02 | Team-wide Vivado / MATLAB versions | DEBUG | DEC-008 | UNKNOWN |
+| U-02 | Team-wide Vivado / MATLAB versions | DEBUG | DEC-008 | RESOLVED — Vivado 2025.2 (DEC-008); MATLAB not pinned |
 | U-03 | Byte order in 32-bit word | DEBUG | Q-02 | **RESOLVED** — MSB byte first |
 | U-04 | Baud rate | DEBUG | DEC-005 | **RESOLVED** — 1 000 000 baud, fixed for all labs (team decision) |
 | U-05 | Block RAM latency of demo ROM | DEBUG | IP summary | UNKNOWN |
