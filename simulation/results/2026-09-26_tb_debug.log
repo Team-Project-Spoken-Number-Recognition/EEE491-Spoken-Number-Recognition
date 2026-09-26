@@ -1,0 +1,265 @@
+# Simulation log — tb_debug
+# Date      : 2026-09-26
+# Simulator : Vivado 2025.2 XSim, batch mode (xvhdl / xelab / xsim --runall)
+# Sources   : fpga/rtl/debug/uart_tx.vhd fpga/rtl/debug/debug.vhd fpga/tb/debug/tb_debug.vhd
+# Commit    : d6bdd94 (branch feature/debug-design), sources unmodified
+# Run by    : Claude Code session (AI-0006) on Hande's PC; independent re-run of Hande's GUI XSim result
+# Commands  : xvhdl fpga/rtl/debug/uart_tx.vhd fpga/rtl/debug/debug.vhd fpga/tb/debug/tb_debug.vhd
+#             xelab -debug off -snapshot tb_debug_snap work.tb_debug
+#             xsim tb_debug_snap --runall
+# Redaction : machine-identifying lines (host name, user paths, CPU/memory details) replaced by
+#             '<redacted>' because the repository is public (DEC-016). Nothing else is edited.
+#
+########## xvhdl ##########
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/dev/EEE491-Spoken-Number-Recognition/fpga/rtl/debug/uart_tx.vhd" into library work
+INFO: [VRFC 10-3107] analyzing entity 'uart_tx'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/dev/EEE491-Spoken-Number-Recognition/fpga/rtl/debug/debug.vhd" into library work
+INFO: [VRFC 10-3107] analyzing entity 'debug'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd" into library work
+INFO: [VRFC 10-3107] analyzing entity 'tb_debug'
+########## xelab ##########
+Vivado Simulator v2025.2
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: <vivado_install>/Vivado/bin/unwrapped/win64.o/xelab.exe --log <simdir>/tb_debug\xelab.log -debug off -snapshot tb_debug_snap work.tb_debug 
+Multi-threading is on. Using 6 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling architecture rtl of entity work.uart_tx [\uart_tx(g_clks_per_bit=10)\]
+Compiling architecture rtl of entity work.debug [\debug(n=3,g_baud_rate=10000000)...]
+Compiling architecture rtl of entity work.debug [\debug(n=3,g_baud_rate=10000000,...]
+Compiling architecture sim of entity work.tb_debug
+Built simulation snapshot tb_debug_snap
+########## xsim ##########
+#-----------------------------------------------------------
+# xsim v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sat Sep 26 14:28:08 2026
+# Process ID         : <redacted>
+# Current directory  : <simdir>/tb_debug
+# Command line       : xsim.exe -log <simdir>/tb_debug\xsim.log -mode tcl -source {xsim.dir/tb_debug_snap/xsim_script.tcl}
+# Log file           : <simdir>/tb_debug/xsim.log
+# Journal file       : <simdir>/tb_debug\xsim.jou
+# Running On         : <redacted>
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : <redacted>
+# CPU Frequency      : <redacted>
+# CPU Physical cores : <redacted>
+# CPU Logical cores  : <redacted>
+# Host memory        : <redacted>
+# Swap memory        : <redacted>
+# Total Virtual      : <redacted>
+# Available Virtual  : <redacted>
+#-----------------------------------------------------------
+source xsim.dir/tb_debug_snap/xsim_script.tcl
+# xsim {tb_debug_snap} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+Note: TB-DEBUG-01 DUT0 reset: txd idle  Expected: '1'  Actual: '1'  PASS
+Time: 45 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-01 DUT0 reset: ready high  Expected: '1'  Actual: '1'  PASS
+Time: 45 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-01 DUT0 reset: address 0  Expected: 0  Actual: 0  PASS
+Time: 45 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-01 DUT1 reset: txd idle  Expected: '1'  Actual: '1'  PASS
+Time: 45 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-01 DUT1 reset: ready high  Expected: '1'  Actual: '1'  PASS
+Time: 45 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-01 DUT1 reset: address 0  Expected: 0  Actual: 0  PASS
+Time: 45 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-01 DUT2 reset: txd idle  Expected: '1'  Actual: '1'  PASS
+Time: 45 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-01 DUT2 reset: ready high  Expected: '1'  Actual: '1'  PASS
+Time: 45 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-01 DUT2 reset: address 0  Expected: 0  Actual: 0  PASS
+Time: 45 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-02/03/04/08 ready high before start  Expected: '1'  Actual: '1'  PASS
+Time: 95 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-02/03/04/08 ready still high at the sampling edge  Expected: '1'  Actual: '1'  PASS
+Time: 105 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-02/03/04/08 ready low right after the sampling edge  Expected: '0'  Actual: '0'  PASS
+Time: 106 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-02/03/04/08 address = 0 at start  Expected: 0  Actual: 0  PASS
+Time: 106 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-02/03/04/08 first start bit, clocks after sampling edge  Expected: 1  Actual: 1  PASS
+Time: 115 ns  Iteration: 2  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-02/03/04/08 byte count  Expected: 40  Actual: 40  PASS
+Time: 41175 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-02/03/04/08 mismatching bytes (header, 8 words MSB first, end word)  Expected: 0  Actual: 0  PASS
+Time: 41175 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-02/03/04/08 UART framing errors  Expected: 0  Actual: 0  PASS
+Time: 41175 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-02/03/04/08 ready still low during the last stop bit  Expected: '0'  Actual: '0'  PASS
+Time: 41175 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-02/03/04/08 ready rises N clocks after the last stop bit  Expected: 2  Actual: 2  PASS
+Time: 41245 ns  Iteration: 2  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-02/03/04/08 line idle after the end word  Expected: '1'  Actual: '1'  PASS
+Time: 42745 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-02/03/04/08 address changes (1 .. 2^N-1)  Expected: 7  Actual: 7  PASS
+Time: 42745 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-02/03/04/08 address order errors  Expected: 0  Actual: 0  PASS
+Time: 42745 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-02/03/04/08 ready rising edges during transfer  Expected: 1  Actual: 1  PASS
+Time: 42745 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-09 second transfer ready high before start  Expected: '1'  Actual: '1'  PASS
+Time: 42955 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-09 second transfer ready still high at the sampling edge  Expected: '1'  Actual: '1'  PASS
+Time: 42965 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-09 second transfer ready low right after the sampling edge  Expected: '0'  Actual: '0'  PASS
+Time: 42966 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-09 second transfer address = 0 at start  Expected: 0  Actual: 0  PASS
+Time: 42966 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-09 second transfer first start bit, clocks after sampling edge  Expected: 1  Actual: 1  PASS
+Time: 42975 ns  Iteration: 2  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-09 second transfer byte count  Expected: 40  Actual: 40  PASS
+Time: 84035 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-09 second transfer mismatching bytes (header, 8 words MSB first, end word)  Expected: 0  Actual: 0  PASS
+Time: 84035 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-09 second transfer UART framing errors  Expected: 0  Actual: 0  PASS
+Time: 84035 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-09 second transfer ready still low during the last stop bit  Expected: '0'  Actual: '0'  PASS
+Time: 84035 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-09 second transfer ready rises N clocks after the last stop bit  Expected: 2  Actual: 2  PASS
+Time: 84105 ns  Iteration: 2  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-09 second transfer line idle after the end word  Expected: '1'  Actual: '1'  PASS
+Time: 85605 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-09 second transfer address changes (1 .. 2^N-1)  Expected: 7  Actual: 7  PASS
+Time: 85605 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-09 second transfer address order errors  Expected: 0  Actual: 0  PASS
+Time: 85605 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-09 second transfer ready rising edges during transfer  Expected: 1  Actual: 1  PASS
+Time: 85605 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-09 second frame identical to the first  Expected: true  Actual: true  PASS
+Time: 85615 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-05 start pulses while busy ready high before start  Expected: '1'  Actual: '1'  PASS
+Time: 85815 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-05 start pulses while busy ready still high at the sampling edge  Expected: '1'  Actual: '1'  PASS
+Time: 85825 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-05 start pulses while busy ready low right after the sampling edge  Expected: '0'  Actual: '0'  PASS
+Time: 85826 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-05 start pulses while busy address = 0 at start  Expected: 0  Actual: 0  PASS
+Time: 85826 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-05 start pulses while busy first start bit, clocks after sampling edge  Expected: 1  Actual: 1  PASS
+Time: 85835 ns  Iteration: 2  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-05 start pulses while busy byte count  Expected: 40  Actual: 40  PASS
+Time: 126895 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-05 start pulses while busy mismatching bytes (header, 8 words MSB first, end word)  Expected: 0  Actual: 0  PASS
+Time: 126895 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-05 start pulses while busy UART framing errors  Expected: 0  Actual: 0  PASS
+Time: 126895 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-05 start pulses while busy ready still low during the last stop bit  Expected: '0'  Actual: '0'  PASS
+Time: 126895 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-05 start pulses while busy ready rises N clocks after the last stop bit  Expected: 2  Actual: 2  PASS
+Time: 126965 ns  Iteration: 2  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-05 start pulses while busy line idle after the end word  Expected: '1'  Actual: '1'  PASS
+Time: 128465 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-05 start pulses while busy address changes (1 .. 2^N-1)  Expected: 7  Actual: 7  PASS
+Time: 128465 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-05 start pulses while busy address order errors  Expected: 0  Actual: 0  PASS
+Time: 128465 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-05 start pulses while busy ready rising edges during transfer  Expected: 1  Actual: 1  PASS
+Time: 128465 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-06 reset mid-transfer: txd idle  Expected: '1'  Actual: '1'  PASS
+Time: 139206 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-06 reset mid-transfer: ready high  Expected: '1'  Actual: '1'  PASS
+Time: 139206 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-06 reset mid-transfer: address 0  Expected: 0  Actual: 0  PASS
+Time: 139206 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-06 new transfer after reset ready high before start  Expected: '1'  Actual: '1'  PASS
+Time: 140715 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-06 new transfer after reset ready still high at the sampling edge  Expected: '1'  Actual: '1'  PASS
+Time: 140725 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-06 new transfer after reset ready low right after the sampling edge  Expected: '0'  Actual: '0'  PASS
+Time: 140726 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-06 new transfer after reset address = 0 at start  Expected: 0  Actual: 0  PASS
+Time: 140726 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-06 new transfer after reset first start bit, clocks after sampling edge  Expected: 1  Actual: 1  PASS
+Time: 140735 ns  Iteration: 2  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-06 new transfer after reset byte count  Expected: 40  Actual: 40  PASS
+Time: 181795 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-06 new transfer after reset mismatching bytes (header, 8 words MSB first, end word)  Expected: 0  Actual: 0  PASS
+Time: 181795 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-06 new transfer after reset UART framing errors  Expected: 0  Actual: 0  PASS
+Time: 181795 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-06 new transfer after reset ready still low during the last stop bit  Expected: '0'  Actual: '0'  PASS
+Time: 181795 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-06 new transfer after reset ready rises N clocks after the last stop bit  Expected: 2  Actual: 2  PASS
+Time: 181865 ns  Iteration: 2  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-06 new transfer after reset line idle after the end word  Expected: '1'  Actual: '1'  PASS
+Time: 183365 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-06 new transfer after reset address changes (1 .. 2^N-1)  Expected: 7  Actual: 7  PASS
+Time: 183365 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-06 new transfer after reset address order errors  Expected: 0  Actual: 0  PASS
+Time: 183365 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-06 new transfer after reset ready rising edges during transfer  Expected: 1  Actual: 1  PASS
+Time: 183365 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 latency 1 (G_MEM_LATENCY=1) ready high before start  Expected: '1'  Actual: '1'  PASS
+Time: 183575 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 latency 1 (G_MEM_LATENCY=1) ready still high at the sampling edge  Expected: '1'  Actual: '1'  PASS
+Time: 183585 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 latency 1 (G_MEM_LATENCY=1) ready low right after the sampling edge  Expected: '0'  Actual: '0'  PASS
+Time: 183586 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 latency 1 (G_MEM_LATENCY=1) address = 0 at start  Expected: 0  Actual: 0  PASS
+Time: 183586 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 latency 1 (G_MEM_LATENCY=1) first start bit, clocks after sampling edge  Expected: 1  Actual: 1  PASS
+Time: 183595 ns  Iteration: 2  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 latency 1 (G_MEM_LATENCY=1) byte count  Expected: 40  Actual: 40  PASS
+Time: 224575 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 latency 1 (G_MEM_LATENCY=1) mismatching bytes (header, 8 words MSB first, end word)  Expected: 0  Actual: 0  PASS
+Time: 224575 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 latency 1 (G_MEM_LATENCY=1) UART framing errors  Expected: 0  Actual: 0  PASS
+Time: 224575 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 latency 1 (G_MEM_LATENCY=1) ready still low during the last stop bit  Expected: '0'  Actual: '0'  PASS
+Time: 224575 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 latency 1 (G_MEM_LATENCY=1) ready rises N clocks after the last stop bit  Expected: 2  Actual: 2  PASS
+Time: 224645 ns  Iteration: 2  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 latency 1 (G_MEM_LATENCY=1) line idle after the end word  Expected: '1'  Actual: '1'  PASS
+Time: 226145 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 latency 1 (G_MEM_LATENCY=1) address changes (1 .. 2^N-1)  Expected: 7  Actual: 7  PASS
+Time: 226145 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 latency 1 (G_MEM_LATENCY=1) address order errors  Expected: 0  Actual: 0  PASS
+Time: 226145 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 latency 1 (G_MEM_LATENCY=1) ready rising edges during transfer  Expected: 1  Actual: 1  PASS
+Time: 226145 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 memory latency 1, G_MEM_LATENCY=2 ready high before start  Expected: '1'  Actual: '1'  PASS
+Time: 226355 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 memory latency 1, G_MEM_LATENCY=2 ready still high at the sampling edge  Expected: '1'  Actual: '1'  PASS
+Time: 226365 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 memory latency 1, G_MEM_LATENCY=2 ready low right after the sampling edge  Expected: '0'  Actual: '0'  PASS
+Time: 226366 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 memory latency 1, G_MEM_LATENCY=2 address = 0 at start  Expected: 0  Actual: 0  PASS
+Time: 226366 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 memory latency 1, G_MEM_LATENCY=2 first start bit, clocks after sampling edge  Expected: 1  Actual: 1  PASS
+Time: 226375 ns  Iteration: 2  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 memory latency 1, G_MEM_LATENCY=2 byte count  Expected: 40  Actual: 40  PASS
+Time: 267435 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 memory latency 1, G_MEM_LATENCY=2 mismatching bytes (header, 8 words MSB first, end word)  Expected: 0  Actual: 0  PASS
+Time: 267435 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 memory latency 1, G_MEM_LATENCY=2 UART framing errors  Expected: 0  Actual: 0  PASS
+Time: 267435 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 memory latency 1, G_MEM_LATENCY=2 ready still low during the last stop bit  Expected: '0'  Actual: '0'  PASS
+Time: 267435 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 memory latency 1, G_MEM_LATENCY=2 ready rises N clocks after the last stop bit  Expected: 2  Actual: 2  PASS
+Time: 267505 ns  Iteration: 2  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 memory latency 1, G_MEM_LATENCY=2 line idle after the end word  Expected: '1'  Actual: '1'  PASS
+Time: 269005 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 memory latency 1, G_MEM_LATENCY=2 address changes (1 .. 2^N-1)  Expected: 7  Actual: 7  PASS
+Time: 269005 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 memory latency 1, G_MEM_LATENCY=2 address order errors  Expected: 0  Actual: 0  PASS
+Time: 269005 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB-DEBUG-07 memory latency 1, G_MEM_LATENCY=2 ready rising edges during transfer  Expected: 1  Actual: 1  PASS
+Time: 269005 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+Note: TB_RESULT: PASS (97/97 checks)
+Time: 269015 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+exit
+INFO: [Common 17-206] Exiting xsim at Sat Sep 26 14:28:10 2026...
