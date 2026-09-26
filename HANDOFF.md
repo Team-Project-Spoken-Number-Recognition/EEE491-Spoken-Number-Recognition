@@ -1,6 +1,6 @@
 # Current Project State
 
-_Last updated: 2026-09-26 by Claude Code (Opus 5.5, AI-0013) in a session with Eren (`eeerenbuyukbas`)._
+_Last updated: 2026-09-26 by Claude Code (Opus 5.5, AI-0015) in a session with Eren (`eeerenbuyukbas`)._
 _Everything below is AI-generated and **not yet reviewed by the team**._
 
 > **HANDOFF/REPOSITORY INCONSISTENCY fixed in this update:** the previous version (AI-0006) still said
@@ -37,9 +37,11 @@ _Everything below is AI-generated and **not yet reviewed by the team**._
   which made two early test sessions fail (analysis in the HW-DEBUG report §3).
 
 ## Current Branch
-`test/debug-hw` (hardware evidence; PR to `main`). `main` = `f4ad383` (PR #7 merged). Build worktree on Eren's PC:
-`C:\dev\eee491_build` (Vivado cannot use the OneDrive\Masaüstü path, DEC-014); bitstream there in
-`fpga\vivado\build\debug_demo\top_debug_demo.bit`.
+`test/debug-hw` (PR #8: hardware evidence, demo guide, waveforms). `main` = `f4ad383` (PR #7 merged).
+**Working copy on Eren's PC: `C:\dev\EEE491-Spoken-Number-Recognition`** (moved from OneDrive 2026-09-26, DEC-014).
+Build outputs there (git-ignored): `fpga\vivado\build\debug_demo\top_debug_demo.bit` (demo bitstream),
+`fpga\vivado\build\debug_sim\debug_sim.xpr` (all testbenches, `create_debug_sim_project.tcl`),
+`fpga\vivado\build\hw\` (raw MATLAB data of HW-DEBUG-02).
 Remote: https://github.com/Team-Project-Spoken-Number-Recognition/EEE491-Spoken-Number-Recognition (public, DEC-016).
 
 ## Build / simulation notes (all members)

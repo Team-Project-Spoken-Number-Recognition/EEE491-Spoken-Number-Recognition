@@ -164,4 +164,7 @@ memory architecture, Vivado IP usage beyond the manuals.
   `C:\Users\…\OneDrive\Masaüstü\EEE391 Project\…` (the `ü` is garbled and the path is cut at the space:
   `ERROR: [Vivado 12-172] File or Directory 'C:/Users/USER/OneDrive/Masa�st�/EEE391' does not exist`).
   Build and simulate only from a clone at a plain-ASCII path **without spaces**.
-- **Date:** 2026-09-24 · **Status:** PROPOSED (strongly recommended since 2026-09-26) · **Team:** _pending_
+- **Implemented 2026-09-26 (Eren):** the working copy was copied completely (incl. `.git`, local branches, repo-local
+  config, ignored build outputs) to `C:\dev\EEE491-Spoken-Number-Recognition`; Vivado project flow and XSim verified
+  there. The OneDrive copy is obsolete. Hande and Ömer: use a clone at an ASCII path without spaces as well.
+- **Date:** 2026-09-24 · **Status:** ACCEPTED — implemented for Eren 2026-09-26 · **Team:** eeerenbuyukbas

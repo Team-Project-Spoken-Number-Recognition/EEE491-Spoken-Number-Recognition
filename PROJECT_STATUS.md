@@ -92,7 +92,7 @@ Details: `docs/requirements/TRACEABILITY_MATRIX.md`.
 | R-15 | 1 Mbaud not working reliably on some PC/driver/MATLAB combination | — | — | **CLOSED 2026-09-26** for Eren's PC (HW-DEBUG-02…05, ≈ 20 transfers, 0 errors); check once on the lab PC before the demo | Hande |
 | R-16 | Lab-DCT / Lab-COMPARE likely replaced by NN-based labs → architecture after MEL unknown | High | Medium | Don't plan beyond MEL; ask Enis Hoca (Q-14) | ALL |
 | R-02 | Byte-order / handshake interpretation differs from the assistant's expectation | — | — | **CLOSED 2026-09-26** — TA Q-02/Q-03 answered (REQ-DEBUG-007, REQ-IF-006/007) | Hande |
-| R-03 | Git repo inside OneDrive → lock/corruption | Medium | High | DEC-014: move repo outside OneDrive | ALL |
+| R-03 | Git repo inside OneDrive → lock/corruption; Vivado cannot use non-ASCII paths | — | — | **CLOSED 2026-09-26** for Eren: repo moved to `C:\dev\EEE491-Spoken-Number-Recognition` (DEC-014) | ALL |
 | R-04 | Vivado version mismatch between members / lab PC → IP upgrade issues | Medium | Medium | DEC-008: everyone on 2025.2 (decided 2026-09-26) | ALL |
 | R-05 | AI-generated code accepted without understanding → exam and demo risk | Medium | High | PR review rule; owner + reviewer explain each block; AI log | ALL |
 | R-06 | PCB manufacturing lead time unknown; PCB is difficulty 5 and 20 final points | Medium | High | Q-10; consider early release of PCB manual | B |
@@ -111,7 +111,7 @@ Details: `docs/requirements/TRACEABILITY_MATRIX.md`.
 | MATLAB | R2023b | Observed |
 | ModelSim | Intel ModelSim ASE 18.1 present (not the planned simulator) | Observed |
 | git / gh | git 2.54; gh logged in as `eeerenbuyukbas`; **no global git user.name/email configured** | Observed |
-| Repo location | Inside OneDrive (`...\OneDrive\Masaüstü\EEE391 Project`) | **Risk R-03** |
+| Repo location | `C:\dev\EEE491-Spoken-Number-Recognition` since 2026-09-26 (old OneDrive copy obsolete) | DEC-014, R-03 closed |
 | GitHub remote | `Team-Project-Spoken-Number-Recognition/EEE491-Spoken-Number-Recognition`, private, org on free plan | DEC-015 |
 | Branch protection | Enabled on `main` 2026-09-25 (PR + 1 approval, admins included) | Lost if repo goes private on free plan |
 | Hande's PC (2026-09-26) | Vivado **2025.2** (XSim batch mode works); MATLAB R2025b; `gh` not installed; no GHDL | **Version differs from 2023.2 above → DEC-008 / R-04** (IP `.xci` for the demo ROM is version-specific) |
