@@ -1,6 +1,6 @@
 # Current Project State
 
-_Last updated: 2026-09-26 by Claude Code (Opus 5.5, AI-0010) in a session with Eren (`eeerenbuyukbas`)._
+_Last updated: 2026-09-26 by Claude Code (Opus 5.5, AI-0012) in a session with Eren (`eeerenbuyukbas`)._
 _Everything below is AI-generated and **not yet reviewed by the team**._
 
 > **HANDOFF/REPOSITORY INCONSISTENCY fixed in this update:** the previous version (AI-0006) still said
@@ -8,8 +8,8 @@ _Everything below is AI-generated and **not yet reviewed by the team**._
 > the MATLAB side and the ROM IP are in PR #5.
 
 ## Current Objective
-**Lab-DEBUG demo on Wed Sep 30.** All design pieces exist: `debug` (#4), MATLAB + ROM IP (#5), demo top level
-(#7, RTL + bitstream). **Remaining: review/merge PR #7, then the hardware tests HW-DEBUG-01…05 on the board.**
+**Lab-DEBUG demo on Wed Sep 30.** Everything is implemented, simulated, synthesised **and hardware-tested**
+(HW-DEBUG-02…05 PASS). Remaining: merge the evidence PR (`test/debug-hw`), demo preparation, the demonstration.
 
 ## What Has Been Completed
 - Phase 1 documents, TEAM_MANUAL (#1), TA answers + DEC-018 (#2), `debug.md` v0.2 (#3) — merged.
@@ -21,23 +21,25 @@ _Everything below is AI-generated and **not yet reviewed by the team**._
   the official Digilent XDC); `tb_button_conditioner`, `tb_top_debug_demo`; scripts `sim_top_debug_demo.tcl`,
   `build_debug_demo.tcl`; DEC-019 (debounce); reports in `docs/verification/`.
 
-## What Is Currently Working (simulation + implementation, no hardware yet)
-- `uart_tx` 37/37, `debug` 97/97, `debug_rom` 11/11, MATLAB 15/15 (R2025b and R2023b).
-- `button_conditioner` **22/22** (TB-BTN-01…05, 3 mutants detected).
-- **Demo top level with the real ROM IP, N = 14: 15/15** (TB-TOPDBG-01…03: two full frames of 65 544 bytes
-  equal to the COE, bounce/hold/press-while-busy handled; latency mutant detected).
-- **Bitstream built:** WNS +5.083 ns, WHS +0.122 ns, DRC 0; 128 LUT, 114 FF, 14.5 BRAM tiles.
-- Logs: `simulation/results/2026-09-26_*.log`; reports: `docs/verification/2026-09-26_top_debug_demo_*`.
+## What Is Currently Working (simulation, implementation and hardware)
+- Simulation: `uart_tx` 37/37, `debug` 97/97, `debug_rom` 11/11, `button_conditioner` 22/22, demo top 15/15; MATLAB 15/15.
+- Bitstream: WNS +5.083 ns, WHS +0.122 ns, DRC 0; 128 LUT, 114 FF, 14.5 BRAM tiles (PR #7, merged).
+- **Hardware (Basys-3, COM4, 1 Mbaud): HW-DEBUG-02…05 PASS** — 16 384/16 384 words every time, 10/10 repeats
+  (0.62–0.67 s), hold and press-during-transfer → one frame, reset during transfer → truncated frame + clean
+  restart. Report: `docs/verification/2026-09-26_HW-DEBUG.md`; log `2026-09-26_hw_debug_session.log`.
+- Guided hardware session: `addpath("<repo>/matlab/tests"); r = hw_debug_session("COM4")`.
 
 ## What Is Not Working / Not Done
-- No hardware test yet (HW-DEBUG-01…05); 1 Mbaud on the real FT2232HQ/VCP/MATLAB chain unverified (R-15).
-- Bitstream is not in git (build output): rebuild with `fpga/vivado/build_debug_demo.tcl`, or use the file in
-  `C:\dev\eee491_build\fpga\vivado\build\debug_demo\` on Eren's PC; attach to the demo release.
-- Data-capable micro-USB cable: Hande's is charge-only; Eren has one.
+- Lab demonstration (method D for REQ-DEBUG-001/016/017) — Wed Sep 30.
+- HW-DEBUG-01 terminal view not performed (covered by HW-DEBUG-02).
+- Not checked yet on the **lab/demo PC**: FTDI driver, COM port, 1 Mbaud (REQ-HW-003).
+- Operator note: press BTNU only when LD6 is on — a press right after a transfer starts a new (correct) transfer,
+  which made two early test sessions fail (analysis in the HW-DEBUG report §3).
 
 ## Current Branch
-`feature/debug-top` (PR #7), pushed. Build worktree on Eren's PC: `C:\dev\eee491_build` (detached, for
-Vivado — the main working copy is under OneDrive\Masaüstü, which Vivado cannot use, DEC-014).
+`test/debug-hw` (hardware evidence; PR to `main`). `main` = `f4ad383` (PR #7 merged). Build worktree on Eren's PC:
+`C:\dev\eee491_build` (Vivado cannot use the OneDrive\Masaüstü path, DEC-014); bitstream there in
+`fpgaivadouild\debug_demo	op_debug_demo.bit`.
 Remote: https://github.com/Team-Project-Spoken-Number-Recognition/EEE491-Spoken-Number-Recognition (public, DEC-016).
 
 ## Build / simulation notes (all members)
@@ -70,14 +72,13 @@ See above; logs in `simulation/results/`.
 None.
 
 ## Next Steps
-1. Hande (and/or Ömer): review + squash-merge PR #7 (RTL part).
-2. Program the board (Hardware Manager → `top_debug_demo.bit`); LD6 must be on after configuration.
-3. HW-DEBUG-01: terminal at 1 000 000 baud 8N1, press BTNU → bytes `55 AA CC 03 …` visible.
-4. HW-DEBUG-02…05: `run_debug_demo("COMx")` in MATLAB, press BTNU → `PASS: 16384/16384 words match`; repeat
-   10×, hold/press-during-transfer, BTNC during transfer. Evidence into `docs/verification/`.
-5. Demo prep: waveform screenshots (start, ready, txd) from `tb_debug` / `tb_top_debug_demo`; Tuesday evening freeze.
-6. Session exports: AI-0004 (Hande) still to add; AI-0008…0010 (Eren) to export.
-7. Wed Sep 30: demo, tag `lab-debug-demo`, release with the bitstream.
+1. Review + squash-merge the `test/debug-hw` PR (hardware evidence).
+2. Before the demo: check FTDI driver + COM port + one `run_debug_demo` on the lab PC (REQ-HW-003).
+3. Demo prep: waveform screenshots (start, ready, txd) from `tb_debug` / `tb_top_debug_demo`; one-page demo
+   script (program board → `run_debug_demo("COMx")` → press BTNU once). Tuesday evening freeze.
+4. Session exports: AI-0004 (Hande); AI-0008…0012 (Eren).
+5. Wed Sep 30: demo, then tag `lab-debug-demo` and a GitHub release with `top_debug_demo.bit`.
+6. Thu Oct 1: Lab-CTRL kickoff (Lead Eren, Partner Ömer, Hande off).
 
 ## Blockers
 - Demo top level not started (critical path: top level → integration sim → bitstream → hardware).

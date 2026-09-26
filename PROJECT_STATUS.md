@@ -40,7 +40,7 @@ Due:             Wed Sep 30 2026 (confirmed by team, 2026-09-25)
 [x] Functional simulation completed         (block level + demo top with real ROM IP: TB-TOPDBG 15/15, TB-BTN 22/22)
 [x] Expected vs actual results compared     (37/37, 97/97, 11/11, 22/22, 15/15, MT 15/15 PASS — simulation/results/2026-09-26_*.log)
 [x] Synthesis completed                     (synth + impl + bitstream 2026-09-26: WNS +5.083 ns, DRC 0 — docs/verification/)
-[ ] Hardware test completed
+[x] Hardware test completed                 (HW-DEBUG-02…05 PASS 2026-09-26 — docs/verification/2026-09-26_HW-DEBUG.md)
 [ ] Lab demonstration completed
 [ ] Known issues documented
 [~] Results documented                      (TEST_PLAN, REQUIREMENTS, TRACEABILITY_MATRIX updated 2026-09-26)
@@ -89,7 +89,7 @@ Details: `docs/requirements/TRACEABILITY_MATRIX.md`.
 | R-01 | Lab-DEBUG deadline (Wed Sep 30) missed — demo also needs CTRL subset, ROM IP, XDC, MATLAB | High | High (late factor) | All-hands week, parallel split in PROJECT_TIMELINE §4 | ALL |
 | R-13 | Public repository exposes course material, lab work, AI records and possibly personal data; copies persist after going private | Medium | Medium–High | DEC-016; TEAM_MANUAL §9 rules; check exports before commit | ALL |
 | R-14 | Rotation leaves the off-week member unable to explain a lab (exam questions to all members) | Medium | Medium | Thursday catch-up (TEAM_MANUAL §4) | ALL |
-| R-15 | 1 Mbaud not working reliably on some PC/driver/MATLAB combination, or objected to at the demo | Low–Med | Medium | Verify in HW-DEBUG-01 on our PCs and the lab PC early; rate is a generic (DEC-005) | Hande |
+| R-15 | 1 Mbaud not working reliably on some PC/driver/MATLAB combination | — | — | **CLOSED 2026-09-26** for Eren's PC (HW-DEBUG-02…05, ≈ 20 transfers, 0 errors); check once on the lab PC before the demo | Hande |
 | R-16 | Lab-DCT / Lab-COMPARE likely replaced by NN-based labs → architecture after MEL unknown | High | Medium | Don't plan beyond MEL; ask Enis Hoca (Q-14) | ALL |
 | R-02 | Byte-order / handshake interpretation differs from the assistant's expectation | — | — | **CLOSED 2026-09-26** — TA Q-02/Q-03 answered (REQ-DEBUG-007, REQ-IF-006/007) | Hande |
 | R-03 | Git repo inside OneDrive → lock/corruption | Medium | High | DEC-014: move repo outside OneDrive | ALL |

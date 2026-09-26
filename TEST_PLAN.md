@@ -65,11 +65,11 @@ XSim batch mode (AI-0006); the batch logs are in `simulation/results/2026-09-26_
 
 | ID | Procedure | Pass criterion | Req. | Status |
 |---|---|---|---|---|
-| HW-DEBUG-01 | Bring-up: send a fixed byte repeatedly at low baud, then at 1 000 000; view in a terminal program (hex mode, set to 1 000 000 baud) | Correct byte value on screen | REQ-DEBUG-008..010 | PLANNED |
-| HW-DEBUG-02 | Full demo: press START; MATLAB reads 65 544 bytes; compare 16 384 words with the COE file | Header/footer correct; 0 mismatching words | REQ-DEBUG-015..017 | PLANNED |
-| HW-DEBUG-03 | Repeat HW-DEBUG-02 ten times; record duration | 10/10 pass; duration ≈ 0.66 s | REQ-PERF-002 | PLANNED |
-| HW-DEBUG-04 | Press START once / hold START / press during transfer | Exactly one transfer per press; no corrupted frame | REQ-DEBUG-013, REQ-IF-007 | PLANNED |
-| HW-DEBUG-05 | Press RESET during transfer, then START | Clean new frame | REQ-DEBUG-012 | PLANNED |
+| HW-DEBUG-01 | Bring-up: send a fixed byte repeatedly at low baud, then at 1 000 000; view in a terminal program (hex mode, set to 1 000 000 baud) | Correct byte value on screen | COVERED by HW-DEBUG-02 (terminal view not performed) — [report](docs/verification/2026-09-26_HW-DEBUG.md) | PLANNED |
+| HW-DEBUG-02 | Full demo: press START; MATLAB reads 65 544 bytes; compare 16 384 words with the COE file | Header/footer correct; 0 mismatching words | PASS 2026-09-26 (3 runs, 16384/16384) — [report](docs/verification/2026-09-26_HW-DEBUG.md) | PLANNED |
+| HW-DEBUG-03 | Repeat HW-DEBUG-02 ten times; record duration | 10/10 pass; duration ≈ 0.66 s | PASS 2026-09-26 (10/10, 0.62–0.67 s) — [report](docs/verification/2026-09-26_HW-DEBUG.md), [log](docs/verification/2026-09-26_hw_debug_session.log) | PLANNED |
+| HW-DEBUG-04 | Press START once / hold START / press during transfer | Exactly one transfer per press; no corrupted frame | PASS 2026-09-26 (hold + presses during transfer: one frame each) — [report](docs/verification/2026-09-26_HW-DEBUG.md) | PLANNED |
+| HW-DEBUG-05 | Press RESET during transfer, then START | Clean new frame | PASS 2026-09-26 (truncated at 32 216 bytes, clean frame after reset) — [report](docs/verification/2026-09-26_HW-DEBUG.md) | PLANNED |
 
 ## 4. Lab-CTRL (Oct 7 lab — not needed for the DEBUG demo; full plan written with the CTRL design)
 

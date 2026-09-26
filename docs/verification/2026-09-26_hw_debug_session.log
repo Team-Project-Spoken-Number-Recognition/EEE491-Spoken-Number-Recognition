@@ -1,0 +1,51 @@
+# Hardware session log — HW-DEBUG-03/04/05 (TEST_PLAN §3)
+# Date      : 2026-09-26 17:11
+# Board     : Basys-3, bitstream top_debug_demo.bit (N = 14, 1 000 000 baud)
+# MATLAB    : 23.2.0.2485118 (R2023b) Update 6
+# Port      : COM4
+#
+
+>>> Step  1/14  [HW-DEBUG-03]  PRESS BTNU ONCE
+    HW-DEBUG-03  step  1: PASS      (expected PASS     ) bytes=65544 mismatches=0 extra=0 transfer=0.661 s  => OK
+
+>>> Step  2/14  [HW-DEBUG-03]  PRESS BTNU ONCE
+    HW-DEBUG-03  step  2: PASS      (expected PASS     ) bytes=65544 mismatches=0 extra=0 transfer=0.638 s  => OK
+
+>>> Step  3/14  [HW-DEBUG-03]  PRESS BTNU ONCE
+    HW-DEBUG-03  step  3: PASS      (expected PASS     ) bytes=65544 mismatches=0 extra=0 transfer=0.672 s  => OK
+
+>>> Step  4/14  [HW-DEBUG-03]  PRESS BTNU ONCE
+    HW-DEBUG-03  step  4: PASS      (expected PASS     ) bytes=65544 mismatches=0 extra=0 transfer=0.625 s  => OK
+
+>>> Step  5/14  [HW-DEBUG-03]  PRESS BTNU ONCE
+    HW-DEBUG-03  step  5: PASS      (expected PASS     ) bytes=65544 mismatches=0 extra=0 transfer=0.656 s  => OK
+
+>>> Step  6/14  [HW-DEBUG-03]  PRESS BTNU ONCE
+    HW-DEBUG-03  step  6: PASS      (expected PASS     ) bytes=65544 mismatches=0 extra=0 transfer=0.638 s  => OK
+
+>>> Step  7/14  [HW-DEBUG-03]  PRESS BTNU ONCE
+    HW-DEBUG-03  step  7: PASS      (expected PASS     ) bytes=65544 mismatches=0 extra=0 transfer=0.624 s  => OK
+
+>>> Step  8/14  [HW-DEBUG-03]  PRESS BTNU ONCE
+    HW-DEBUG-03  step  8: PASS      (expected PASS     ) bytes=65544 mismatches=0 extra=0 transfer=0.626 s  => OK
+
+>>> Step  9/14  [HW-DEBUG-03]  PRESS BTNU ONCE
+    HW-DEBUG-03  step  9: PASS      (expected PASS     ) bytes=65544 mismatches=0 extra=0 transfer=0.639 s  => OK
+
+>>> Step 10/14  [HW-DEBUG-03]  PRESS BTNU ONCE
+    HW-DEBUG-03  step 10: PASS      (expected PASS     ) bytes=65544 mismatches=0 extra=0 transfer=0.637 s  => OK
+
+>>> Step 11/14  [HW-DEBUG-04a]  PRESS BTNU AND HOLD IT ~2 S, THEN RELEASE
+    HW-DEBUG-04a step 11: PASS      (expected PASS     ) bytes=65544 mismatches=0 extra=0 transfer=0.609 s  => OK
+
+>>> Step 12/14  [HW-DEBUG-04b]  PRESS BTNU, THEN PRESS IT 3-4 MORE TIMES WHILE LD6 IS OFF
+    HW-DEBUG-04b step 12: PASS      (expected PASS     ) bytes=65544 mismatches=0 extra=0 transfer=0.640 s  => OK
+
+>>> Step 13/14  [HW-DEBUG-05a]  PRESS BTNU, THEN PRESS BTNC (RESET) WHILE LD6 IS OFF
+    HW-DEBUG-05a step 13: TRUNCATED (expected TRUNCATED) bytes=32216 mismatches=NaN extra=0 transfer=2.283 s  => OK
+
+>>> Step 14/14  [HW-DEBUG-05b]  PRESS BTNU ONCE (AFTER THE RESET)
+    HW-DEBUG-05b step 14: PASS      (expected PASS     ) bytes=65544 mismatches=0 extra=0 transfer=0.607 s  => OK
+
+# Transfer time (PASS steps): min 0.607 s, mean 0.636 s, max 0.672 s (n = 13)
+HW_RESULT: PASS (14/14 steps as expected)
