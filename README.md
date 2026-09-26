@@ -90,8 +90,8 @@ Differences from the originally proposed layout are explained in [DECISIONS.md](
 
 | Tool | Version | Status |
 |---|---|---|
-| Vivado ML Standard | 2023.2 observed on one member's PC | ASSUMED team-wide — TO VERIFY |
-| MATLAB | R2023b observed on one member's PC | ASSUMED team-wide — TO VERIFY |
+| Vivado ML Standard | **2025.2** (all members, DEC-008) | DECIDED 2026-09-26 |
+| MATLAB | R2025b (Hande, Ömer), R2023b (Eren) — code must run on R2019b+ | NOT PINNED |
 | LTspice | UNKNOWN | — |
 | PCB tool | KiCad proposed | PLANNED |
 
