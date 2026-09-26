@@ -80,3 +80,7 @@ desktop.ini
 !simulation/results/**
 !simulation/waveforms/**
 !docs/verification/**
+
+# ---------- Python ----------
+__pycache__/
+*.pyc
