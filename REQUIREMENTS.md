@@ -48,25 +48,25 @@ corresponding manual is released.**
 
 | ID | Description | Rationale | Source | Verif. | Status | Owner |
 |---|---|---|---|---|---|---|
-| REQ-DEBUG-001 | A debugger shall be implemented on the Basys-3 FPGA that transmits multiple 32-bit data words to a MATLAB program on a PC via the USB connection. | Primary debug path of the whole project | DBG §1 ¶1 | S, H, D | OPEN | Hande |
+| REQ-DEBUG-001 | A debugger shall be implemented on the Basys-3 FPGA that transmits multiple 32-bit data words to a MATLAB program on a PC via the USB connection. | Primary debug path of the whole project | DBG §1 ¶1 | S, H, D | IMPLEMENTED — NOT VERIFIED (sim PASS: TB-DEBUG-03/09, 2026-09-26; HW-DEBUG-02 / demo open) | Hande |
 | REQ-DEBUG-002 | The debugger shall implement only the **transmitter** part of a UART. | Scope limit | DBG §1 ¶1 | I | OPEN | Hande |
-| REQ-DEBUG-003 | The debugger shall read data through the **read-only port** of a memory inside the FPGA. | Decouples debugger from producer | DBG §1 ¶2 | I, S | OPEN | Hande |
-| REQ-DEBUG-004 | The memory address width **N** shall be defined once as a number at the beginning of the VHDL code and used everywhere instead of hard-coded widths; the debugger shall transmit **2^N** 32-bit words per transfer. Changing N alone shall change the memory size handled. | Reusable for any RAM size | DBG §1 ¶2; TA Q-07 | I, S | OPEN | Hande |
-| REQ-DEBUG-005 | Before the data, the debugger shall transmit the 32-bit start word **0x55AACC03**. | Frame delimiter | DBG §1 ¶3 | S, H | OPEN | Hande |
-| REQ-DEBUG-006 | After the 2^N data words, the debugger shall transmit the 32-bit end word **0xAA5503CC**. | Frame delimiter | DBG §1 ¶3 | S, H | OPEN | Hande |
-| REQ-DEBUG-007 | Each 32-bit word shall be sent as four 8-bit UART transactions, **most-significant byte first** — for header, data and end words alike. | Frame format; single concatenation rule on the PC | DBG §1 ¶3 table; **TA Q-02 confirmed** | S, H | OPEN | Hande |
-| REQ-DEBUG-008 | The UART frame shall be 1 start bit, 8 data bits **LSB first**, no parity, 1 stop bit (8N1). | UART compatibility with FT2232HQ/PC | DBG §3 (baud-rate guidance example) | S, H | OPEN | Hande |
-| REQ-DEBUG-009 | The baud rate shall be **1 000 000** (1 Mbaud) and stay fixed for all later labs; it satisfies the manual minimum of 115 200. | One rate used throughout the project; same as the reference design | DBG §1 ¶5, §3; team decision 2026-09-26 (DEC-005); DEC-018 | A, S, H | OPEN | Hande |
+| REQ-DEBUG-003 | The debugger shall read data through the **read-only port** of a memory inside the FPGA. | Decouples debugger from producer | DBG §1 ¶2 | I, S | IMPLEMENTED — NOT VERIFIED (sim PASS: TB-DEBUG-04, 2026-09-26; inspection = PR #4 review) | Hande |
+| REQ-DEBUG-004 | The memory address width **N** shall be defined once as a number at the beginning of the VHDL code and used everywhere instead of hard-coded widths; the debugger shall transmit **2^N** 32-bit words per transfer. Changing N alone shall change the memory size handled. | Reusable for any RAM size | DBG §1 ¶2; TA Q-07 | I, S | IMPLEMENTED — NOT VERIFIED (sim PASS: TB-DEBUG-03/04 with N = 3, 2026-09-26; inspection = PR #4 review) | Hande |
+| REQ-DEBUG-005 | Before the data, the debugger shall transmit the 32-bit start word **0x55AACC03**. | Frame delimiter | DBG §1 ¶3 | S, H | IMPLEMENTED — NOT VERIFIED (sim PASS: TB-DEBUG-03, 2026-09-26; HW-DEBUG-02 open) | Hande |
+| REQ-DEBUG-006 | After the 2^N data words, the debugger shall transmit the 32-bit end word **0xAA5503CC**. | Frame delimiter | DBG §1 ¶3 | S, H | IMPLEMENTED — NOT VERIFIED (sim PASS: TB-DEBUG-03, 2026-09-26; HW-DEBUG-02 open) | Hande |
+| REQ-DEBUG-007 | Each 32-bit word shall be sent as four 8-bit UART transactions, **most-significant byte first** — for header, data and end words alike. | Frame format; single concatenation rule on the PC | DBG §1 ¶3 table; **TA Q-02 confirmed** | S, H | IMPLEMENTED — NOT VERIFIED (sim PASS: TB-DEBUG-03/08, 2026-09-26; HW-DEBUG-02 open) | Hande |
+| REQ-DEBUG-008 | The UART frame shall be 1 start bit, 8 data bits **LSB first**, no parity, 1 stop bit (8N1). | UART compatibility with FT2232HQ/PC | DBG §3 (baud-rate guidance example) | S, H | IMPLEMENTED — NOT VERIFIED (sim PASS: TB-UART-01/03, TB-DEBUG-03, 2026-09-26; HW-DEBUG-01 open) | Hande |
+| REQ-DEBUG-009 | The baud rate shall be **1 000 000** (1 Mbaud) and stay fixed for all later labs; it satisfies the manual minimum of 115 200. | One rate used throughout the project; same as the reference design | DBG §1 ¶5, §3; team decision 2026-09-26 (DEC-005); DEC-018 | A, S, H | IMPLEMENTED — NOT VERIFIED (A: INTERFACES §3.3; sim PASS: TB-UART-02 = 100 clocks/bit, 2026-09-26; HW-DEBUG-01 open) | Hande |
 | REQ-DEBUG-010 | The UART shall interface with the on-board FT2232HQ USB-UART bridge (FPGA TX → FT2232 RXD). | Board wiring | DBG §1 ¶5 figure | I, H | OPEN | Hande |
 | REQ-DEBUG-011 | Ports: `reset_in`, `clock_in` (100 MHz), `mem_addr_out` (N-bit), `mem_data_in` (32-bit), `txd_out`, `start_in`, `ready_out` — names exactly as in the manual. | Grading/interface consistency | DBG §1 ¶6 | I | OPEN | Hande |
-| REQ-DEBUG-012 | `reset_in` shall reset the FSM registers. | Defined start-up | DBG §1 ¶6 | S | OPEN | Hande |
-| REQ-DEBUG-013 | `start_in` is active high, asserted for a **single clock cycle**; it only takes the debugger out of its wait state and starts a transfer (see REQ-IF-007). | Common handshake | DBG §1 ¶6 + waveform; TA Q-03 | S | OPEN | Hande |
-| REQ-DEBUG-014 | `ready_out` is active high; it shall be '1' after reset, go **low just after** `start_in` is asserted and return high when all data has been transferred (see REQ-IF-006). | Common handshake | DBG §1 ¶6 + waveform; TA Q-03 | S | OPEN | Hande |
-| REQ-DEBUG-015 | On the PC, MATLAB shall extract the bytes between start and end word and concatenate every four bytes into one 32-bit integer. | PC-side decoding | DBG §1 ¶4 | S (MATLAB test), H | OPEN | Ömer |
+| REQ-DEBUG-012 | `reset_in` shall reset the FSM registers. | Defined start-up | DBG §1 ¶6 | S | VERIFIED (sim: TB-DEBUG-01/06, 2026-09-26) | Hande |
+| REQ-DEBUG-013 | `start_in` is active high, asserted for a **single clock cycle**; it only takes the debugger out of its wait state and starts a transfer (see REQ-IF-007). | Common handshake | DBG §1 ¶6 + waveform; TA Q-03 | S | VERIFIED (sim: TB-DEBUG-02/05, 2026-09-26) | Hande |
+| REQ-DEBUG-014 | `ready_out` is active high; it shall be '1' after reset, go **low just after** `start_in` is asserted and return high when all data has been transferred (see REQ-IF-006). | Common handshake | DBG §1 ¶6 + waveform; TA Q-03 | S | VERIFIED (sim: TB-DEBUG-01/02, 2026-09-26) | Hande |
+| REQ-DEBUG-015 | On the PC, MATLAB shall extract the bytes between start and end word and concatenate every four bytes into one 32-bit integer. | PC-side decoding | DBG §1 ¶4 | S (MATLAB test), H | IMPLEMENTED — NOT VERIFIED (MATLAB tests PASS: MT-DEBUG-01/02, 2026-09-26; HW-DEBUG-02 open) | Ömer |
 | REQ-DEBUG-016 | Demo design: Lab-DEBUG instantiated in a **top module** that drives `start_in` and observes `ready_out` (Lab-CTRL **not required** — TA Q-04), connected to a ROM from Vivado *Block Memory Generator* (Single-Port ROM, 14-bit address, 32-bit data, initialised from a COE file); N = 14. | Demo requirement | DBG §2 bullet 3, relaxed by TA Q-04 | I, D | OPEN | Hande, Eren |
 | REQ-DEBUG-017 | The design shall be implemented on the FPGA and the ROM content transferred to MATLAB and verified there. | Demo requirement | DBG §2 bullets 1, 4 | H, D | OPEN | Hande, Ömer |
 | REQ-DEBUG-018 | The debugger shall be integrable with any sub-system to transfer that sub-system's RAM data to MATLAB. | Reuse in all later labs | DBG §1 ¶7, ¶4 | I (at each later stage) | OPEN | Hande |
-| REQ-DEBUG-019 | The design shall account for the memory read latency (typically 1–2 clock cycles for Block RAM). | Correct data capture | DBG §3 (ROM guidance) | S | OPEN | Hande |
+| REQ-DEBUG-019 | The design shall account for the memory read latency (typically 1–2 clock cycles for Block RAM). | Correct data capture | DBG §3 (ROM guidance) | S | VERIFIED (sim: TB-DEBUG-07, L = 1 and 2, 2026-09-26; real ROM latency still to read from the IP summary, ASSUMPTION-011) | Hande |
 | REQ-DEBUG-020 | Words narrower than 32 bits may be zero-padded in the unused MSBs. | Convention for later sub-systems | DBG §3 | I | OPEN | Hande |
 
 ### 1.3 Lab-CTRL — system controller (manual: `docs/manuals/Lab-CTRL_Assignment.pdf`)
@@ -91,18 +91,18 @@ Released together with Lab-DEBUG because the Lab-DEBUG demo requires Lab-CTRL (D
 | ID | Description | Rationale | Source | Verif. | Status | Owner |
 |---|---|---|---|---|---|---|
 | REQ-IF-001 | Every sub-system shall have a `start` input and a `ready` output. | Uniform control | CTRL §1 ¶5 | I, S | OPEN | ALL |
-| REQ-IF-002 | `start` shall be logic-1 at a rising clock edge as a single pulse of one clock-cycle duration. | Uniform control | CTRL §1 ¶5 + waveform | S | OPEN | ALL |
-| REQ-IF-003 | `ready` shall be active high, go low just after `start` is asserted, and become active at the rising edge after the sub-system completes its operation. | Uniform control | CTRL §1 ¶5 + waveform | S | OPEN | ALL |
+| REQ-IF-002 | `start` shall be logic-1 at a rising clock edge as a single pulse of one clock-cycle duration. | Uniform control | CTRL §1 ¶5 + waveform | S | IN PROGRESS (Lab-DEBUG: sim PASS TB-DEBUG-02, 2026-09-26; other sub-systems open) | ALL |
+| REQ-IF-003 | `ready` shall be active high, go low just after `start` is asserted, and become active at the rising edge after the sub-system completes its operation. | Uniform control | CTRL §1 ¶5 + waveform | S | IN PROGRESS (Lab-DEBUG: sim PASS TB-DEBUG-02, 2026-09-26; other sub-systems open) | ALL |
 | REQ-IF-004 | Each sub-system shall hold its processed data in an internal dual-port RAM that is read by the following sub-system. | Data hand-over | CTRL §1 ¶2 | I, S | OPEN | ALL |
 | REQ-IF-005 | All sub-systems use the 100 MHz Basys-3 oscillator as `clock_in`. | Single clock domain | DBG §1, CTRL §1 IO lists | I | OPEN | ALL |
-| REQ-IF-006 | Every sub-system's `ready` shall be '1' after reset: '1' = idle/waiting, '0' = working. | Uniform control | TA Q-03 (2026-09-26) | S | OPEN | ALL |
-| REQ-IF-007 | A `start` pulse arriving while a sub-system is working shall not change its operation; `start` only takes the block out of its wait state. | Robust sequencing | TA Q-03 (2026-09-26) | S | OPEN | ALL |
+| REQ-IF-006 | Every sub-system's `ready` shall be '1' after reset: '1' = idle/waiting, '0' = working. | Uniform control | TA Q-03 (2026-09-26) | S | IN PROGRESS (Lab-DEBUG: sim PASS TB-DEBUG-01, 2026-09-26; other sub-systems open) | ALL |
+| REQ-IF-007 | A `start` pulse arriving while a sub-system is working shall not change its operation; `start` only takes the block out of its wait state. | Robust sequencing | TA Q-03 (2026-09-26) | S | IN PROGRESS (Lab-DEBUG: sim PASS TB-DEBUG-05, 2026-09-26; other sub-systems open) | ALL |
 
 ## 3. Performance Requirements
 
 | ID | Description | Rationale | Source | Verif. | Status | Owner |
 |---|---|---|---|---|---|---|
-| REQ-PERF-001 | UART bit period error relative to the nominal baud rate shall be < 2 % (target < 0.5 %). | Reliable 8N1 reception | DERIVED (standard UART tolerance) — TO CONFIRM | A, S | OPEN | Hande |
+| REQ-PERF-001 | UART bit period error relative to the nominal baud rate shall be < 2 % (target < 0.5 %). | Reliable 8N1 reception | DERIVED (standard UART tolerance) — TO CONFIRM | A, S | VERIFIED (A: INTERFACES §3.3, divider exact; sim: TB-UART-02, 0 % error, 2026-09-26) | Hande |
 | REQ-PERF-002 | A full N = 14 transfer (65 544 bytes) shall complete without byte loss. At 1 000 000 baud (8N1) this takes ≈ 0.66 s. | Demo robustness | DERIVED from DBG §1, §2 | H | OPEN | Hande |
 | REQ-PERF-003 | Lab-MATLAB: each digit is spoken 3 times; the score is the number recognised out of **30** (trials may be repeated). Final-demo recognition performance (10 pts) is judged by Enis Hoca; no numeric target given. | Grading | SYL (final-demo table); TA Q-09 | D | OPEN | ALL |
 
@@ -118,9 +118,9 @@ Released together with Lab-DEBUG because the Lab-DEBUG demo requires Lab-CTRL (D
 
 | ID | Description | Rationale | Source | Verif. | Status | Owner |
 |---|---|---|---|---|---|---|
-| REQ-SW-001 | A MATLAB script shall receive the UART data from the USB port. | PC receiver | DBG §3 | H | OPEN | Ömer |
+| REQ-SW-001 | A MATLAB script shall receive the UART data from the USB port. | PC receiver | DBG §3 | H | IMPLEMENTED — NOT VERIFIED (`receive_debug_frame.m`; HW-DEBUG-02 open) | Ömer |
 | REQ-SW-002 | A terminal program shall be used during bring-up to observe raw bytes. | Incremental bring-up | DBG §3 | H | OPEN | Ömer |
-| REQ-SW-003 | The MATLAB receiver shall read a fixed number of bytes (8 + 4·2^N) and use the start/end words as **validation**, not as the only delimiter (payload may contain the delimiter values). | Robust parsing | DERIVED — design choice, see DEC-010 | S (MATLAB test), H | OPEN | Ömer |
+| REQ-SW-003 | The MATLAB receiver shall read a fixed number of bytes (8 + 4·2^N) and use the start/end words as **validation**, not as the only delimiter (payload may contain the delimiter values). | Robust parsing | DERIVED — design choice, see DEC-010 | S (MATLAB test), H | IMPLEMENTED — NOT VERIFIED (MATLAB tests PASS: MT-DEBUG-02/03, 2026-09-26; HW-DEBUG-02 open) | Ömer |
 
 ## 6. Verification Requirements
 

@@ -76,10 +76,15 @@ memory architecture, Vivado IP usage beyond the manuals.
 - **Date:** 2026-09-24 · **Status:** PROPOSED · **Team:** _pending_
 
 ### DEC-008 — Tool versions pinned team-wide
-- **Decision:** All members use the same Vivado and MATLAB versions. Observed on one PC: Vivado 2023.2, MATLAB R2023b.
-- **Reason:** Vivado projects/IP (.xci) are version-specific; mixed versions force IP upgrades.
-- **Action:** Every member reports their versions; lab PC version to be checked.
-- **Date:** 2026-09-24 · **Status:** PROPOSED · **Team:** _pending_
+- **Decision:** All members use **Vivado ML Standard 2025.2** for the whole project (Eren moves from
+  2023.2; Hande and Ömer already have 2025.2). MATLAB is not pinned yet: Hande and Ömer have R2025b,
+  Eren R2023b — MATLAB code must only use functions available since R2019b (`serialport`).
+- **Reason:** Vivado projects/IP (.xci) are version-specific and a newer .xci cannot be opened in an
+  older Vivado. The reference design's IP (DEC-018, `blk_mem_gen_*.xci`) was generated with 2025.2, and
+  two of three members already had 2025.2. The lab PC version is not decisive for us (team).
+- **Action:** Eren installs 2025.2. IP is committed as `.coe` + Tcl where possible (DEC-013), so a later
+  version change only needs the Tcl re-run.
+- **Date:** 2026-09-24, updated 2026-09-26 · **Status:** ACCEPTED (Vivado) · **Team:** Eren, Hande, Ömer (group chat 2026-09-26)
 
 ### DEC-009 — Debug path separation
 - **Decision:** Lab-DEBUG only reads RAM read ports. A port-B address mux selects between the next functional block and Lab-DEBUG; Lab-CTRL runs Lab-DEBUG only while the pipeline is idle.

@@ -40,7 +40,7 @@ Read this once completely; afterwards use §11 (cheat sheet) and §6 (Claude pro
 | # | Step | Check |
 |---|---|---|
 | 1 | Install **Git for Windows** and **GitHub CLI** (`gh`) | `git --version`, `gh --version` |
-| 2 | Install **Vivado ML Standard 2023.2** (same version for all — DEC-008) | Vivado → Help → About |
+| 2 | Install **Vivado ML Standard 2025.2** (same version for all — DEC-008; devices: Artix-7 only is enough) | Vivado → Help → About |
 | 3 | Install **MATLAB R2023b** (or agree on another common version) | `ver` in MATLAB |
 | 4 | Install the **FTDI VCP driver** (Basys-3 USB-UART) | Device Manager → Ports → "USB Serial Port (COMx)" when the board is plugged in |
 | 5 | Install the **Claude desktop app** and sign in to your own Claude account | Code tab opens |

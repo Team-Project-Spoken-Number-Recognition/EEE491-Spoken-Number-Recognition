@@ -1,92 +1,101 @@
 # Current Project State
 
-_Last updated: 2026-09-26 by Claude (Opus 5.5) in a session with `eeerenbuyukbas`._
+_Last updated: 2026-09-26 by Claude Code (Opus 5.5, AI-0007) in a session with Ömer (`omerkutlu1030`)._
 _Everything below is AI-generated and **not yet reviewed by the team**._
 
+> **HANDOFF/REPOSITORY INCONSISTENCY fixed in this update:** the previous version (AI-0006) still said
+> PR #4 was open and the MATLAB receiver / ROM were not started. PR #4 was squash-merged on 2026-09-26;
+> the MATLAB side and the ROM IP are in PR #5.
+
 ## Current Objective
-**Lab-DEBUG demo on Wed Sep 30** (all-hands week, plan in PROJECT_TIMELINE §4). Hande starts the
-debugger design/RTL on 2026-09-26. The demo does **not** need Lab-CTRL (TA Q-04): top module + button
-conditioning + ROM + Lab-DEBUG. Eren may start the Lab-CTRL design (Oct 7) in parallel.
+**Lab-DEBUG demo on Wed Sep 30** (all-hands week, PROJECT_TIMELINE §4). Lab-CTRL is not needed for the
+demo (TA Q-04): top module + button conditioning + ROM + Lab-DEBUG.
+Right now: **PR #5 and PR #6 wait for a review by Hande or Eren; the demo top level (Eren) is the
+remaining design piece.**
 
 ## What Has Been Completed
-- Repository skeleton created (see README §4); initial commit `1680976` pushed.
-- Course PDFs moved: syllabus → `docs/syllabus/`; DEBUG + CTRL manuals → `docs/manuals/`;
-  ADC, WINDOW, PCB, MATLAB, FFT, MEL manuals → `docs/manuals/pending/` (not released, not read).
-- Planning documents: README, CLAUDE, CONTRIBUTING, REQUIREMENTS, ARCHITECTURE, INTERFACES,
-  VERIFICATION_PLAN, TEST_PLAN, PROJECT_TIMELINE, PROJECT_STATUS, DECISIONS, ASSUMPTIONS,
-  INSTRUCTOR_QUESTIONS, manual analyses for DEBUG and CTRL, traceability matrix, AI-log structure,
-  GitHub PR/issue templates, CI plan.
+- Phase 1 documents, TEAM_MANUAL (PR #1), TA answers + DEC-018 (PR #2), `debug.md` v0.2 (PR #3) — merged.
+- **PR #4 merged (squash, 2026-09-26):** `uart_tx`, `debug`, `tb_uart_tx`, `tb_debug` (Hande, AI-0004/0006).
+  Second review by Ömer (AI-0007): both testbenches re-run on Ömer's PC in Vivado 2025.2 — PASS 37/37, 97/97.
+- **PR #5 (open, `feature/debug-matlab`), Ömer, AI-0007:**
+  - MATLAB: `matlab/debug/` — `generate_debug_coe`, `read_coe`, `decode_debug_frame`, `receive_debug_frame`,
+    `compare_with_coe`, `run_debug_demo`, `debug_frame_spec`; tests `matlab/tests/test_debug.m` (MT-DEBUG-01…04).
+  - Demo ROM: `fpga/ip/debug_rom.coe` (test pattern `[k | NOT k]` + delimiter values at addresses 1, 2,
+    16382, 16383), `fpga/ip/create_debug_rom.tcl` → `fpga/ip/debug_rom/debug_rom.xci` (Single Port ROM
+    16384 × 32, always enabled, output register ON), `tb_debug_rom` + `fpga/vivado/sim_debug_rom.tcl`.
+- **PR #6 (open, `docs/vivado-2025-2`):** DEC-008 → everyone on Vivado ML Standard 2025.2 (team decision
+  2026-09-26; Eren moves from 2023.2). MATLAB not pinned (R2025b Hande/Ömer, R2023b Eren).
 
-- 2026-09-25: `TEAM_MANUAL.md` (setup, Lead/Partner/off-week rotation, weekly Thu→Wed cycle, git
-  workflow, Claude prompts, public-repo rules). DEC-016 (temporarily public), DEC-017 (rotation).
-  Timeline switched to Wednesday deadlines. Committed on branch `docs/team-manual`, submitted as the
-  first pull request (needs one approval to merge).
-- 2026-09-25: branch protection enabled on `main` (PR + 1 approval, admins included, no force-push).
-- 2026-09-26: TA answers Q-02…Q-13 recorded; requirements, assumptions, decisions (DEC-003/005/007/012
-  updated, **DEC-018** reference-design rule), interfaces (board pin table), architecture, test plan,
-  timeline and team manual updated. Reference design inspected only for Lab-DEBUG-relevant files
-  (`constraints/jc_homefab.xdc`, `rtl/debug.vhd`, `rtl/top_module.vhd` IO/generics). Branch
-  `docs/ta-answers-2026-09-26` (stacked on `docs/team-manual`), not yet committed.
+## What Is Currently Working (simulation / MATLAB only)
+- `uart_tx` PASS 37/37 (TB-UART-01…03); `debug` PASS 97/97 (TB-DEBUG-01…09).
+- MATLAB: `MT_RESULT: PASS (15/15 tests)` — MT-DEBUG-01…04.
+- ROM IP: `TB_RESULT: PASS (11/11 checks)` — Vivado accepts the COE, all 16 384 words match,
+  **read latency measured = 2** (= `G_MEM_LATENCY` default). Mutation (expect 1) → FAIL, shift-by-one.
+- Logs: `simulation/results/2026-09-26_{tb_uart_tx,tb_debug,mt_debug,tb_debug_rom}.log`.
 
-## What Is Currently Working
-Nothing is implemented. No VHDL, MATLAB, or hardware work exists yet.
-
-## What Is Not Working
-n/a
+## What Is Not Working / Not Done
+- Demo top level `top_debug_demo` (reset sync, button sync/debounce/1-cycle pulse, ROM + debug wiring,
+  LD6), XDC from `Basys3_Master.xdc`, `create_debug_demo.tcl`, TB-TOPDBG-01 — Eren, not started.
+- No synthesis / implementation / timing numbers yet.
+- No hardware test (HW-DEBUG-01…05); MATLAB receiver untested on real hardware.
+- Data-capable micro-USB cable: Hande's is charge-only; Eren has one.
 
 ## Current Branch
-`main` — remote `origin` = https://github.com/Team-Project-Spoken-Number-Recognition/EEE491-Spoken-Number-Recognition
-(transferred from `eeerenbuyukbas` to the organization on 2026-09-24, DEC-015; old URL redirects;
-**temporarily public** since 2026-09-25, DEC-016). All three members are org owners/admins.
+`feature/debug-matlab` (PR #5), pushed, up to date with `origin/main`. Also pushed: `docs/vivado-2025-2` (PR #6).
+Remote: https://github.com/Team-Project-Spoken-Number-Recognition/EEE491-Spoken-Number-Recognition (public, DEC-016).
 
-## Last Commit
-Initial commit `chore: initialize project repository and Phase 1 engineering documents`
-(bootstrap commit made directly on `main`, before branch protection existed — the only allowed exception).
-Commit identity on this PC is repo-local: `eeerenbuyukbas <185053941+eeerenbuyukbas@users.noreply.github.com>`.
+## Integration notes for the top level (Eren)
+- ROM ports: `clka` ← `clock_in`, `addra(13:0)` ← `mem_addr_out`, `douta(31:0)` → `mem_data_in`; **no `ena`**
+  (always enabled). Add the IP with `read_ip fpga/ip/debug_rom/debug_rom.xci` (or re-run `create_debug_rom.tcl`).
+- Keep `debug` generic `G_MEM_LATENCY` = 2 (verified, TB-ROM-01).
+- `start_in` must be a clean 1-cycle pulse (debug.md §15).
+- **Vivado on Ömer's PC:** `.bat` scripts cannot run from `%TEMP%`, and `launch_simulation` crashed with a
+  redirected console → build folders go to `fpga/vivado/build/` (git-ignored); `sim_debug_rom.tcl` has a
+  `-tclargs scripts_only` fallback. Use the same pattern in `create_debug_demo.tcl` if needed.
 
-## Files Changed
-On branch `docs/team-manual` (2026-09-24/25): TEAM_MANUAL.md (new), README.md, CLAUDE.md, CONTRIBUTING.md, DECISIONS.md,
-ASSUMPTIONS.md, PROJECT_STATUS.md, PROJECT_TIMELINE.md, HANDOFF.md, docs/meetings/INSTRUCTOR_QUESTIONS.md,
-ai/AI_USAGE_LOG.md, ai/outputs/2026-09-25_AI-0002_github-setup-team-manual.md (new).
-
-## Current Architecture
-PLANNED only — see `ARCHITECTURE.md`. Single 100 MHz domain, start/ready handshake, one output
-dual-port RAM per block, Lab-DEBUG as a read-only tap to MATLAB via FT2232HQ.
+## Open review findings (non-blocking)
+- PR #4 findings 1–7 (style: `numeric_std` in `uart_tx`, inner `when others`, named constants, UART RX
+  model not in `fpga/tb/common/`, TB-DEBUG-05 coverage, debug.md header "DRAFT v0.1", GHDL claim without
+  evidence) — after the demo; any RTL change needs both TBs re-run.
+- Merge style: PR #4 was squash-merged and its branch deleted (DEC-004).
 
 ## Important Technical Decisions
-DEC-015 (organization, all owners), DEC-016 (temporarily public) and DEC-017 (rotation model) are
-ACCEPTED; DEC-001 … DEC-014 are still PROPOSED. Most important for the next step:
-DEC-003 (CTRL released with DEBUG), DEC-005 (UART protocol, **1 000 000 baud**, fixed), DEC-007 (sync reset),
-DEC-010 (fixed-length MATLAB read), DEC-012 (generics), DEC-014 (move repo out of OneDrive).
+DEC-004/005/015/016/017/018 ACCEPTED; DEC-008 ACCEPTED (Vivado 2025.2) once PR #6 is merged; others PROPOSED.
+Relevant now: DEC-007 (sync reset), DEC-010 (fixed-length MATLAB read), DEC-011, DEC-012, DEC-013.
 
 ## Known Bugs
-None (no code).
+None found in simulation or MATLAB tests.
 
 ## Current Test Results
-None.
+TB-UART-01…03, TB-DEBUG-01…09, TB-ROM-01…03, MT-DEBUG-01…04 PASS (2026-09-26).
+TB-TOPDBG-01, HW-DEBUG-01…05 PLANNED.
 
 ## Simulation Results
-None.
+See above; logs in `simulation/results/`.
 
 ## Hardware Results
 None.
 
 ## Next Steps
-1. Team reviews the Phase 1 documents; fills in names; accepts/rejects DEC-001…014.
-2. Repo is in the organization (DEC-015), all three are owners, temporarily public (DEC-016).
-   Still open: every member follows TEAM_MANUAL §2 (clone outside OneDrive, identity); review and merge the `docs/team-manual` PR.
-3. Baud rate decided: **1 000 000** (DEC-005) — verify 1 Mbaud on PC/MATLAB in HW-DEBUG-01. Decide spoken language EN/TR (U-18). Ask Enis Hoca Q-14 (DCT/COMPARE → NN labs?) in class.
-4. Write `docs/architecture/subsystems/debug.md` (FSM, timing, latency; parameter named `N`) — review — then RTL. Eren: top-level plan + button conditioning; optionally start `ctrl.md` (full CTRL).
-5. Download datasheets listed in `hardware/README.md`.
-6. Export this chat session into `ai/sessions/` (syllabus GenAI policy).
+1. Hande or Eren: review + squash-merge PR #5 and PR #6.
+2. Eren: install Vivado 2025.2; demo top level + XDC + `create_debug_demo.tcl` + TB-TOPDBG-01; synthesis,
+   utilisation (expect 16 RAMB36 for the ROM), WNS; bitstream. Target: PR by Monday evening.
+3. Ömer: cross-check "Total Port A Read Latency: 2" in the `debug_rom` IP Summary tab (GUI, cancel without
+   changes); get the Basys-3 back from Hande (Mon); install the FTDI VCP driver; find the COM port.
+4. Tuesday (Hande + Ömer): HW-DEBUG-01 (terminal, 1 Mbaud), then `run_debug_demo("COMx")` for
+   HW-DEBUG-02…05; evidence into `docs/verification/`. Tuesday evening: freeze.
+5. Session exports: AI-0004 (Hande) still to add. AI-0007 (Ömer) added, redacted, group chats omitted — keep the
+   same rule for other exports (no pasted WhatsApp messages or phone numbers in the public repo).
+6. Wed Sep 30: demo, tag `lab-debug-demo`, release with bitstream.
 
 ## Blockers
-- Only 4 days until the Lab-DEBUG deadline.
+- Demo top level not started (critical path: top level → integration sim → bitstream → hardware).
+- PR #5 / #6 need a review (authors cannot approve their own PRs).
 
 ## Assumptions
-See `ASSUMPTIONS.md` — now VERIFIED by the TA: -006 (MSB byte first), -007 (ready high after reset),
--008 (start ignored while busy). Still open: -001 (part number), -003 (TX pin A18, supported by reference design),
--011 (ROM latency), -013 (dates after Sep 30).
+See `ASSUMPTIONS.md` — VERIFIED: -006, -007, -008 (TA), **-011 (ROM latency 2, TB-ROM-01)**, -004 (Vivado
+2025.2 for Hande/Ömer). Open: -001 (part number), -003 (TX pin A18), -005 (MATLAB version), -009 (1 Mbaud on
+PC), -013 (dates after Sep 30).
 
 ## Questions for Instructor
 Q-01 … Q-13 answered (`docs/meetings/INSTRUCTOR_QUESTIONS.md`). Open: **Q-14** to Enis Hoca (DCT/COMPARE → NN labs?).
@@ -97,3 +106,6 @@ Q-01 … Q-13 answered (`docs/meetings/INSTRUCTOR_QUESTIONS.md`). Open: **Q-14**
 - Board pin assignment in `INTERFACES.md` §1.1 (DEC-018).
 - The released/pending split of manuals (`docs/manuals/` vs `docs/manuals/pending/`).
 - Requirement IDs (never renumber; deprecate instead).
+- `debug` / `uart_tx` behaviour — every change needs a TB re-run and a new log.
+- ROM settings (output register ON → latency 2) and the COE test pattern — `G_MEM_LATENCY`, TB-ROM and
+  MT-DEBUG tests depend on them; regenerate COE + IP + logs together.

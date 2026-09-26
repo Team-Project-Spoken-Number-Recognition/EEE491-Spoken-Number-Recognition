@@ -16,30 +16,42 @@ read latency (1 or 2 cycles) drives `mem_data_in`.
 Simulation parameters: `G_ADDR_WIDTH` = 3 or 4 (8–16 words) and a small baud divider (e.g. 16 clocks/bit)
 for speed, except TB-UART-02 which uses the real 100 MHz / 1 000 000 divider (100).
 
+**Results 2026-09-26** (PR #4, commit `d6bdd94`): `tb_uart_tx` → `TB_RESULT: PASS (37/37 checks)`,
+`tb_debug` → `TB_RESULT: PASS (97/97 checks)`. Run by Hande in Vivado 2025.2 XSim (GUI) and re-run in
+XSim batch mode (AI-0006); the batch logs are in `simulation/results/2026-09-26_tb_*.log`. Actual settings:
+`tb_uart_tx` 10 and 100 clocks/bit; `tb_debug` N = 3, 10 clocks/bit, three DUTs (latency generic/memory =
+2/2, 1/1, 2/1). Testbench sensitivity (AI-0004, not repeated here): 3 injected bugs in `uart_tx` and 7 in
+`debug` were all detected.
+**Deviation:** the UART receiver and memory models are written inline in each testbench, not in
+`fpga/tb/common/` as planned above; move them there when a second testbench needs them.
+
 | ID | Test | Expected result | Req. | Status |
 |---|---|---|---|---|
-| TB-UART-01 | Single byte 0x55, 0x00, 0xFF, 0x81 through the UART TX sub-block | Start bit 0, 8 bits LSB first, stop bit 1; line idle high before/after | REQ-DEBUG-008 | PLANNED |
-| TB-UART-02 | Real divider: measure bit period | 100 clocks ± 0 (1.00 µs); frame = 10 bit periods | REQ-DEBUG-009, REQ-PERF-001 | PLANNED |
-| TB-UART-03 | Back-to-back bytes | No glitch between stop bit and next start bit; stop bit ≥ 1 bit period | REQ-DEBUG-008 | PLANNED |
-| TB-DEBUG-01 | Reset: assert `reset_in` | `txd_out` = '1', `ready_out` = '1', FSM idle | REQ-DEBUG-012, REQ-IF-006 | PLANNED |
-| TB-DEBUG-02 | Handshake: 1-cycle `start_in` | `ready_out` is cleared at the edge that samples `start_in` = '1' (low one clock after `start_in` rose), stays low until the last stop bit, then rises | REQ-DEBUG-013/014, REQ-IF-002/003 | PLANNED |
-| TB-DEBUG-03 | Full frame, N small, known memory pattern | Byte stream = 55 AA CC 03, words 0..2^N−1 MSB-byte first, AA 55 03 CC; count = 8 + 4·2^N | REQ-DEBUG-004..007 | PLANNED |
-| TB-DEBUG-04 | Address sequence | `mem_addr_out` visits 0 … 2^N−1 exactly once, in order; no out-of-range address | REQ-DEBUG-003/004 | PLANNED |
-| TB-DEBUG-05 | `start_in` while busy | Ignored; stream unchanged | REQ-IF-007 | PLANNED |
-| TB-DEBUG-06 | Reset during transfer, then new start | Transfer aborts, line idle high, next start produces a complete correct frame | REQ-DEBUG-012 | PLANNED |
-| TB-DEBUG-07 | Memory latency 1 and 2 cycles | Correct data captured for both settings | REQ-DEBUG-019 | PLANNED |
-| TB-DEBUG-08 | Payload containing delimiter values (0x55AACC03, 0xAA5503CC), 0x00000000, 0xFFFFFFFF, walking-ones | Sent unchanged | DEC-010 | PLANNED |
-| TB-DEBUG-09 | Two consecutive transfers | Second frame identical and complete | REQ-DEBUG-001 | PLANNED |
+| TB-UART-01 | Single byte 0x55, 0x00, 0xFF, 0x81 through the UART TX sub-block | Start bit 0, 8 bits LSB first, stop bit 1; line idle high before/after | REQ-DEBUG-008 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_tb_uart_tx.log) |
+| TB-UART-02 | Real divider: measure bit period | 100 clocks ± 0 (1.00 µs); frame = 10 bit periods | REQ-DEBUG-009, REQ-PERF-001 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_tb_uart_tx.log) |
+| TB-UART-03 | Back-to-back bytes | No glitch between stop bit and next start bit; stop bit ≥ 1 bit period | REQ-DEBUG-008 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_tb_uart_tx.log) |
+| TB-DEBUG-01 | Reset: assert `reset_in` | `txd_out` = '1', `ready_out` = '1', FSM idle | REQ-DEBUG-012, REQ-IF-006 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_tb_debug.log) |
+| TB-DEBUG-02 | Handshake: 1-cycle `start_in` | `ready_out` is cleared at the edge that samples `start_in` = '1' (low one clock after `start_in` rose), stays low until the last stop bit, then rises | REQ-DEBUG-013/014, REQ-IF-002/003 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_tb_debug.log) |
+| TB-DEBUG-03 | Full frame, N small, known memory pattern | Byte stream = 55 AA CC 03, words 0..2^N−1 MSB-byte first, AA 55 03 CC; count = 8 + 4·2^N | REQ-DEBUG-004..007 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_tb_debug.log) |
+| TB-DEBUG-04 | Address sequence | `mem_addr_out` visits 0 … 2^N−1 exactly once, in order; no out-of-range address | REQ-DEBUG-003/004 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_tb_debug.log) |
+| TB-DEBUG-05 | `start_in` while busy | Ignored; stream unchanged | REQ-IF-007 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_tb_debug.log) |
+| TB-DEBUG-06 | Reset during transfer, then new start | Transfer aborts, line idle high, next start produces a complete correct frame | REQ-DEBUG-012 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_tb_debug.log) |
+| TB-DEBUG-07 | Memory latency 1 and 2 cycles | Correct data captured for both settings | REQ-DEBUG-019 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_tb_debug.log) |
+| TB-DEBUG-08 | Payload containing delimiter values (0x55AACC03, 0xAA5503CC), 0x00000000, 0xFFFFFFFF, walking-ones | Sent unchanged | DEC-010 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_tb_debug.log) |
+| TB-DEBUG-09 | Two consecutive transfers | Second frame identical and complete | REQ-DEBUG-001 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_tb_debug.log) |
 | TB-TOPDBG-01 | Demo top (button conditioning + ROM IP simulation model + DEBUG; no CTRL) with a small COE | Button pulse → one complete frame; ROM content matches COE | REQ-DEBUG-016 | PLANNED |
+| TB-ROM-01 | Demo ROM IP `debug_rom`: address change → new word on `douta` | Read latency = 2 clock edges (= `G_MEM_LATENCY` default of `debug`) | REQ-DEBUG-019, ASSUMPTION-011 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_tb_debug_rom.log) |
+| TB-ROM-02 | Demo ROM IP: read all 16 384 addresses | Every word equals `fpga/ip/debug_rom.coe` | REQ-DEBUG-016 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_tb_debug_rom.log) |
+| TB-ROM-03 | Demo ROM IP: test-pattern addresses 0–5, 16382, 16383 | Expected / Actual printed, all equal | REQ-DEBUG-016, DEC-010 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_tb_debug_rom.log) |
 
 ## 2. Lab-DEBUG — MATLAB tests (no hardware)
 
 | ID | Test | Expected | Req. | Status |
 |---|---|---|---|---|
-| MT-DEBUG-01 | Decode a synthetic byte vector (built in MATLAB) | Words equal the source words | REQ-DEBUG-015 | PLANNED |
-| MT-DEBUG-02 | Synthetic stream with delimiter values inside the payload | Correct decode, no truncation | DEC-010 | PLANNED |
-| MT-DEBUG-03 | Corrupted header / short stream | Clear error message, no silent wrong data | REQ-SW-003 | PLANNED |
-| MT-DEBUG-04 | COE generator writes a file that Vivado accepts and MATLAB reads back identically | Round-trip identical | REQ-DEBUG-016 | PLANNED |
+| MT-DEBUG-01 | Decode a synthetic byte vector (built in MATLAB) | Words equal the source words | REQ-DEBUG-015 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_mt_debug.log) |
+| MT-DEBUG-02 | Synthetic stream with delimiter values inside the payload | Correct decode, no truncation | DEC-010 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_mt_debug.log) |
+| MT-DEBUG-03 | Corrupted header / short stream | Clear error message, no silent wrong data | REQ-SW-003 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_mt_debug.log) |
+| MT-DEBUG-04 | COE generator writes a file that Vivado accepts and MATLAB reads back identically | Round-trip identical | REQ-DEBUG-016 | PASS 2026-09-26 — MATLAB round trip + format ([log](simulation/results/2026-09-26_mt_debug.log)); Vivado accepts the COE and the ROM holds it exactly (TB-ROM-02, [log](simulation/results/2026-09-26_tb_debug_rom.log)) |
 
 ## 3. Lab-DEBUG — hardware tests (Basys-3)
 

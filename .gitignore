@@ -1,4 +1,6 @@
 # ---------- Vivado (projects are re-created from Tcl; see fpga/vivado/README.md) ----------
+fpga/vivado/build/
+dfx_runtime.txt
 *.jou
 *.log
 *.str
@@ -24,6 +26,7 @@ fpga/ip/**/*
 !fpga/ip/**/
 !fpga/ip/**/*.xci
 !fpga/ip/**/*.coe
+!fpga/ip/*.tcl
 !fpga/ip/**/README.md
 !fpga/ip/**/.gitkeep
 # Bitstreams are build outputs; release bitstreams are attached to GitHub releases, not committed

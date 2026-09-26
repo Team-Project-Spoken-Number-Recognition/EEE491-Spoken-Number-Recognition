@@ -22,8 +22,8 @@ listed here. Status: **UNVERIFIED → VERIFIED** (with evidence) or **REJECTED**
 - **Status:** **VERIFIED (official documentation)** — Digilent `Basys-3-Master.xdc` (digilent-xdc commit `69d3501`): `RsTx` = A18, `RsRx` = B18. Also used by the reference design. Hardware confirmation in HW-DEBUG-01.
 
 ### ASSUMPTION-004 — Vivado version
-- **Statement:** Team uses Vivado ML Standard 2023.2 (observed on one member's PC; Block Memory Generator 8.4 in the manual screenshots is consistent).
-- **Status:** UNVERIFIED · **How to verify:** Each member + lab PC report `Help → About`.
+- **Statement:** Team uses Vivado ML Standard **2025.2** (DEC-008, 2026-09-26). Block Memory Generator in 2025.2 is newer than the 8.4 shown in the manual screenshots — check the configuration pages match.
+- **Status:** VERIFIED for Hande and Ömer (2025.2 installed); Eren installing · **How to verify:** `Help → About` on each PC.
 
 ### ASSUMPTION-005 — MATLAB version and serial API
 - **Statement:** MATLAB R2023b (observed on one PC); `serialport` (base MATLAB, R2019b+) is available.
@@ -55,7 +55,7 @@ listed here. Status: **UNVERIFIED → VERIFIED** (with evidence) or **REJECTED**
 ### ASSUMPTION-011 — Memory read latency of the demo ROM
 - **Statement:** Block Memory Generator ROM latency is 1 cycle without, 2 cycles with the primitive output register.
 - **Source:** DBG §3 ("usually one or two clock cycles, check the summary tab").
-- **Status:** UNVERIFIED · **How to verify:** Read the IP *Summary* tab after configuration; record value in the subsystem doc.
+- **Status:** VERIFIED 2026-09-26 for the demo ROM `debug_rom` (primitive output register ON): **2 clock edges**, measured in simulation (TB-ROM-01, `simulation/results/2026-09-26_tb_debug_rom.log`); recorded in `debug.md` §12. Cross-check in the IP *Summary* tab when the IP is opened in the GUI.
 
 ### ASSUMPTION-012 — RECORD & NUMBER switches
 - **Statement:** They select template-recording mode and the number being recorded for Lab-COMPARE.
@@ -72,7 +72,7 @@ listed here. Status: **UNVERIFIED → VERIFIED** (with evidence) or **REJECTED**
 | # | Parameter | Needed by stage | Resolved by | Status |
 |---|---|---|---|---|
 | U-01 | Exact FPGA part / board revision | DEBUG | ASSUMPTION-001/002 | UNVERIFIED |
-| U-02 | Team-wide Vivado / MATLAB versions | DEBUG | DEC-008 | UNKNOWN |
+| U-02 | Team-wide Vivado / MATLAB versions | DEBUG | DEC-008 | RESOLVED — Vivado 2025.2 (DEC-008); MATLAB not pinned |
 | U-03 | Byte order in 32-bit word | DEBUG | Q-02 | **RESOLVED** — MSB byte first |
 | U-04 | Baud rate | DEBUG | DEC-005 | **RESOLVED** — 1 000 000 baud, fixed for all labs (team decision) |
 | U-05 | Block RAM latency of demo ROM | DEBUG | IP summary | UNKNOWN |

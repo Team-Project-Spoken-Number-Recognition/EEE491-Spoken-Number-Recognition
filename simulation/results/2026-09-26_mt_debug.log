@@ -1,0 +1,37 @@
+# Test log — MATLAB MT-DEBUG-01..04 (PC side of Lab-DEBUG)
+# Date      : 2026-09-26
+# Tool      : MATLAB R2025b, batch mode
+# Sources   : matlab/debug/*.m, matlab/tests/test_debug.m (branch feature/debug-matlab)
+# Run by    : Claude Code session (AI-0007) on Ömer's PC
+# Command   : matlab -batch "addpath('matlab/debug','matlab/tests'); run_debug_tests"
+# Note      : the line "FAIL: 1 of 8 words differ ... DEADBEEF" is printed by
+#             test_compare_reports_mismatch, which plants one wrong word on purpose.
+# ------------------------------------------------------------------------------
+Running test_debug
+.......... ...FAIL: 1 of 8 words differ.
+  addr     5 (0x0005): expected 0005FFFA, received DEADBEEF
+PASS: 8/8 words match.
+..
+Done test_debug
+__________
+
+                              Name                              Passed    Failed    Incomplete    Duration       Details   
+    ________________________________________________________    ______    ______    __________    _________    ____________
+
+    {'test_debug/test_MT_DEBUG_01_hand_written_frame'      }    true      false       false         0.25607    {11 struct}
+    {'test_debug/test_MT_DEBUG_01_random_words'            }    true      false       false        0.053657    {11 struct}
+    {'test_debug/test_MT_DEBUG_01_full_size_N14'           }    true      false       false        0.029908    {11 struct}
+    {'test_debug/test_MT_DEBUG_02_delimiters_in_payload'   }    true      false       false        0.030023    {11 struct}
+    {'test_debug/test_MT_DEBUG_02_payload_all_delimiters'  }    true      false       false        0.004922    {11 struct}
+    {'test_debug/test_MT_DEBUG_03_short_stream'            }    true      false       false         0.15099    {11 struct}
+    {'test_debug/test_MT_DEBUG_03_long_stream'             }    true      false       false       0.0076957    {11 struct}
+    {'test_debug/test_MT_DEBUG_03_bad_start_word'          }    true      false       false        0.026013    {11 struct}
+    {'test_debug/test_MT_DEBUG_03_bad_end_word'            }    true      false       false       0.0030864    {11 struct}
+    {'test_debug/test_MT_DEBUG_03_lost_byte_in_middle'     }    true      false       false       0.0028645    {11 struct}
+    {'test_debug/test_MT_DEBUG_04_coe_round_trip'          }    true      false       false        0.057881    {11 struct}
+    {'test_debug/test_MT_DEBUG_04_coe_format'              }    true      false       false        0.027639    {11 struct}
+    {'test_debug/test_MT_DEBUG_04_committed_coe_is_current'}    true      false       false        0.026563    {11 struct}
+    {'test_debug/test_compare_reports_mismatch'            }    true      false       false        0.032392    {11 struct}
+    {'test_debug/test_pattern_default_words'               }    true      false       false        0.015083    {11 struct}
+
+MT_RESULT: PASS (15/15 tests)
