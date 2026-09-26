@@ -1,6 +1,6 @@
 # Current Project State
 
-_Last updated: 2026-09-26 by Claude Code (Opus 5.5, AI-0012) in a session with Eren (`eeerenbuyukbas`)._
+_Last updated: 2026-09-26 by Claude Code (Opus 5.5, AI-0013) in a session with Eren (`eeerenbuyukbas`)._
 _Everything below is AI-generated and **not yet reviewed by the team**._
 
 > **HANDOFF/REPOSITORY INCONSISTENCY fixed in this update:** the previous version (AI-0006) still said
@@ -74,8 +74,9 @@ None.
 ## Next Steps
 1. Review + squash-merge the `test/debug-hw` PR (hardware evidence).
 2. Before the demo: check FTDI driver + COM port + one `run_debug_demo` on the lab PC (REQ-HW-003).
-3. Demo prep: waveform screenshots (start, ready, txd) from `tb_debug` / `tb_top_debug_demo`; one-page demo
-   script (program board → `run_debug_demo("COMx")` → press BTNU once). Tuesday evening freeze.
+3. Demo prep: **done** — `docs/reports/lab-debug-demo/DEMO_GUIDE.md` (demo card per DBG §2, checklist, Q&A,
+   fallbacks) and figures `simulation/waveforms/debug/debug_w1…w5` (live: `fpga/vivado/sim_debug_waves.tcl
+   -tclargs gui`). Team: read the guide + Q&A, do one dry run. Tuesday evening freeze.
 4. Session exports: AI-0004 (Hande); AI-0008…0012 (Eren).
 5. Wed Sep 30: demo, then tag `lab-debug-demo` and a GitHub release with `top_debug_demo.bit`.
 6. Thu Oct 1: Lab-CTRL kickoff (Lead Eren, Partner Ömer, Hande off).
