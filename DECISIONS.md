@@ -41,7 +41,8 @@ memory architecture, Vivado IP usage beyond the manuals.
 - **Chosen:** A.
 - **Reason:** Option B would create a throw-away controller and risk handshake mismatch.
 - **Trade-offs:** Slightly larger current scope. Only the CTRL subset needed for the DEBUG demo is built first; full framing follows for the Oct 10 demo.
-- **Date:** 2026-09-24 · **Status:** PROPOSED · **Team:** _pending_
+- **Update 2026-09-26:** TA Q-04 — Lab-CTRL is **not required** for the Lab-DEBUG demo; a top module drives `start_in`/`ready_out`. The CTRL manual stays released (Lab-CTRL is next week's lab, Oct 7) but the DEBUG demo no longer depends on it, so CTRL work can proceed independently.
+- **Date:** 2026-09-24 · **Status:** ACCEPTED (release) / demo dependency REMOVED by TA Q-04 · **Team:** eeerenbuyukbas
 
 ### DEC-004 — Git workflow: protected `main`, feature branches, reviewed PRs
 - **Decision:** `main` protected (PR + 1 approving review + no direct push). Branches `feature/<block>`, `fix/<topic>`, `docs/<topic>`, `sim/<topic>`. Conventional commit messages. Squash-merge. A git tag per demonstrated lab (`lab-debug-demo`, `lab-ctrl-v1`, …).
@@ -52,13 +53,14 @@ memory architecture, Vivado IP usage beyond the manuals.
 - **Date:** 2026-09-24 · **Status:** ACCEPTED 2026-09-25 (branch protection enabled on `main`, enforced for admins) · **Team:** eeerenbuyukbas
 
 ### DEC-005 — UART / debug protocol
-- **Decision:** 8N1, LSB-first bits, MSB-first bytes, start word `55AACC03`, end word `AA5503CC`, fixed length `8 + 4·2^N` bytes. Start at **115 200 baud**; evaluate a higher rate (e.g. 1 000 000, exact divider 100) only after the 115 200 demo path works.
-- **Context:** DBG §1, §3. Byte order derived from the header table (ASSUMPTION-006).
+- **Decision:** 8N1, LSB-first bits, **MSB-first bytes** (TA Q-02), start word `55AACC03`, end word `AA5503CC`, fixed length `8 + 4·2^N` bytes, **1 000 000 baud**, used unchanged in every lab.
+- **Context:** DBG §1, §3 require ≥ 115 200 baud if supported by the FT2232HQ. The rate itself is left to the team by the instructor.
 - **Options:** baud 115 200 / 460 800 / 921 600 / 1 000 000.
-- **Chosen:** 115 200 for first bring-up and demo; higher rate is a later, separately verified change.
-- **Reason:** Manual minimum; guaranteed support; 5.7 s transfer is acceptable for N = 14.
-- **Trade-offs:** Slow for large RAM dumps in later labs.
-- **Date:** 2026-09-24 · **Status:** PROPOSED · **Team:** _pending_
+- **Chosen:** 1 000 000.
+- **Reason:** Same rate as the reference design (DEC-018) → its PC-side tools and experience stay compatible; exact divider (100 MHz / 1 MHz = 100, 0 % error); N = 14 dump in 0.66 s instead of 5.7 s, which matters for large RAM dumps in later labs.
+- **History:** 2026-09-24 AI proposed 115 200 first. 2026-09-26 the TA answered "No" to Q-06 ("may we use a rate above 115 200 in later labs?"). The team's interpretation (eeerenbuyukbas): the TA understood the question as *changing* the rate between labs; the instructor leaves the rate to the team, and the team will keep one rate for the whole project. → 1 000 000 chosen; the AI's 115 200 recommendation was not adopted.
+- **Risks / verification:** FT2232HQ, Windows VCP driver and MATLAB `serialport` must work at 1 Mbaud (ASSUMPTION-009; the reference design ran at this rate → supporting evidence, not proof) → verify in HW-DEBUG-01 before building on it. If the assistant objects at the demo, the rate is a generic (`G_BAUD_RATE`) — one-line change + re-run of TB-UART-02.
+- **Date:** 2026-09-26 · **Status:** ACCEPTED · **Team:** eeerenbuyukbas
 
 ### DEC-006 — Clock strategy
 - **Decision:** Single 100 MHz clock domain; baud tick and all slower timing via clock-enable pulses; no MMCM/PLL until a manual or timing analysis requires it.
@@ -70,7 +72,7 @@ memory architecture, Vivado IP usage beyond the manuals.
 - **Decision:** `reset_in` active high, passed through a 2-FF synchroniser in the top level, used synchronously in all clocked processes. Board RESET input → synchroniser → every block (REQ-CTRL-006).
 - **Options:** A) synchronous · B) asynchronous · C) async assert / sync de-assert.
 - **Chosen:** A (Xilinx 7-series guidance favours synchronous resets; one domain makes A simple).
-- **Open:** Which Basys-3 input is RESET (button vs. switch) — INSTRUCTOR_QUESTIONS Q-05.
+- **Board input:** RESET = **BTNC** (U18) (TA Q-05: our choice → DEC-018 reference design).
 - **Date:** 2026-09-24 · **Status:** PROPOSED · **Team:** _pending_
 
 ### DEC-008 — Tool versions pinned team-wide
@@ -99,7 +101,8 @@ memory architecture, Vivado IP usage beyond the manuals.
 - **Decision:** Implement the manual's "N defined in a constant" as a generic with default 14, plus generics for clock frequency, baud rate and memory latency.
 - **Reason:** Same RTL runs at small N / fast baud in simulation and N = 14 in hardware; satisfies "constant definition" because the top level fixes the value in a package constant.
 - **Verify:** Confirm with assistant that a generic set from a package constant satisfies the manual (INSTRUCTOR_QUESTIONS Q-07).
-- **Date:** 2026-09-24 · **Status:** PROPOSED · **Team:** _pending_
+- **Update 2026-09-26:** TA Q-07 — intent is that the width is never hard-coded and is changed by editing **N**, defined as a number at the beginning of the code. → Name the parameter literally **`N`** (not `G_ADDR_WIDTH`), declare it at the top of the entity with default **14**, and use `N` for every address width/counter. The same code then runs with small N in simulation.
+- **Date:** 2026-09-24 · **Status:** ACCEPTED (TA intent confirmed) · **Team:** eeerenbuyukbas
 
 ### DEC-013 — Vivado projects are re-created from Tcl, not committed
 - **Decision:** Commit sources, XDC, `.xci`, `.coe` and a `fpga/vivado/create_<design>.tcl` script; ignore `.xpr`, `.runs`, `.cache`, etc.
@@ -130,6 +133,14 @@ memory architecture, Vivado IP usage beyond the manuals.
 - **Trade-offs:** Knowledge of a lab is concentrated in two people → mandatory Thursday catch-up for the returning member; interface changes need all three.
 - **Details:** `TEAM_MANUAL.md` §3–4. Slot mapping: P1 = Eren, P2 = Ömer, P3 = Hande — follows from the team decision "Lab-PCB: Eren Lead, Ömer Partner"; Lab-DEBUG is all-hands.
 - **Date:** 2026-09-25 · **Status:** ACCEPTED · **Team:** eeerenbuyukbas
+
+### DEC-018 — Where manuals and the TA leave choices open, follow the reference design
+- **Decision:** For choices that neither the released manual nor a TA/instructor answer fixes, adopt the specification of last semester's reference design **Borek-32/EEE491-Spoken-Digit-Recognizer-BASYS3** (public, MIT License).
+- **Context:** Instructors accept reusing that project (team, 2026-09-26). Using the same conventions makes later debugging and reuse easier (team rationale).
+- **Precedence:** released manual > TA/instructor answer > this decision. Where the reference design conflicts with a manual or TA answer, the manual/TA wins and the conflict is logged (first case: baud rate, DEC-005).
+- **Rules for reuse:** keep the MIT copyright/licence notice in any copied file; name the source file + commit in the file header and in the AI/decision log; review it like AI output; re-verify with **our** testbench against **our** REQ-IDs; check interfaces (start/ready, byte order, widths) — the reference project is similar, not identical; do not use its future-stage code before the stage's manual is released.
+- **Applied so far (from `constraints/jc_homefab.xdc`, `rtl/debug.vhd`, `rtl/top_module.vhd`):** RESET = BTNC (U18), START = BTNU (T18), `txd_out` = A18, `ready_out` LED = LD6 (U14), clock W5. Also adopted: 1 000 000 baud (DEC-005). Note: their `debug.vhd` is the final multi-RAM debugger, not the Lab-DEBUG 2^N module — use as reference, not as a drop-in.
+- **Date:** 2026-09-26 · **Status:** ACCEPTED · **Team:** eeerenbuyukbas
 
 ### DEC-014 — Repository location outside OneDrive
 - **Decision:** Keep the git working copy outside OneDrive-synced folders (e.g. `C:\dev\EEE491-Spoken-Number-Recognition`); GitHub is the sync mechanism.

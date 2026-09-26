@@ -17,7 +17,7 @@ DEBUG · CTRL · ADC · WINDOW · PCB · MATLAB · FFT · MEL · DCT · COMPARE 
 Only DEBUG and CTRL have released manuals; everything else is PLANNED/UNKNOWN.
 
 ## 4. Requirements breakdown
-64 requirements: SYS 5, DEBUG 20, CTRL 10, IF 5, PERF 3, HW 3, SW 3, VER 4, DOC 3, PROC 5 — all OPEN
+**61** requirements (corrected 2026-09-26, CORR-0001 — originally misreported as 64): SYS 5, DEBUG 20, CTRL 10, IF 5, PERF 3, HW 3, SW 3, VER 4, DOC 3, PROC 5. After the TA answers (2026-09-26): 64 (+REQ-SYS-006, REQ-IF-006, REQ-IF-007) — all OPEN
 except DOC-001 and PROC-002 (IN PROGRESS). `REQUIREMENTS.md`.
 
 ## 5. Major unknowns

@@ -93,16 +93,16 @@ at the Lab-ADC stage (first real dual-port RAM).
 
 ## 4. Lab-DEBUG demo configuration (current stage — PLANNED)
 
+TA Q-04: Lab-CTRL is **not** needed for this demo; the top module drives `start_in` / `ready_out` directly.
+
 ```mermaid
 flowchart LR
-    BTN["START button<br/>→ sync + debounce + 1-cycle pulse"] --> CTRL["Lab-CTRL<br/>(demo subset)"]
-    RST["RESET input<br/>→ synchroniser"] --> CTRL & DBG
-    CTRL -->|start_debug_out| DBG[Lab-DEBUG<br/>N = 14]
-    DBG -->|ready_debug_in| CTRL
+    BTN["BTNU (START)<br/>→ sync + debounce + 1-cycle pulse"] -->|start_in| DBG[Lab-DEBUG<br/>N = 14]
+    RST["BTNC (RESET)<br/>→ synchroniser"] --> DBG
+    DBG -->|ready_out| LED["LED LD6"]
     DBG -->|mem_addr_out 14b| ROM["Block Memory Generator<br/>Single-Port ROM 16384 × 32<br/>init: .coe"]
     ROM -->|mem_data_in 32b| DBG
     DBG --> TXD[txd_out → FT2232HQ]
-    CTRL --> LED[LEDs: ready signals]
 ```
 
 Resource note: a 16384 × 32 ROM = 524 288 bits ≈ **16 BRAM36** (≈ 32 % of the 50 BRAM36 of an

@@ -19,7 +19,7 @@ listed here. Status: **UNVERIFIED → VERIFIED** (with evidence) or **REJECTED**
 ### ASSUMPTION-003 — UART TX pin
 - **Statement:** FPGA → PC transmit (`txd_out`) is on FPGA pin **A18** (`RsTx` in `Basys3_Master.xdc`); B18 is PC → FPGA.
 - **Source:** DBG §1 figure (FT2232 TXD → B18, RXD ← A18).
-- **Status:** UNVERIFIED · **How to verify:** Official `Basys3_Master.xdc`; hardware test HW-DEBUG-01.
+- **Status:** SUPPORTED — the reference design (Borek-32, `constraints/jc_homefab.xdc`) also uses A18 for `txd_out`. Still confirm with the official `Basys3_Master.xdc` and hardware test HW-DEBUG-01.
 
 ### ASSUMPTION-004 — Vivado version
 - **Statement:** Team uses Vivado ML Standard 2023.2 (observed on one member's PC; Block Memory Generator 8.4 in the manual screenshots is consistent).
@@ -32,20 +32,20 @@ listed here. Status: **UNVERIFIED → VERIFIED** (with evidence) or **REJECTED**
 ### ASSUMPTION-006 — Byte order inside a 32-bit word
 - **Statement:** Bytes are sent most-significant first (W[31:24] first).
 - **Source:** DERIVED from the DBG §1 header table: start word 55AACC03 is listed as bytes 55, AA, CC, 03 and end word AA5503CC as AA, 55, 03, CC. The manual says "1st 8-bit of first 32-bit data" without defining which byte is "1st".
-- **Status:** UNVERIFIED · **How to verify:** Ask assistant (INSTRUCTOR_QUESTIONS Q-02). Keep the choice consistent in RTL, testbench and MATLAB.
+- **Status:** **VERIFIED** — TA answer Q-02 (2026-09-26): MSB byte first for all words, same as the header.
 
 ### ASSUMPTION-007 — `ready_out` after reset
 - **Statement:** `ready_out` = '1' after reset (idle = ready).
 - **Source:** Waveforms in DBG §1 and CTRL §1 show `ready_out` high before `start_in`.
-- **Status:** UNVERIFIED · **How to verify:** INSTRUCTOR_QUESTIONS Q-03.
+- **Status:** **VERIFIED** — TA answer Q-03 (2026-09-26) → REQ-IF-006.
 
 ### ASSUMPTION-008 — `start_in` while busy
 - **Statement:** A `start_in` pulse during an active transfer is ignored.
 - **Source:** Not specified in the manuals; defensive design choice.
-- **Status:** UNVERIFIED · **How to verify:** INSTRUCTOR_QUESTIONS Q-03.
+- **Status:** **VERIFIED** — TA answer Q-03 (2026-09-26) → REQ-IF-007.
 
-### ASSUMPTION-009 — FT2232HQ supports ≥ 115 200 baud
-- **Statement:** The FT2232HQ supports 115 200 baud (and higher, e.g. 1 Mbaud).
+### ASSUMPTION-009 — FT2232HQ link works at 1 000 000 baud
+- **Statement:** FT2232HQ + Windows VCP driver + MATLAB `serialport` work reliably at 1 000 000 baud (DEC-005). Supporting evidence: the reference design used this rate.
 - **Status:** UNVERIFIED · **How to verify:** FT2232H datasheet + AN232B-05; hardware test at each rate.
 
 ### ASSUMPTION-010 — ADC sample RAM address width
@@ -60,12 +60,12 @@ listed here. Status: **UNVERIFIED → VERIFIED** (with evidence) or **REJECTED**
 ### ASSUMPTION-012 — RECORD & NUMBER switches
 - **Statement:** They select template-recording mode and the number being recorded for Lab-COMPARE.
 - **Source:** Only their appearance in the CTRL §1 block diagram.
-- **Status:** UNVERIFIED — **do not design for it** until the COMPARE manual is released.
+- **Status:** UNVERIFIED — **do not design for it** until the COMPARE manual is released. Note: COMPARE (and DCT) will very likely be replaced by NN-based labs (TA Q-11).
 
 ### ASSUMPTION-013 — Lab schedule dates
 - **Statement:** Lab due dates are the Saturdays listed in the syllabus; they "may be advanced by three days" (to the Wednesday before).
 - **Source:** Syllabus Lab Schedule (tentative).
-- **Status:** PARTIALLY VERIFIED — the team was informed (2026-09-25) that there is one lab deadline per week on **Wednesday**, the first being Lab-DEBUG on **Wed Sep 30**. The other Wednesday dates (syllabus date − 3 days) are still to be confirmed per lab.
+- **Status:** PARTIALLY VERIFIED — TA Q-12 (2026-09-26): the Lab-ADC date is correct. The team was informed (2026-09-25) that there is one lab deadline per week on **Wednesday**, the first being Lab-DEBUG on **Wed Sep 30**. The other Wednesday dates (syllabus date − 3 days) are still to be confirmed per lab.
 
 ## 2. Unknown parameters register
 
@@ -73,11 +73,11 @@ listed here. Status: **UNVERIFIED → VERIFIED** (with evidence) or **REJECTED**
 |---|---|---|---|---|
 | U-01 | Exact FPGA part / board revision | DEBUG | ASSUMPTION-001/002 | UNVERIFIED |
 | U-02 | Team-wide Vivado / MATLAB versions | DEBUG | DEC-008 | UNKNOWN |
-| U-03 | Byte order in 32-bit word | DEBUG | Q-02 | ASSUMED |
-| U-04 | Baud rate to use above 115 200 | DEBUG (optional) | HW test | UNKNOWN |
+| U-03 | Byte order in 32-bit word | DEBUG | Q-02 | **RESOLVED** — MSB byte first |
+| U-04 | Baud rate | DEBUG | DEC-005 | **RESOLVED** — 1 000 000 baud, fixed for all labs (team decision) |
 | U-05 | Block RAM latency of demo ROM | DEBUG | IP summary | UNKNOWN |
-| U-06 | Which board input is RESET / START (button vs. switch) | DEBUG / CTRL | Q-05 | UNKNOWN |
-| U-07 | Minimum Lab-CTRL function required in the Lab-DEBUG demo | DEBUG | Q-04 | UNKNOWN |
+| U-06 | Which board input is RESET / START | DEBUG / CTRL | Q-05, DEC-018 | **RESOLVED** — RESET = BTNC (U18), START = BTNU (T18) |
+| U-07 | Minimum Lab-CTRL function required in the Lab-DEBUG demo | DEBUG | Q-04 | **RESOLVED** — none; top module drives start/ready |
 | U-08 | ADC part, resolution, SPI mode, SCLK limit | ADC | Lab-ADC manual + datasheet | UNKNOWN |
 | U-09 | Sampling frequency | ADC | Lab-ADC manual / team decision | UNKNOWN |
 | U-10 | Recording length / ADC RAM depth | ADC, CTRL | Lab-ADC manual | UNKNOWN |
@@ -86,11 +86,11 @@ listed here. Status: **UNVERIFIED → VERIFIED** (with evidence) or **REJECTED**
 | U-13 | FFT size, scaling, IP configuration | FFT | Lab-FFT manual | UNKNOWN |
 | U-14 | Where magnitude/power and log are computed | FFT / MEL / DCT | manuals | UNKNOWN |
 | U-15 | Number and spacing of MEL filters | MEL | Lab-MEL manual | UNKNOWN |
-| U-16 | Number of DCT coefficients | DCT | Lab-DCT manual (not received) | UNKNOWN |
-| U-17 | Classification method, templates, distance metric | COMPARE | Lab-COMPARE manual (not received) | UNKNOWN |
-| U-18 | Vocabulary: which numbers (0–9?), which language, speaker-dependent? | MATLAB, COMPARE | Q-08 | UNKNOWN |
-| U-19 | Required recognition rate | Final | Q-09 | UNKNOWN |
+| U-16 | Number of DCT coefficients | DCT | Lab-DCT manual (not received) | UNKNOWN — lab likely replaced by NN lab (Q-11, Q-14) |
+| U-17 | Classification method, templates, distance metric | COMPARE | Lab-COMPARE manual (not received) | UNKNOWN — lab likely replaced by NN lab (Q-11, Q-14) |
+| U-18 | Vocabulary, language, speaker dependence | MATLAB, COMPARE | Q-08 | **PARTLY RESOLVED** — digits 0–9, speaker-dependent OK; language (EN/TR) = team decision pending |
+| U-19 | Required recognition rate | Final | Q-09 | **PARTLY RESOLVED** — Lab-MATLAB: 3 × 10 digits → score /30; final demo judged by Enis Hoca |
 | U-20 | Microphone type, amplifier gain, filter corner, supply rails | PCB | Lab-PCB manual | UNKNOWN |
-| U-21 | PCB manufacturing process and lead time at the lab | PCB | Q-10 | UNKNOWN |
+| U-21 | PCB manufacturing process and lead time | PCB | Q-10 | **PARTLY RESOLVED** — printed at the school's senior-design (bitirme) lab; details our choice / ask Enis Hoca |
 | U-22 | Fixed-point formats of every numeric signal | WINDOW onward | per-stage analysis | UNKNOWN |
 | U-23 | 7-segment display format for the result | COMPARE | Lab-COMPARE manual | UNKNOWN |

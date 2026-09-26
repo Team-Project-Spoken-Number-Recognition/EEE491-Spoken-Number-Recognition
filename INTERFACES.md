@@ -15,6 +15,18 @@ reviewed PR. Changes are logged in `DECISIONS.md`.
 | Inter-block data | Each block's output dual-port RAM, read by the next block | Manual-defined (CTRL §1) |
 | Numeric library | `ieee.numeric_std` only | TEAM (CONTRIBUTING §6) |
 
+### 1.1 Board I/O (Basys-3) — DEC-018 (reference design) unless noted
+
+| Signal | Board resource | FPGA pin | Source |
+|---|---|---|---|
+| `clock_in` | 100 MHz oscillator | W5 | Basys-3 / reference XDC |
+| `reset_in` | BTNC (centre button) | U18 | TA Q-05 → DEC-018 |
+| `start_in` | BTNU (up button) — through sync + debounce + 1-cycle pulse | T18 | TA Q-05 → DEC-018 |
+| `txd_out` | FT2232HQ UART RXD | A18 | DBG §1 figure; reference XDC |
+| `ready_out` (demo LED) | LD6 | U14 | DEC-018 |
+
+Pins still to be checked against Digilent's official `Basys3_Master.xdc` before the first bitstream.
+
 ## 2. start / ready handshake (all sub-systems) — REQ-IF-001..003
 
 ```text
@@ -24,9 +36,9 @@ ready_out  ‾‾‾‾‾‾‾|___________________ ... ___|‾‾‾‾‾‾ 
                                                         edge after the operation completes
 ```
 
-Open points (see `docs/meetings/INSTRUCTOR_QUESTIONS.md`):
-- Value of `ready_out` right after reset — waveform shows high before start → **ASSUMED high** (ASSUMPTION-007).
-- Behaviour if `start_in` arrives while busy → **PROPOSED: ignored** (ASSUMPTION-008).
+Clarified by the TA (Q-03, 2026-09-26):
+- `ready_out` = '1' after reset; '1' = idle/waiting, '0' = working (REQ-IF-006).
+- `start_in` only leaves the wait state; pulses while working are ignored (REQ-IF-007).
 - "Low just after start": **PROPOSED:** `ready_out` is low from the first rising edge after the edge
   that sampled `start_in` = '1' (i.e. registered, 1-cycle response).
 
@@ -48,12 +60,12 @@ Open points (see `docs/meetings/INSTRUCTOR_QUESTIONS.md`):
 
 | Generic | Default | Purpose |
 |---|---|---|
-| `G_ADDR_WIDTH` (N) | 14 | Memory address width → 2^N words |
+| `N` | 14 | Memory address width → 2^N words. Named literally `N` and declared at the top of the code (TA Q-07, DEC-012) |
 | `G_CLK_FREQ_HZ` | 100_000_000 | Clock frequency |
-| `G_BAUD_RATE` | 115_200 | Baud rate (manual minimum) |
+| `G_BAUD_RATE` | 1_000_000 | Baud rate — fixed for the whole project (DEC-005); divider 100 000 000 / 1 000 000 = 100 (exact) |
 | `G_MEM_LATENCY` | from IP summary (1 or 2) | Clock cycles from address to valid data (REQ-DEBUG-019) |
 
-Simulation will override `G_ADDR_WIDTH` and the baud divider to keep run-time short; one test keeps
+Simulation will override `N` and the baud divider to keep run-time short; one test keeps
 the real divider (see `TEST_PLAN.md`).
 
 ### 3.3 Serial frame (REQ-DEBUG-005..008)
@@ -61,7 +73,7 @@ the real divider (see `TEST_PLAN.md`).
 | Field | Bytes on the wire (in order) |
 |---|---|
 | Start word | `0x55`, `0xAA`, `0xCC`, `0x03` |
-| Data word k (k = 0 … 2^N − 1, read from address k) | `W[31:24]`, `W[23:16]`, `W[15:8]`, `W[7:0]` — MSB byte first (DERIVED, ASSUMPTION-006) |
+| Data word k (k = 0 … 2^N − 1, read from address k) | `W[31:24]`, `W[23:16]`, `W[15:8]`, `W[7:0]` — MSB byte first (**confirmed, TA Q-02**) |
 | End word | `0xAA`, `0x55`, `0x03`, `0xCC` |
 
 Byte framing: start bit '0', D0 … D7 (LSB first), stop bit '1'; no parity (8N1).
@@ -76,6 +88,8 @@ Baud divider analysis (100 MHz):
 | 460 800 | 217.01 | 217 | +0.006 % | 1.42 s |
 | 921 600 | 108.51 | 109 | −0.45 % | 0.71 s |
 | 1 000 000 | 100 | 100 | 0 % | 0.66 s |
+
+**Selected: 1 000 000 baud** (DEC-005) — exact divider, 0 % error, 0.66 s per N = 14 transfer.
 
 (Transfer time = 10 bits × 65 544 bytes / baud.) Rates above 115 200 require confirmation that the
 FT2232HQ, the Windows VCP driver and MATLAB `serialport` all accept them — **UNVERIFIED** (DEC-005).

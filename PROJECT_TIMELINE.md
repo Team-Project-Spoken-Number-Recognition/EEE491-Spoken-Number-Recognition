@@ -69,14 +69,15 @@ before the stage is complete.
 ## 4. Lab-DEBUG week (Fri Sep 25 – Wed Sep 30) — all hands
 
 Everyone has a work package (team decision). Hande coordinates and writes the debugger RTL. Eren builds
-the CTRL subset and the demo top level (Eren leads Lab-CTRL next week, so the CTRL work carries over).
-Ömer does board bring-up, ROM IP and the MATLAB side.
+the demo top level (button/reset conditioning, XDC, Tcl) and — since TA Q-04 removed the CTRL dependency
+of the DEBUG demo — starts the Lab-CTRL design early, as next week's Lead. Ömer does board bring-up,
+ROM IP and the MATLAB side.
 
-| Date | Hande — coordinator, DEBUG RTL | Eren — CTRL subset + top level | Ömer — board, ROM, MATLAB |
+| Date | Hande — coordinator, DEBUG RTL | Eren — top level + early CTRL | Ömer — board, ROM, MATLAB |
 |---|---|---|---|
-| Fri Sep 25 | Everyone: TEAM_MANUAL §2 setup, clone outside OneDrive, accept/reject DEC-001…017. Write `docs/architecture/subsystems/debug.md` (baud tick, UART byte TX, word/frame FSM, memory latency, timing). | Write `docs/architecture/subsystems/ctrl.md` — DEBUG-demo subset only. | Download Basys-3 manual, `Basys3_Master.xdc`, FT2232H datasheet, AN232B-05; install FTDI VCP driver. |
-| Sat Sep 26 (lab) | Review design docs together; ask Q-02…Q-05 at the lab. | Button/reset conditioning block (sync + debounce + 1-cycle pulse) design. | Board bring-up: blinky with XDC; confirm part number (ASSUMPTION-001); COM port visible. |
-| Sun–Mon Sep 27–28 | UART TX + TB-UART-01..03; word/frame FSM + TB-DEBUG-01..09. | CTRL subset RTL + TB-CTRL-01/02; button conditioning TB. | MATLAB: COE generator (incl. delimiter values) + receiver/decoder + MT-DEBUG-01..04; Block Memory Generator ROM (14b × 32b). |
+| Fri Sep 25 | Everyone: TEAM_MANUAL §2 setup, clone outside OneDrive, accept/reject DEC-001…017. Write `docs/architecture/subsystems/debug.md` (baud tick, UART byte TX, word/frame FSM, memory latency, timing). | Write the top-level plan (button/reset conditioning, pin list from INTERFACES §1.1). | Download Basys-3 manual, `Basys3_Master.xdc`, FT2232H datasheet, AN232B-05; install FTDI VCP driver. |
+| Sat Sep 26 (lab) | Review design docs together; TA answers received (Q-02…Q-13) — handshake fixed by REQ-IF-006/007. | Button/reset conditioning block (sync + debounce + 1-cycle pulse) design. | Board bring-up: blinky with XDC; confirm part number (ASSUMPTION-001); COM port visible. |
+| Sun–Mon Sep 27–28 | UART TX + TB-UART-01..03; word/frame FSM + TB-DEBUG-01..09. | Button conditioning RTL + TB; start `docs/architecture/subsystems/ctrl.md` (full CTRL for Oct 7). | MATLAB: COE generator (incl. delimiter values) + receiver/decoder + MT-DEBUG-01..04; Block Memory Generator ROM (14b × 32b). |
 | Tue Sep 29 | Review Eren's PRs; integration sim TB-TOPDBG-01. | Demo top level + XDC + `fpga/vivado/create_debug_demo.tcl`; synthesis/implementation. | Hardware tests HW-DEBUG-01..05 with Hande; review Hande's PRs. **Evening: freeze.** |
 | **Wed Sep 30** | **Demo.** Tag `lab-debug-demo`, release with bitstream. | Evidence into `docs/verification/`. | AI sessions exported, records completed. |
 

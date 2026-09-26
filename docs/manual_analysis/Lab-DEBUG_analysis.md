@@ -75,8 +75,17 @@ Basys-3, micro-USB cable, FTDI VCP driver on the PC, Vivado Block Memory Generat
 - Deadline in 6–9 days with CTRL dependency.
 
 ## Questions / Ambiguities
-Q-01 (date), Q-02 (byte order), Q-03 (ready after reset, start while busy), Q-04 (CTRL scope in demo),
-Q-05 (which board inputs), Q-06 (higher baud), Q-07 (generic vs. constant).
+Q-01 … Q-07 — all answered (see "Clarifications received" below). Baud rate decided: 1 000 000 (DEC-005).
+
+## Clarifications received (TA, 2026-09-26)
+| Question | Answer | Effect |
+|---|---|---|
+| Q-02 byte order | MSB byte first for all words | REQ-DEBUG-007 confirmed |
+| Q-03 handshake | `ready_out` = '1' after reset; `start_in` during a transfer is ignored | REQ-IF-006, REQ-IF-007 |
+| Q-04 CTRL in demo | Not required — top module drives `start_in`/`ready_out` | REQ-DEBUG-016 relaxed; step 6 below changes |
+| Q-05 board inputs | Our choice → reference design: RESET = BTNC, START = BTNU | DEC-018, INTERFACES §1.1 |
+| Q-06 higher baud | No (team interpretation: about changing the rate between labs) | Team chose 1 000 000 baud, fixed for all labs (DEC-005) |
+| Q-07 constant N | Use N, defined as a number at the top of the code; no hard-coded widths | DEC-012, REQ-DEBUG-004 |
 
 ## Recommended Implementation Order
 1. `docs/architecture/subsystems/debug.md`: block diagram (baud-tick generator, UART byte TX, word
@@ -85,5 +94,5 @@ Q-05 (which board inputs), Q-06 (higher baud), Q-07 (generic vs. constant).
 3. Word/frame FSM (header → 2^N words → footer, ready/start) + TB with memory model.
 4. MATLAB: COE generator + decoder + MT tests (in parallel, owner C).
 5. Button/reset conditioning + XDC (in parallel, owner B).
-6. Lab-CTRL subset + demo top level with Block Memory Generator ROM; integration TB.
+6. Demo top level (button/reset conditioning + Block Memory Generator ROM + Lab-DEBUG; **no Lab-CTRL**, TA Q-04); integration TB.
 7. Synthesis/implementation; hardware bring-up (terminal, then MATLAB); evidence; demo.

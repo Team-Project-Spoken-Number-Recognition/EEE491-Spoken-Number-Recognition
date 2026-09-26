@@ -21,7 +21,16 @@ state explicitly what still has to be verified.
 
 ## Source-of-truth order
 1 repository code → 2 verified test/sim results → 3 official datasheets/docs → 4 syllabus + released
-manuals → 5 approved team decisions → 6 HANDOFF.md → 7 previous AI conversation → 8 assumptions → 9 AI inference.
+manuals + TA/instructor answers (`docs/meetings/INSTRUCTOR_QUESTIONS.md`) → 5 approved team decisions →
+6 reference design (only for choices left open, DEC-018) → 7 HANDOFF.md → 8 previous AI conversation →
+9 assumptions → 10 AI inference.
+
+## Reference design (DEC-018)
+Last semester's project `https://github.com/Borek-32/EEE491-Spoken-Digit-Recognizer-BASYS3` (MIT) may be
+reused; instructors accept it. Use its specification where manual/TA leave a choice open; never where
+they conflict (log the conflict in `DECISIONS.md`). Keep the MIT notice and name the source in reused
+files, re-verify with our testbenches, check interface differences, and don't read its code for stages
+whose manual is not yet released.
 
 ## Staged manuals (hard rule)
 - Only manuals in `docs/manuals/` (released) may drive implementation.
