@@ -19,11 +19,11 @@ listed here. Status: **UNVERIFIED → VERIFIED** (with evidence) or **REJECTED**
 ### ASSUMPTION-003 — UART TX pin
 - **Statement:** FPGA → PC transmit (`txd_out`) is on FPGA pin **A18** (`RsTx` in `Basys3_Master.xdc`); B18 is PC → FPGA.
 - **Source:** DBG §1 figure (FT2232 TXD → B18, RXD ← A18).
-- **Status:** SUPPORTED — the reference design (Borek-32, `constraints/jc_homefab.xdc`) also uses A18 for `txd_out`. Still confirm with the official `Basys3_Master.xdc` and hardware test HW-DEBUG-01.
+- **Status:** **VERIFIED (official documentation)** — Digilent `Basys-3-Master.xdc` (digilent-xdc commit `69d3501`): `RsTx` = A18, `RsRx` = B18. Also used by the reference design. Hardware confirmation in HW-DEBUG-01.
 
 ### ASSUMPTION-004 — Vivado version
 - **Statement:** Team uses Vivado ML Standard **2025.2** (DEC-008, 2026-09-26). Block Memory Generator in 2025.2 is newer than the 8.4 shown in the manual screenshots — check the configuration pages match.
-- **Status:** VERIFIED for Hande and Ömer (2025.2 installed); Eren installing · **How to verify:** `Help → About` on each PC.
+- **Status:** VERIFIED for all three members (2025.2 installed; Eren's install checked 2026-09-26: xc7a35t parts present) · **How to verify:** `Help → About` + `get_parts xc7a35t*` on each PC.
 
 ### ASSUMPTION-005 — MATLAB version and serial API
 - **Statement:** MATLAB R2023b (observed on one PC); `serialport` (base MATLAB, R2019b+) is available.

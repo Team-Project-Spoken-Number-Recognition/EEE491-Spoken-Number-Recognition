@@ -34,12 +34,12 @@ Due:             Wed Sep 30 2026 (confirmed by team, 2026-09-25)
 [x] Manual requirements understood          (docs/manual_analysis/Lab-DEBUG_analysis.md — pending team review)
 [x] Requirements documented                 (REQUIREMENTS.md §1.2)
 [x] Architecture defined                    (docs/architecture/subsystems/debug.md v0.2, reviewed in PR #3)
-[~] Implementation completed                (debug + uart_tx merged; MATLAB + ROM IP + COE in PR #5; demo top level open — Eren)
-[~] VHDL/MATLAB code reviewed               (PR #4 approved + merged; PR #5 awaiting review)
-[x] Testbench created                       (tb_uart_tx, tb_debug, tb_debug_rom, MATLAB test_debug — self-checking, DEC-011)
-[~] Functional simulation completed         (block level PASS; TB-TOPDBG-01 with the demo top open)
-[x] Expected vs actual results compared     (37/37, 97/97, 11/11, MT 15/15 PASS — simulation/results/2026-09-26_*.log)
-[ ] Synthesis completed                     (Vivado synthesis not yet run)
+[x] Implementation completed                (debug + uart_tx #4, MATLAB + ROM IP #5, demo top level #7 — 2026-09-26)
+[~] VHDL/MATLAB code reviewed               (PR #4, #5 approved + merged; PR #7 RTL awaiting review)
+[x] Testbench created                       (tb_uart_tx, tb_debug, tb_debug_rom, tb_button_conditioner, tb_top_debug_demo, MATLAB test_debug — DEC-011)
+[x] Functional simulation completed         (block level + demo top with real ROM IP: TB-TOPDBG 15/15, TB-BTN 22/22)
+[x] Expected vs actual results compared     (37/37, 97/97, 11/11, 22/22, 15/15, MT 15/15 PASS — simulation/results/2026-09-26_*.log)
+[x] Synthesis completed                     (synth + impl + bitstream 2026-09-26: WNS +5.083 ns, DRC 0 — docs/verification/)
 [ ] Hardware test completed
 [ ] Lab demonstration completed
 [ ] Known issues documented
@@ -55,12 +55,12 @@ Due:             Wed Sep 30 2026 (confirmed by team, 2026-09-25)
 [x] Manual requirements understood          (docs/manual_analysis/Lab-CTRL_analysis.md — pending team review)
 [x] Requirements documented                 (REQUIREMENTS.md §1.3)
 [ ] Architecture defined
-[~] Implementation completed                (debug + uart_tx merged; MATLAB + ROM IP + COE in PR #5; demo top level open — Eren)
+[x] Implementation completed                (debug + uart_tx #4, MATLAB + ROM IP #5, demo top level #7 — 2026-09-26)
 [ ] Code reviewed
-[x] Testbench created                       (tb_uart_tx, tb_debug, tb_debug_rom, MATLAB test_debug — self-checking, DEC-011)
+[x] Testbench created                       (tb_uart_tx, tb_debug, tb_debug_rom, tb_button_conditioner, tb_top_debug_demo, MATLAB test_debug — DEC-011)
 [ ] Functional simulation completed (framing + sequence waveforms)
-[x] Expected vs actual results compared     (37/37, 97/97, 11/11, MT 15/15 PASS — simulation/results/2026-09-26_*.log)
-[ ] Synthesis completed                     (Vivado synthesis not yet run)
+[x] Expected vs actual results compared     (37/37, 97/97, 11/11, 22/22, 15/15, MT 15/15 PASS — simulation/results/2026-09-26_*.log)
+[x] Synthesis completed                     (synth + impl + bitstream 2026-09-26: WNS +5.083 ns, DRC 0 — docs/verification/)
 [ ] Hardware test completed (button start, LEDs)
 [ ] Lab demonstration completed
 [ ] Known issues / results documented

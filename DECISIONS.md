@@ -147,7 +147,21 @@ memory architecture, Vivado IP usage beyond the manuals.
 - **Applied so far (from `constraints/jc_homefab.xdc`, `rtl/debug.vhd`, `rtl/top_module.vhd`):** RESET = BTNC (U18), START = BTNU (T18), `txd_out` = A18, `ready_out` LED = LD6 (U14), clock W5. Also adopted: 1 000 000 baud (DEC-005). Note: their `debug.vhd` is the final multi-RAM debugger, not the Lab-DEBUG 2^N module — use as reference, not as a drop-in.
 - **Date:** 2026-09-26 · **Status:** ACCEPTED · **Team:** eeerenbuyukbas
 
+### DEC-019 — Debounce the start button (deviation from the reference design)
+- **Decision:** BTNU (start) passes through a 2-FF synchroniser, a counter-based debouncer (level must be stable for `G_DEBOUNCE_CYCLES` = 1 000 000 clocks = 10 ms) and a rising-edge detector that emits a 1-clock pulse. BTNC (reset) is only synchronised (DEC-007).
+- **Context:** Button conditioning is the team's choice (TA Q-05). The reference design (DEC-018) only synchronises BTNU and detects its rising edge, without debouncing.
+- **Options:** A) sync + edge detect (reference) · B) sync + debounce + edge detect.
+- **Chosen:** B.
+- **Reason:** Contact bounce produces several edges per press. Inside a transfer they are ignored (REQ-IF-007), but a press held longer than one transfer (0.66 s) can start a second transfer on release/re-press bounce. Debouncing removes this for ≈ 20 flip-flops.
+- **Trade-offs:** 10 ms extra start latency (invisible to the operator). Deviates from DEC-018 → logged here as required.
+- **Verification:** TB-BTN-01…05, TB-TOPDBG-02, HW-DEBUG-04.
+- **Date:** 2026-09-26 · **Status:** PROPOSED (design doc `top_debug_demo.md`) · **Team:** eeerenbuyukbas
+
 ### DEC-014 — Repository location outside OneDrive
 - **Decision:** Keep the git working copy outside OneDrive-synced folders (e.g. `C:\dev\EEE491-Spoken-Number-Recognition`); GitHub is the sync mechanism.
 - **Reason:** OneDrive syncing `.git/` and Vivado run directories causes file-lock errors and corrupted repos.
-- **Date:** 2026-09-24 · **Status:** PROPOSED · **Team:** _pending_
+- **Update 2026-09-26 — now a hard requirement for Vivado:** Vivado 2025.2 could not open any source under
+  `C:\Users\…\OneDrive\Masaüstü\EEE391 Project\…` (the `ü` is garbled and the path is cut at the space:
+  `ERROR: [Vivado 12-172] File or Directory 'C:/Users/USER/OneDrive/Masa�st�/EEE391' does not exist`).
+  Build and simulate only from a clone at a plain-ASCII path **without spaces**.
+- **Date:** 2026-09-24 · **Status:** PROPOSED (strongly recommended since 2026-09-26) · **Team:** _pending_
