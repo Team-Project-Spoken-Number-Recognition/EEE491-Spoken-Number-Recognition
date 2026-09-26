@@ -160,4 +160,8 @@ memory architecture, Vivado IP usage beyond the manuals.
 ### DEC-014 — Repository location outside OneDrive
 - **Decision:** Keep the git working copy outside OneDrive-synced folders (e.g. `C:\dev\EEE491-Spoken-Number-Recognition`); GitHub is the sync mechanism.
 - **Reason:** OneDrive syncing `.git/` and Vivado run directories causes file-lock errors and corrupted repos.
-- **Date:** 2026-09-24 · **Status:** PROPOSED · **Team:** _pending_
+- **Update 2026-09-26 — now a hard requirement for Vivado:** Vivado 2025.2 could not open any source under
+  `C:\Users\…\OneDrive\Masaüstü\EEE391 Project\…` (the `ü` is garbled and the path is cut at the space:
+  `ERROR: [Vivado 12-172] File or Directory 'C:/Users/USER/OneDrive/Masa�st�/EEE391' does not exist`).
+  Build and simulate only from a clone at a plain-ASCII path **without spaces**.
+- **Date:** 2026-09-24 · **Status:** PROPOSED (strongly recommended since 2026-09-26) · **Team:** _pending_

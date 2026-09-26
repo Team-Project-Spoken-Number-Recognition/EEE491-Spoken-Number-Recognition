@@ -1,6 +1,7 @@
 # ---------- Vivado (projects are re-created from Tcl; see fpga/vivado/README.md) ----------
 fpga/vivado/build/
 dfx_runtime.txt
+clockInfo.txt
 *.jou
 *.log
 *.str

@@ -1,0 +1,57 @@
+# Simulation log — tb_button_conditioner (TB-BTN-01..05)
+# Date      : 2026-09-26
+# Simulator : Vivado 2025.2 XSim, batch mode (xvhdl / xelab / xsim -R)
+# Sources   : fpga/rtl/common/sync_2ff.vhd fpga/rtl/common/button_conditioner.vhd fpga/tb/debug/tb_button_conditioner.vhd
+# Commit    : 8eea97e (branch feature/debug-top), sources unmodified
+# Settings  : G_DEBOUNCE_CYCLES = 20 (simulation)
+# Run by    : Claude Code session (AI-0010) on Eren's PC
+# Mutation  : 3 injected bugs (pulse on release too / no debounce / counter not cleared on bounce)
+#             -> TB_RESULT: FAIL (4, 5 and 1 of 22 checks) — all detected
+# Redaction : absolute file paths replaced by repository-relative paths (public repository, DEC-016)
+#
+Note: RESET       pulse low  Expected: '0'  Actual: '0'  PASS
+Time: 46 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: RESET       level low  Expected: '0'  Actual: '0'  PASS
+Time: 46 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: TB-BTN-01   latency press -> pulse (edges)  Expected: 22  Actual: 22  PASS
+Time: 316 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: TB-BTN-01   pulse is 1 clock wide  Expected: '0'  Actual: '0'  PASS
+Time: 326 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: TB-BTN-01   pulses for one clean press  Expected: 1  Actual: 1  PASS
+Time: 926 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: TB-BTN-01   debounced level high  Expected: '1'  Actual: '1'  PASS
+Time: 926 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: TB-BTN-01   no pulse on clean release  Expected: 0  Actual: 0  PASS
+Time: 1526 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: TB-BTN-01   debounced level low  Expected: '0'  Actual: '0'  PASS
+Time: 1526 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: TB-BTN-01   press of exactly D clocks -> pulses  Expected: 1  Actual: 1  PASS
+Time: 2526 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: TB-BTN-02   bouncing press -> pulses  Expected: 1  Actual: 1  PASS
+Time: 3506 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: TB-BTN-02   debounced level high  Expected: '1'  Actual: '1'  PASS
+Time: 3506 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: TB-BTN-03   bouncing release -> pulses  Expected: 0  Actual: 0  PASS
+Time: 4486 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: TB-BTN-03   debounced level low  Expected: '0'  Actual: '0'  PASS
+Time: 4486 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: TB-BTN-03   idle glitch of D/2 clocks -> pulses  Expected: 0  Actual: 0  PASS
+Time: 5386 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: TB-BTN-03   idle glitch of D-1 clocks -> pulses  Expected: 0  Actual: 0  PASS
+Time: 6376 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: TB-BTN-03   debounced level still low  Expected: '0'  Actual: '0'  PASS
+Time: 6376 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: TB-BTN-04   long hold (10 D) -> pulses  Expected: 1  Actual: 1  PASS
+Time: 9176 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: TB-BTN-05   press during reset -> pulses  Expected: 0  Actual: 0  PASS
+Time: 9976 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: TB-BTN-05   level low during reset  Expected: '0'  Actual: '0'  PASS
+Time: 9976 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: TB-BTN-05   held through reset release -> pulses  Expected: 1  Actual: 1  PASS
+Time: 10576 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: ALL         pulses wider than 1 clock  Expected: 0  Actual: 0  PASS
+Time: 11176 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: ALL         pulses while reset = '1'  Expected: 0  Actual: 0  PASS
+Time: 11176 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd
+Note: TB_RESULT: PASS (22/22 checks)
+Time: 11176 ns  Iteration: 0  Process: /tb_button_conditioner/stim  File: fpga/tb/debug/tb_button_conditioner.vhd

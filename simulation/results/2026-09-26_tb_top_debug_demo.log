@@ -1,0 +1,49 @@
+# Simulation log — tb_top_debug_demo (TB-TOPDBG-01..03)
+# Date      : 2026-09-26
+# Simulator : Vivado 2025.2 XSim via fpga/vivado/sim_top_debug_demo.tcl (Vivado project, real debug_rom IP)
+# Sources   : fpga/rtl/common/{sync_2ff,button_conditioner}.vhd fpga/rtl/debug/{uart_tx,debug}.vhd
+#             fpga/rtl/top/top_debug_demo.vhd fpga/ip/debug_rom/debug_rom.xci + debug_rom.coe
+#             fpga/tb/debug/tb_top_debug_demo.vhd
+# Commit    : 8eea97e (branch feature/debug-top), sources unmodified
+# Settings  : N = 14 (16 384 words), 10 clocks/bit, G_DEBOUNCE_CYCLES = 50, G_MEM_LATENCY = 2
+# Run by    : Claude Code session (AI-0010) on Eren's PC, from a worktree at an ASCII path (DEC-014)
+# Mutation  : re-run with G_MEM_LATENCY = 1 -> TB_RESULT: FAIL (2 of 15): 32 905 bytes wrong per frame,
+#             first at byte 8 (every word shifted by one address) — detected
+# Redaction : worktree path replaced by <repo> (public repository, DEC-016)
+#
+Time resolution is 1 ps
+ Block Memory Generator module loading initial data...
+ Block Memory Generator data initialization complete.
+Block Memory Generator module tb_top_debug_demo.dut.u_rom.inst.native_mem_module.blk_mem_gen_v8_4_12_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+Note: RESET        txd idle  Expected: '1'  Actual: '1'  PASS
+Time: 396 ns  Iteration: 0  Process: /tb_top_debug_demo/stim  File: <repo>/fpga/tb/debug/tb_top_debug_demo.vhd
+Note: RESET        LD6 (ready) on  Expected: '1'  Actual: '1'  PASS
+Time: 396 ns  Iteration: 0  Process: /tb_top_debug_demo/stim  File: <repo>/fpga/tb/debug/tb_top_debug_demo.vhd
+Note: TB-TOPDBG-01 LD6 off after press (transfer started)  Expected: '0'  Actual: '0'  PASS
+Time: 1025 ns  Iteration: 2  Process: /tb_top_debug_demo/stim  File: <repo>/fpga/tb/debug/tb_top_debug_demo.vhd
+Note: TB-TOPDBG-01 LD6 on again after the transfer  Expected: '1'  Actual: '1'  PASS
+Time: 67511285 ns  Iteration: 2  Process: /tb_top_debug_demo/stim  File: <repo>/fpga/tb/debug/tb_top_debug_demo.vhd
+Note: TB-TOPDBG-01 LD6 stayed off until the last byte  Expected: 65544 bytes when LD6 turns on  Actual: 65544  PASS
+Time: 67511285 ns  Iteration: 2  Process: /tb_top_debug_demo/stim  File: <repo>/fpga/tb/debug/tb_top_debug_demo.vhd
+Note: TB-TOPDBG-01 bytes received  Expected: 65544  Actual: 65544  PASS
+Time: 67513286 ns  Iteration: 0  Process: /tb_top_debug_demo/stim  File: <repo>/fpga/tb/debug/tb_top_debug_demo.vhd
+Note: TB-TOPDBG-01 8N1 framing errors  Expected: 0  Actual: 0  PASS
+Time: 67513286 ns  Iteration: 0  Process: /tb_top_debug_demo/stim  File: <repo>/fpga/tb/debug/tb_top_debug_demo.vhd
+Note: TB-TOPDBG-01 bytes different from COE/header/footer  Expected: 0  Actual: 0  PASS
+Time: 67513286 ns  Iteration: 0  Process: /tb_top_debug_demo/stim  File: <repo>/fpga/tb/debug/tb_top_debug_demo.vhd
+Note: TB-TOPDBG-02 bytes after hold + bouncing release  Expected: 0  Actual: 0  PASS
+Time: 67526386 ns  Iteration: 0  Process: /tb_top_debug_demo/stim  File: <repo>/fpga/tb/debug/tb_top_debug_demo.vhd
+Note: TB-TOPDBG-02 LD6 still on  Expected: '1'  Actual: '1'  PASS
+Time: 67526386 ns  Iteration: 0  Process: /tb_top_debug_demo/stim  File: <repo>/fpga/tb/debug/tb_top_debug_demo.vhd
+Note: TB-TOPDBG-03 second transfer started  Expected: '0'  Actual: '0'  PASS
+Time: 67531436 ns  Iteration: 0  Process: /tb_top_debug_demo/stim  File: <repo>/fpga/tb/debug/tb_top_debug_demo.vhd
+Note: TB-TOPDBG-03 still busy after the press during transfer  Expected: '0'  Actual: '0'  PASS
+Time: 67536436 ns  Iteration: 0  Process: /tb_top_debug_demo/stim  File: <repo>/fpga/tb/debug/tb_top_debug_demo.vhd
+Note: TB-TOPDBG-03 bytes received  Expected: 131088  Actual: 131088  PASS
+Time: 135040226 ns  Iteration: 0  Process: /tb_top_debug_demo/stim  File: <repo>/fpga/tb/debug/tb_top_debug_demo.vhd
+Note: TB-TOPDBG-03 8N1 framing errors  Expected: 0  Actual: 0  PASS
+Time: 135040226 ns  Iteration: 0  Process: /tb_top_debug_demo/stim  File: <repo>/fpga/tb/debug/tb_top_debug_demo.vhd
+Note: TB-TOPDBG-03 bytes different from COE/header/footer  Expected: 0  Actual: 0  PASS
+Time: 135040226 ns  Iteration: 0  Process: /tb_top_debug_demo/stim  File: <repo>/fpga/tb/debug/tb_top_debug_demo.vhd
+Note: TB_RESULT: PASS (15/15 checks)
+Time: 135040226 ns  Iteration: 0  Process: /tb_top_debug_demo/stim  File: <repo>/fpga/tb/debug/tb_top_debug_demo.vhd

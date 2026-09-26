@@ -1,6 +1,6 @@
 # Current Project State
 
-_Last updated: 2026-09-26 by Claude Code (Opus 5.5, AI-0007) in a session with Ömer (`omerkutlu1030`)._
+_Last updated: 2026-09-26 by Claude Code (Opus 5.5, AI-0010) in a session with Eren (`eeerenbuyukbas`)._
 _Everything below is AI-generated and **not yet reviewed by the team**._
 
 > **HANDOFF/REPOSITORY INCONSISTENCY fixed in this update:** the previous version (AI-0006) still said
@@ -8,50 +8,43 @@ _Everything below is AI-generated and **not yet reviewed by the team**._
 > the MATLAB side and the ROM IP are in PR #5.
 
 ## Current Objective
-**Lab-DEBUG demo on Wed Sep 30** (all-hands week, PROJECT_TIMELINE §4). Lab-CTRL is not needed for the
-demo (TA Q-04): top module + button conditioning + ROM + Lab-DEBUG.
-Right now: **PR #5 and PR #6 wait for a review by Hande or Eren; the demo top level (Eren) is the
-remaining design piece.**
+**Lab-DEBUG demo on Wed Sep 30.** All design pieces exist: `debug` (#4), MATLAB + ROM IP (#5), demo top level
+(#7, RTL + bitstream). **Remaining: review/merge PR #7, then the hardware tests HW-DEBUG-01…05 on the board.**
 
 ## What Has Been Completed
-- Phase 1 documents, TEAM_MANUAL (PR #1), TA answers + DEC-018 (PR #2), `debug.md` v0.2 (PR #3) — merged.
-- **PR #4 merged (squash, 2026-09-26):** `uart_tx`, `debug`, `tb_uart_tx`, `tb_debug` (Hande, AI-0004/0006).
-  Second review by Ömer (AI-0007): both testbenches re-run on Ömer's PC in Vivado 2025.2 — PASS 37/37, 97/97.
-- **PR #5 (open, `feature/debug-matlab`), Ömer, AI-0007:**
-  - MATLAB: `matlab/debug/` — `generate_debug_coe`, `read_coe`, `decode_debug_frame`, `receive_debug_frame`,
-    `compare_with_coe`, `run_debug_demo`, `debug_frame_spec`; tests `matlab/tests/test_debug.m` (MT-DEBUG-01…04).
-  - Demo ROM: `fpga/ip/debug_rom.coe` (test pattern `[k | NOT k]` + delimiter values at addresses 1, 2,
-    16382, 16383), `fpga/ip/create_debug_rom.tcl` → `fpga/ip/debug_rom/debug_rom.xci` (Single Port ROM
-    16384 × 32, always enabled, output register ON), `tb_debug_rom` + `fpga/vivado/sim_debug_rom.tcl`.
-- **PR #6 (open, `docs/vivado-2025-2`):** DEC-008 → everyone on Vivado ML Standard 2025.2 (team decision
-  2026-09-26; Eren moves from 2023.2). MATLAB not pinned (R2025b Hande/Ömer, R2023b Eren).
+- Phase 1 documents, TEAM_MANUAL (#1), TA answers + DEC-018 (#2), `debug.md` v0.2 (#3) — merged.
+- **#4 merged:** `uart_tx`, `debug` + testbenches (Hande, AI-0004/0006).
+- **#5 merged:** MATLAB side (`matlab/debug/`, MT-DEBUG-01…04) + demo ROM IP `debug_rom` + COE + `tb_debug_rom` (Ömer, AI-0007).
+- **#6 merged:** DEC-008 — Vivado ML Standard 2025.2 for everyone.
+- **#7 open (`feature/debug-top`, Eren, AI-0008/0009/0010):** design doc `top_debug_demo.md` v0.3 (approved by
+  Ömer); RTL `sync_2ff`, `button_conditioner`, `top_debug_demo`; XDC `top_debug_demo.xdc` (pins verified against
+  the official Digilent XDC); `tb_button_conditioner`, `tb_top_debug_demo`; scripts `sim_top_debug_demo.tcl`,
+  `build_debug_demo.tcl`; DEC-019 (debounce); reports in `docs/verification/`.
 
-## What Is Currently Working (simulation / MATLAB only)
-- `uart_tx` PASS 37/37 (TB-UART-01…03); `debug` PASS 97/97 (TB-DEBUG-01…09).
-- MATLAB: `MT_RESULT: PASS (15/15 tests)` — MT-DEBUG-01…04.
-- ROM IP: `TB_RESULT: PASS (11/11 checks)` — Vivado accepts the COE, all 16 384 words match,
-  **read latency measured = 2** (= `G_MEM_LATENCY` default). Mutation (expect 1) → FAIL, shift-by-one.
-- Logs: `simulation/results/2026-09-26_{tb_uart_tx,tb_debug,mt_debug,tb_debug_rom}.log`.
+## What Is Currently Working (simulation + implementation, no hardware yet)
+- `uart_tx` 37/37, `debug` 97/97, `debug_rom` 11/11, MATLAB 15/15 (R2025b and R2023b).
+- `button_conditioner` **22/22** (TB-BTN-01…05, 3 mutants detected).
+- **Demo top level with the real ROM IP, N = 14: 15/15** (TB-TOPDBG-01…03: two full frames of 65 544 bytes
+  equal to the COE, bounce/hold/press-while-busy handled; latency mutant detected).
+- **Bitstream built:** WNS +5.083 ns, WHS +0.122 ns, DRC 0; 128 LUT, 114 FF, 14.5 BRAM tiles.
+- Logs: `simulation/results/2026-09-26_*.log`; reports: `docs/verification/2026-09-26_top_debug_demo_*`.
 
 ## What Is Not Working / Not Done
-- Demo top level `top_debug_demo` (reset sync, button sync/debounce/1-cycle pulse, ROM + debug wiring,
-  LD6), XDC from `Basys3_Master.xdc`, `create_debug_demo.tcl`, TB-TOPDBG-01 — Eren, not started.
-- No synthesis / implementation / timing numbers yet.
-- No hardware test (HW-DEBUG-01…05); MATLAB receiver untested on real hardware.
+- No hardware test yet (HW-DEBUG-01…05); 1 Mbaud on the real FT2232HQ/VCP/MATLAB chain unverified (R-15).
+- Bitstream is not in git (build output): rebuild with `fpga/vivado/build_debug_demo.tcl`, or use the file in
+  `C:\dev\eee491_build\fpga\vivado\build\debug_demo\` on Eren's PC; attach to the demo release.
 - Data-capable micro-USB cable: Hande's is charge-only; Eren has one.
 
 ## Current Branch
-`feature/debug-matlab` (PR #5), pushed, up to date with `origin/main`. Also pushed: `docs/vivado-2025-2` (PR #6).
+`feature/debug-top` (PR #7), pushed. Build worktree on Eren's PC: `C:\dev\eee491_build` (detached, for
+Vivado — the main working copy is under OneDrive\Masaüstü, which Vivado cannot use, DEC-014).
 Remote: https://github.com/Team-Project-Spoken-Number-Recognition/EEE491-Spoken-Number-Recognition (public, DEC-016).
 
-## Integration notes for the top level (Eren)
-- ROM ports: `clka` ← `clock_in`, `addra(13:0)` ← `mem_addr_out`, `douta(31:0)` → `mem_data_in`; **no `ena`**
-  (always enabled). Add the IP with `read_ip fpga/ip/debug_rom/debug_rom.xci` (or re-run `create_debug_rom.tcl`).
-- Keep `debug` generic `G_MEM_LATENCY` = 2 (verified, TB-ROM-01).
-- `start_in` must be a clean 1-cycle pulse (debug.md §15).
-- **Vivado on Ömer's PC:** `.bat` scripts cannot run from `%TEMP%`, and `launch_simulation` crashed with a
-  redirected console → build folders go to `fpga/vivado/build/` (git-ignored); `sim_debug_rom.tcl` has a
-  `-tclargs scripts_only` fallback. Use the same pattern in `create_debug_demo.tcl` if needed.
+## Build / simulation notes (all members)
+- Run Vivado scripts from a clone at an **ASCII path without spaces** (DEC-014), with Vivado's `bin` on `PATH`.
+- Simulation with the IP: `vivado -mode batch -source fpga/vivado/sim_top_debug_demo.tcl` (≈ 1 min).
+- Bitstream: `vivado -mode batch -source fpga/vivado/build_debug_demo.tcl` (≈ 2 min) → `fpga/vivado/build/debug_demo/top_debug_demo.bit`.
+- In Claude Code shells remove `NoDefaultCurrentDirectoryInExePath` for Vivado commands (TEAM_MANUAL §10).
 
 ## Open review findings (non-blocking)
 - PR #4 findings 1–7 (style: `numeric_std` in `uart_tx`, inner `when others`, named constants, UART RX
@@ -77,16 +70,14 @@ See above; logs in `simulation/results/`.
 None.
 
 ## Next Steps
-1. Hande or Eren: review + squash-merge PR #5 and PR #6.
-2. Eren: install Vivado 2025.2; demo top level + XDC + `create_debug_demo.tcl` + TB-TOPDBG-01; synthesis,
-   utilisation (expect 16 RAMB36 for the ROM), WNS; bitstream. Target: PR by Monday evening.
-3. Ömer: cross-check "Total Port A Read Latency: 2" in the `debug_rom` IP Summary tab (GUI, cancel without
-   changes); get the Basys-3 back from Hande (Mon); install the FTDI VCP driver; find the COM port.
-4. Tuesday (Hande + Ömer): HW-DEBUG-01 (terminal, 1 Mbaud), then `run_debug_demo("COMx")` for
-   HW-DEBUG-02…05; evidence into `docs/verification/`. Tuesday evening: freeze.
-5. Session exports: AI-0004 (Hande) still to add. AI-0007 (Ömer) added, redacted, group chats omitted — keep the
-   same rule for other exports (no pasted WhatsApp messages or phone numbers in the public repo).
-6. Wed Sep 30: demo, tag `lab-debug-demo`, release with bitstream.
+1. Hande (and/or Ömer): review + squash-merge PR #7 (RTL part).
+2. Program the board (Hardware Manager → `top_debug_demo.bit`); LD6 must be on after configuration.
+3. HW-DEBUG-01: terminal at 1 000 000 baud 8N1, press BTNU → bytes `55 AA CC 03 …` visible.
+4. HW-DEBUG-02…05: `run_debug_demo("COMx")` in MATLAB, press BTNU → `PASS: 16384/16384 words match`; repeat
+   10×, hold/press-during-transfer, BTNC during transfer. Evidence into `docs/verification/`.
+5. Demo prep: waveform screenshots (start, ready, txd) from `tb_debug` / `tb_top_debug_demo`; Tuesday evening freeze.
+6. Session exports: AI-0004 (Hande) still to add; AI-0008…0010 (Eren) to export.
+7. Wed Sep 30: demo, tag `lab-debug-demo`, release with the bitstream.
 
 ## Blockers
 - Demo top level not started (critical path: top level → integration sim → bitstream → hardware).

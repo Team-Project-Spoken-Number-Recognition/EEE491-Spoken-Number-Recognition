@@ -320,6 +320,8 @@ is not enough.
 | Board not seen as COM port | Install FTDI VCP driver; try another USB cable (charge-only cables exist); close terminal programs holding the port. |
 | Claude says HANDOFF/REPOSITORY INCONSISTENCY | Good — it found stale docs. Fix the doc in the same PR. |
 | Repo is inside OneDrive and git behaves strangely | Re-clone into `C:\dev\` (§2). |
+| Vivado: `File or Directory '…/Masa�st�/…' does not exist` | Vivado cannot handle non-ASCII characters (`ü`, `ş`, …) or spaces in paths. Work from a clone at e.g. `C:\dev\EEE491-Spoken-Number-Recognition` (DEC-014). |
+| Vivado batch: `'compile.bat' is not recognized` / `Spawn failed` | Vivado's `bin` must be on `PATH` (use the "Vivado 2025.2 Tcl Shell" or add `C:\AMDDesignTools\2025.2\Vivado\bin`). In a Claude Code shell also remove `NoDefaultCurrentDirectoryInExePath` for that command (Claude sets it; `cmd` then ignores `.bat` files in the current folder). Fallback: `-tclargs scripts_only`. |
 
 ---
 
