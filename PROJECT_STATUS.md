@@ -1,13 +1,13 @@
 # Project Status
 
-_Last updated: 2026-09-26 — Lab-DEBUG RTL + testbenches in PR #4, simulation PASS (AI-0006, pending team review)_
+_Last updated: 2026-09-26 — PR #4 merged; MATLAB side + demo ROM IP in PR #5 (MT 15/15, TB-ROM 11/11 PASS), Vivado 2025.2 in PR #6 (AI-0007, pending team review)_
 
 ## 1. Stage overview
 
 | Stage | Manual | Manual status | Stage status |
 |---|---|---|---|
 | Phase 1 — initialisation | syllabus | Released | **DONE — pending team review** |
-| Lab-DEBUG | `docs/manuals/Lab-DEBUG_Assignment.pdf` | Released, analysed | **CURRENT — RTL + TB done (sim PASS), PR #4 in review; top level, synthesis, HW open** |
+| Lab-DEBUG | `docs/manuals/Lab-DEBUG_Assignment.pdf` | Released, analysed | **CURRENT — RTL merged (PR #4); MATLAB + ROM IP in PR #5; top level (Eren), synthesis, HW open** |
 | Lab-CTRL | `docs/manuals/Lab-CTRL_Assignment.pdf` | Released, analysed (DEC-003) | NOT STARTED |
 | Lab-ADC | `docs/manuals/pending/Lab-ADC_Assignment_v4.pdf` | Received, not released | — |
 | Lab-WINDOW | `docs/manuals/pending/Lab-WINDOW_Assignment.pdf` | Received, not released | — |
@@ -24,7 +24,7 @@ _Last updated: 2026-09-26 — Lab-DEBUG RTL + testbenches in PR #4, simulation P
 Current Stage:   Lab-DEBUG (Lab-CTRL not needed for its demo — TA Q-04)
 Official Manual: docs/manuals/Lab-DEBUG_Assignment.pdf
 Analysis:        docs/manual_analysis/Lab-DEBUG_analysis.md
-Status:          IN PROGRESS — design v0.2 merged (PR #3); RTL + TBs in PR #4, sim PASS 2026-09-26
+Status:          IN PROGRESS — RTL merged (PR #4); MATLAB + ROM IP in PR #5 (PASS); demo top level open
 Due:             Wed Sep 30 2026 (confirmed by team, 2026-09-25)
 ```
 
@@ -34,19 +34,19 @@ Due:             Wed Sep 30 2026 (confirmed by team, 2026-09-25)
 [x] Manual requirements understood          (docs/manual_analysis/Lab-DEBUG_analysis.md — pending team review)
 [x] Requirements documented                 (REQUIREMENTS.md §1.2)
 [x] Architecture defined                    (docs/architecture/subsystems/debug.md v0.2, reviewed in PR #3)
-[~] Implementation completed                (debug + uart_tx in PR #4; demo top level + ROM still open — Eren)
-[ ] VHDL/MATLAB code reviewed               (PR #4 awaiting approving review; MATLAB receiver not yet written)
-[x] Testbench created                       (tb_uart_tx, tb_debug — self-checking, DEC-011)
+[~] Implementation completed                (debug + uart_tx merged; MATLAB + ROM IP + COE in PR #5; demo top level open — Eren)
+[~] VHDL/MATLAB code reviewed               (PR #4 approved + merged; PR #5 awaiting review)
+[x] Testbench created                       (tb_uart_tx, tb_debug, tb_debug_rom, MATLAB test_debug — self-checking, DEC-011)
 [~] Functional simulation completed         (block level PASS; TB-TOPDBG-01 with the demo top open)
-[x] Expected vs actual results compared     (37/37, 97/97 PASS — simulation/results/2026-09-26_tb_*.log)
+[x] Expected vs actual results compared     (37/37, 97/97, 11/11, MT 15/15 PASS — simulation/results/2026-09-26_*.log)
 [ ] Synthesis completed                     (Vivado synthesis not yet run)
 [ ] Hardware test completed
 [ ] Lab demonstration completed
 [ ] Known issues documented
 [~] Results documented                      (TEST_PLAN, REQUIREMENTS, TRACEABILITY_MATRIX updated 2026-09-26)
-[~] HANDOFF.md updated                      (2026-09-26, block-level RTL)
-[~] PROJECT_STATUS.md updated               (2026-09-26, block-level RTL)
-[~] AI interaction documented               (AI-0004 record + AI-0006; chat export still to be added by Hande)
+[~] HANDOFF.md updated                      (2026-09-26, AI-0007: MATLAB + ROM IP)
+[~] PROJECT_STATUS.md updated               (2026-09-26, AI-0007: MATLAB + ROM IP)
+[~] AI interaction documented               (AI-0004, AI-0006, AI-0007 records; chat exports of AI-0004 (Hande) and AI-0007 (Ömer) still to add)
 ```
 
 ### Completion checklist — Lab-CTRL
@@ -55,11 +55,11 @@ Due:             Wed Sep 30 2026 (confirmed by team, 2026-09-25)
 [x] Manual requirements understood          (docs/manual_analysis/Lab-CTRL_analysis.md — pending team review)
 [x] Requirements documented                 (REQUIREMENTS.md §1.3)
 [ ] Architecture defined
-[~] Implementation completed                (debug + uart_tx in PR #4; demo top level + ROM still open — Eren)
+[~] Implementation completed                (debug + uart_tx merged; MATLAB + ROM IP + COE in PR #5; demo top level open — Eren)
 [ ] Code reviewed
-[x] Testbench created                       (tb_uart_tx, tb_debug — self-checking, DEC-011)
+[x] Testbench created                       (tb_uart_tx, tb_debug, tb_debug_rom, MATLAB test_debug — self-checking, DEC-011)
 [ ] Functional simulation completed (framing + sequence waveforms)
-[x] Expected vs actual results compared     (37/37, 97/97 PASS — simulation/results/2026-09-26_tb_*.log)
+[x] Expected vs actual results compared     (37/37, 97/97, 11/11, MT 15/15 PASS — simulation/results/2026-09-26_*.log)
 [ ] Synthesis completed                     (Vivado synthesis not yet run)
 [ ] Hardware test completed (button start, LEDs)
 [ ] Lab demonstration completed
