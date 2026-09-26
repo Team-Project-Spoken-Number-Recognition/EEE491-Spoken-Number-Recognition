@@ -1,4 +1,67 @@
+# Simulation log — tb_uart_tx
+# Date      : 2026-09-26
+# Simulator : Vivado 2025.2 XSim, batch mode (xvhdl / xelab / xsim --runall)
+# Sources   : fpga/rtl/debug/uart_tx.vhd fpga/tb/debug/tb_uart_tx.vhd
+# Commit    : d6bdd94 (branch feature/debug-design), sources unmodified
+# Run by    : Claude Code session (AI-0006) on Hande's PC; independent re-run of Hande's GUI XSim result
+# Commands  : xvhdl fpga/rtl/debug/uart_tx.vhd fpga/tb/debug/tb_uart_tx.vhd
+#             xelab -debug off -snapshot tb_uart_tx_snap work.tb_uart_tx
+#             xsim tb_uart_tx_snap --runall
+# Redaction : machine-identifying lines (host name, user paths, CPU/memory details) replaced by
+#             '<redacted>' because the repository is public (DEC-016). Nothing else is edited.
+#
+########## xvhdl ##########
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/dev/EEE491-Spoken-Number-Recognition/fpga/rtl/debug/uart_tx.vhd" into library work
+INFO: [VRFC 10-3107] analyzing entity 'uart_tx'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_uart_tx.vhd" into library work
+INFO: [VRFC 10-3107] analyzing entity 'tb_uart_tx'
+########## xelab ##########
+Vivado Simulator v2025.2
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: <vivado_install>/Vivado/bin/unwrapped/win64.o/xelab.exe --log <simdir>/tb_uart_tx\xelab.log -debug off -snapshot tb_uart_tx_snap work.tb_uart_tx 
+Multi-threading is on. Using 6 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling architecture rtl of entity work.uart_tx [\uart_tx(g_clks_per_bit=10)\]
+Compiling architecture rtl of entity work.uart_tx [uart_tx_default]
+Compiling architecture sim of entity work.tb_uart_tx
+Built simulation snapshot tb_uart_tx_snap
+########## xsim ##########
+#-----------------------------------------------------------
+# xsim v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sat Sep 26 14:27:58 2026
+# Process ID         : <redacted>
+# Current directory  : <simdir>/tb_uart_tx
+# Command line       : xsim.exe -log <simdir>/tb_uart_tx\xsim.log -mode tcl -source {xsim.dir/tb_uart_tx_snap/xsim_script.tcl}
+# Log file           : <simdir>/tb_uart_tx/xsim.log
+# Journal file       : <simdir>/tb_uart_tx\xsim.jou
+# Running On         : <redacted>
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : <redacted>
+# CPU Frequency      : <redacted>
+# CPU Physical cores : <redacted>
+# CPU Logical cores  : <redacted>
+# Host memory        : <redacted>
+# Swap memory        : <redacted>
+# Total Virtual      : <redacted>
+# Available Virtual  : <redacted>
+#-----------------------------------------------------------
+source xsim.dir/tb_uart_tx_snap/xsim_script.tcl
+# xsim {tb_uart_tx_snap} -autoloadwcfg -runall
 Time resolution is 1 ps
+run -all
 Note: RESET       DUT A line idle  Expected: '1'  Actual: '1'  PASS
 Time: 45 ns  Iteration: 0  Process: /tb_uart_tx/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_uart_tx.vhd
 Note: RESET       DUT B line idle  Expected: '1'  Actual: '1'  PASS
@@ -75,3 +138,5 @@ Note: TB-UART-02  frame length (clocks)  Expected: 1000  Actual: 1000  PASS
 Time: 17345 ns  Iteration: 2  Process: /tb_uart_tx/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_uart_tx.vhd
 Note: TB_RESULT: PASS (37/37 checks)
 Time: 17345 ns  Iteration: 2  Process: /tb_uart_tx/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_uart_tx.vhd
+exit
+INFO: [Common 17-206] Exiting xsim at Sat Sep 26 14:28:03 2026...

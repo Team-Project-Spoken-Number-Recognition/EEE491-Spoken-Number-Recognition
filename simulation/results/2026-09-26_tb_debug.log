@@ -1,4 +1,70 @@
+# Simulation log — tb_debug
+# Date      : 2026-09-26
+# Simulator : Vivado 2025.2 XSim, batch mode (xvhdl / xelab / xsim --runall)
+# Sources   : fpga/rtl/debug/uart_tx.vhd fpga/rtl/debug/debug.vhd fpga/tb/debug/tb_debug.vhd
+# Commit    : d6bdd94 (branch feature/debug-design), sources unmodified
+# Run by    : Claude Code session (AI-0006) on Hande's PC; independent re-run of Hande's GUI XSim result
+# Commands  : xvhdl fpga/rtl/debug/uart_tx.vhd fpga/rtl/debug/debug.vhd fpga/tb/debug/tb_debug.vhd
+#             xelab -debug off -snapshot tb_debug_snap work.tb_debug
+#             xsim tb_debug_snap --runall
+# Redaction : machine-identifying lines (host name, user paths, CPU/memory details) replaced by
+#             '<redacted>' because the repository is public (DEC-016). Nothing else is edited.
+#
+########## xvhdl ##########
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/dev/EEE491-Spoken-Number-Recognition/fpga/rtl/debug/uart_tx.vhd" into library work
+INFO: [VRFC 10-3107] analyzing entity 'uart_tx'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/dev/EEE491-Spoken-Number-Recognition/fpga/rtl/debug/debug.vhd" into library work
+INFO: [VRFC 10-3107] analyzing entity 'debug'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd" into library work
+INFO: [VRFC 10-3107] analyzing entity 'tb_debug'
+########## xelab ##########
+Vivado Simulator v2025.2
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: <vivado_install>/Vivado/bin/unwrapped/win64.o/xelab.exe --log <simdir>/tb_debug\xelab.log -debug off -snapshot tb_debug_snap work.tb_debug 
+Multi-threading is on. Using 6 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling architecture rtl of entity work.uart_tx [\uart_tx(g_clks_per_bit=10)\]
+Compiling architecture rtl of entity work.debug [\debug(n=3,g_baud_rate=10000000)...]
+Compiling architecture rtl of entity work.debug [\debug(n=3,g_baud_rate=10000000,...]
+Compiling architecture sim of entity work.tb_debug
+Built simulation snapshot tb_debug_snap
+########## xsim ##########
+#-----------------------------------------------------------
+# xsim v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sat Sep 26 14:28:08 2026
+# Process ID         : <redacted>
+# Current directory  : <simdir>/tb_debug
+# Command line       : xsim.exe -log <simdir>/tb_debug\xsim.log -mode tcl -source {xsim.dir/tb_debug_snap/xsim_script.tcl}
+# Log file           : <simdir>/tb_debug/xsim.log
+# Journal file       : <simdir>/tb_debug\xsim.jou
+# Running On         : <redacted>
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : <redacted>
+# CPU Frequency      : <redacted>
+# CPU Physical cores : <redacted>
+# CPU Logical cores  : <redacted>
+# Host memory        : <redacted>
+# Swap memory        : <redacted>
+# Total Virtual      : <redacted>
+# Available Virtual  : <redacted>
+#-----------------------------------------------------------
+source xsim.dir/tb_debug_snap/xsim_script.tcl
+# xsim {tb_debug_snap} -autoloadwcfg -runall
 Time resolution is 1 ps
+run -all
 Note: TB-DEBUG-01 DUT0 reset: txd idle  Expected: '1'  Actual: '1'  PASS
 Time: 45 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
 Note: TB-DEBUG-01 DUT0 reset: ready high  Expected: '1'  Actual: '1'  PASS
@@ -195,3 +261,5 @@ Note: TB-DEBUG-07 memory latency 1, G_MEM_LATENCY=2 ready rising edges during tr
 Time: 269005 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
 Note: TB_RESULT: PASS (97/97 checks)
 Time: 269015 ns  Iteration: 0  Process: /tb_debug/stim  File: C:/dev/EEE491-Spoken-Number-Recognition/fpga/tb/debug/tb_debug.vhd
+exit
+INFO: [Common 17-206] Exiting xsim at Sat Sep 26 14:28:10 2026...
