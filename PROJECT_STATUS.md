@@ -25,7 +25,7 @@ Current Stage:   Lab-DEBUG (+ Lab-CTRL subset for the demo)
 Official Manual: docs/manuals/Lab-DEBUG_Assignment.pdf
 Analysis:        docs/manual_analysis/Lab-DEBUG_analysis.md
 Status:          IN PROGRESS — requirements documented; design not started
-Due:             Sat Oct 03 2026 (possibly Wed Sep 30 — Q-01)
+Due:             Wed Sep 30 2026 (confirmed by team, 2026-09-25)
 ```
 
 ### Completion checklist — Lab-DEBUG
@@ -82,7 +82,9 @@ Due:             Sat Oct 03 2026 (possibly Wed Sep 30 — Q-01)
 
 | ID | Risk | Likelihood | Impact | Mitigation | Owner |
 |---|---|---|---|---|---|
-| R-01 | Lab-DEBUG deadline (Oct 03, possibly Sep 30) missed — demo also needs CTRL subset, ROM IP, XDC, MATLAB | High | High (late factor) | Parallel split in PROJECT_TIMELINE §4; clarify date (Q-01) | ALL |
+| R-01 | Lab-DEBUG deadline (Wed Sep 30) missed — demo also needs CTRL subset, ROM IP, XDC, MATLAB | High | High (late factor) | All-hands week, parallel split in PROJECT_TIMELINE §4 | ALL |
+| R-13 | Public repository exposes course material, lab work, AI records and possibly personal data; copies persist after going private | Medium | Medium–High | DEC-016; TEAM_MANUAL §9 rules; check exports before commit | ALL |
+| R-14 | Rotation leaves the off-week member unable to explain a lab (exam questions to all members) | Medium | Medium | Thursday catch-up (TEAM_MANUAL §4) | ALL |
 | R-02 | Byte-order / handshake interpretation differs from the assistant's expectation | Medium | Medium | Q-02, Q-03 before coding; single constant controls order | A |
 | R-03 | Git repo inside OneDrive → lock/corruption | Medium | High | DEC-014: move repo outside OneDrive | ALL |
 | R-04 | Vivado version mismatch between members / lab PC → IP upgrade issues | Medium | Medium | DEC-008 | ALL |
@@ -104,3 +106,5 @@ Due:             Sat Oct 03 2026 (possibly Wed Sep 30 — Q-01)
 | ModelSim | Intel ModelSim ASE 18.1 present (not the planned simulator) | Observed |
 | git / gh | git 2.54; gh logged in as `eeerenbuyukbas`; **no global git user.name/email configured** | Observed |
 | Repo location | Inside OneDrive (`...\OneDrive\Masaüstü\EEE391 Project`) | **Risk R-03** |
+| GitHub remote | `Team-Project-Spoken-Number-Recognition/EEE491-Spoken-Number-Recognition`, private, org on free plan | DEC-015 |
+| Branch protection | Enabled on `main` 2026-09-25 (PR + 1 approval, admins included) | Lost if repo goes private on free plan |

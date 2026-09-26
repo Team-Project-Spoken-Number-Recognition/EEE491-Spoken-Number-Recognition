@@ -24,10 +24,18 @@
 - Tag each demonstrated lab: `lab-debug-demo`, `lab-ctrl-v1`, `lab-ctrl-v2`, … (REQ-CTRL-010).
 - Bitstreams used in a demo are attached to a GitHub **release** for that tag, not committed.
 
-**GitHub settings (to do once):** private repo · protect `main` (require PR, 1 approval, no force-push) ·
-squash-merge only · delete branch after merge.
+**GitHub settings:** repo is in the organization `Team-Project-Spoken-Number-Recognition`, all three
+members are owners (DEC-015), currently public (DEC-016). **Branch protection on `main` is enabled
+(2026-09-25)**: PR required, 1 approving review, stale approvals dismissed on new pushes, all review
+conversations resolved, no force-push, no deletion — **also enforced for admins**. It stops being
+enforced if the repo becomes private on the free plan.
+Squash-merge only · delete branch after merge. Day-to-day usage: [TEAM_MANUAL.md](TEAM_MANUAL.md).
 
-## 3. Ownership matrix (PROPOSED)
+## 3. Ownership matrix — SUPERSEDED by the weekly rotation
+
+> Since 2026-09-25 each lab is owned by a **Lab Lead + Partner** pair with a rotating off-week member
+> (DEC-017). The authoritative plan is [TEAM_MANUAL.md §3](TEAM_MANUAL.md#3-roles-and-weekly-rotation):
+> the Lead is the block owner, the Partner is the reviewer. The table below is kept for history only.
 
 Each block has one **owner** (designs, writes, documents), one **reviewer** (reviews design doc *and*
 code *and* test evidence), and the whole team is responsible for integration. Replace A/B/C with names.

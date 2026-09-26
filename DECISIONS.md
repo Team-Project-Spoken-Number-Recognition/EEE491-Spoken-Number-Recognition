@@ -49,7 +49,7 @@ memory architecture, Vivado IP usage beyond the manuals.
 - **Chosen:** A.
 - **Reason:** 3 people, weekly deadlines; C adds overhead, B breaks each other's work.
 - **Impact:** See `CONTRIBUTING.md`. Tags also satisfy REQ-CTRL-010 (keep CTRL versions).
-- **Date:** 2026-09-24 · **Status:** PROPOSED · **Team:** _pending_
+- **Date:** 2026-09-24 · **Status:** ACCEPTED 2026-09-25 (branch protection enabled on `main`, enforced for admins) · **Team:** eeerenbuyukbas
 
 ### DEC-005 — UART / debug protocol
 - **Decision:** 8N1, LSB-first bits, MSB-first bytes, start word `55AACC03`, end word `AA5503CC`, fixed length `8 + 4·2^N` bytes. Start at **115 200 baud**; evaluate a higher rate (e.g. 1 000 000, exact divider 100) only after the 115 200 demo path works.
@@ -105,6 +105,31 @@ memory architecture, Vivado IP usage beyond the manuals.
 - **Decision:** Commit sources, XDC, `.xci`, `.coe` and a `fpga/vivado/create_<design>.tcl` script; ignore `.xpr`, `.runs`, `.cache`, etc.
 - **Reason:** Vivado project folders are large, machine-specific and merge-hostile; three people would conflict constantly.
 - **Date:** 2026-09-24 · **Status:** PROPOSED · **Team:** _pending_
+
+### DEC-015 — Host the repository in a GitHub organization with all members as owners
+- **Decision:** Transfer the repository from the personal account `eeerenbuyukbas` to the organization `Team-Project-Spoken-Number-Recognition` (free plan); all three members are organization **Owners**.
+- **Context:** Every member uses Claude Code on their own PC; each Claude acts with that member's GitHub rights. The team wants every member (and their Claude) to be able to do the same administrative actions. On a personal-account repository only the owner can be admin.
+- **Options:** A) organization, all owners · B) personal repo + GitHub Pro (branch protection, single admin) · C) make the repo temporarily public (rejected: does not give equal rights; would irreversibly expose course manuals and our work).
+- **Chosen:** A.
+- **Trade-offs:** Free organizations have no branch protection for private repositories → the PR-only rule of DEC-004 is enforced by team discipline. Equal owners can also delete/rename the repo or remove members → administrative actions require team agreement first.
+- **Date:** 2026-09-24 · **Status:** ACCEPTED — implemented; all three members are organization owners/admins (verified 2026-09-25) · **Team:** eeerenbuyukbas, handeery, omerkutlu1030
+
+### DEC-016 — Repository temporarily public
+- **Decision:** The repository is made **public for a limited period**; it will be returned to private later.
+- **Context:** Team decision (eeerenbuyukbas, 2026-09-25). Supersedes the rejection of option C in DEC-015.
+- **Trade-offs / risks accepted:** Anything pushed while public (including the course manuals, syllabus, lab work and AI records) can be cloned or forked by anyone, and making the repo private later does not remove existing copies. Course-material policy question Q-13 is still open.
+- **Mitigation:** Public-repository rules in `TEAM_MANUAL.md` §9 (no secrets, no personal data, no voice recordings without consent). Free branch protection is available while public.
+- **Date:** 2026-09-25 · **Status:** ACCEPTED (team) · **Team:** eeerenbuyukbas
+
+### DEC-017 — Weekly Lead/Partner pairs with a rotating off-week
+- **Decision:** Each weekly lab is done by two members (Lab Lead + Partner); the third member has an off-week. Rotation: Partner → next Lead, Lead → off, off → Partner. Lab-DEBUG (first week) is recommended as an all-hands week.
+- **Context:** Team decision on workload (eeerenbuyukbas, 2026-09-25); one lab deadline per week on Wednesdays.
+- **Options:** A) fixed owner per subsystem (CONTRIBUTING §3, original proposal) · B) rotating pairs.
+- **Chosen:** B. Supersedes the ownership matrix of CONTRIBUTING §3.
+- **Reason:** Continuity (each pair contains someone from the previous lab), no one leads two labs in a row, everyone rests one week in three.
+- **Trade-offs:** Knowledge of a lab is concentrated in two people → mandatory Thursday catch-up for the returning member; interface changes need all three.
+- **Details:** `TEAM_MANUAL.md` §3–4. Slot mapping: P1 = Eren, P2 = Ömer, P3 = Hande — follows from the team decision "Lab-PCB: Eren Lead, Ömer Partner"; Lab-DEBUG is all-hands.
+- **Date:** 2026-09-25 · **Status:** ACCEPTED · **Team:** eeerenbuyukbas
 
 ### DEC-014 — Repository location outside OneDrive
 - **Decision:** Keep the git working copy outside OneDrive-synced folders (e.g. `C:\dev\EEE491-Spoken-Number-Recognition`); GitHub is the sync mechanism.

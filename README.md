@@ -22,7 +22,10 @@ See [ARCHITECTURE.md](ARCHITECTURE.md).
 | Current stage | **Lab-DEBUG** (with the Lab-CTRL dependency required for its demo) |
 | Official manuals in use | [docs/manuals/Lab-DEBUG_Assignment.pdf](docs/manuals/Lab-DEBUG_Assignment.pdf), [docs/manuals/Lab-CTRL_Assignment.pdf](docs/manuals/Lab-CTRL_Assignment.pdf) |
 | Status | Phase 1 (project initialisation) complete — design of Lab-DEBUG not started |
-| Syllabus due date | Lab-DEBUG: **Sat Oct 03 2026** (syllabus: may be advanced by 3 days → Wed Sep 30) |
+| Due date | Lab-DEBUG: **Wed Sep 30 2026** (one lab deadline per week, on Wednesdays) |
+
+**New team member or new Claude session? Read [TEAM_MANUAL.md](TEAM_MANUAL.md) first** — setup,
+weekly rotation, git workflow, Claude prompts, public-repo rules.
 
 Live status: [PROJECT_STATUS.md](PROJECT_STATUS.md) · Session handoff: [HANDOFF.md](HANDOFF.md)
 
@@ -94,15 +97,21 @@ Differences from the originally proposed layout are explained in [DECISIONS.md](
 
 ## 7. Team
 
-| Role | Name |
-|---|---|
-| Member A | _TBD_ |
-| Member B | _TBD_ |
-| Member C | _TBD_ |
+Repository: https://github.com/Team-Project-Spoken-Number-Recognition/EEE491-Spoken-Number-Recognition
+(owned by the GitHub organization `Team-Project-Spoken-Number-Recognition` — DEC-015; **temporarily
+public** — DEC-016). Organization owners (equal admin rights): `eeerenbuyukbas`, `handeery`, `omerkutlu1030`.
+Weekly Lead/Partner/off-week rotation: [TEAM_MANUAL.md §3](TEAM_MANUAL.md#3-roles-and-weekly-rotation).
+
+| Role | Name | GitHub |
+|---|---|---|
+| Member A | _TBD_ | _TBD_ |
+| Member B | _TBD_ | _TBD_ |
+| Member C | _TBD_ | _TBD_ |
 | Instructor | İsmail Enis Ungan |
 | Lab assistant | Arda Keskin |
 
 Ownership matrix: [CONTRIBUTING.md §3](CONTRIBUTING.md#3-ownership-matrix-proposed).
 
-> **Repository visibility:** this repository contains official course material (manuals, syllabus).
-> It must be a **private** GitHub repository.
+> **Repository visibility:** this repository contains official course material (manuals, syllabus) and
+> is currently public by team decision (DEC-016). Follow the public-repository rules in
+> [TEAM_MANUAL.md §9](TEAM_MANUAL.md#9-public-repository-rules).
