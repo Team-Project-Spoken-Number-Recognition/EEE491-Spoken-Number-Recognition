@@ -72,6 +72,14 @@ two clocks later.
 
 ## 4. Showing waveforms live (optional)
 
+**All testbenches in the Vivado GUI:** in the Vivado Tcl Console `cd` to the clone (ASCII path) and run
+`source fpga/vivado/create_debug_sim_project.tcl`. Then Simulation Sources → sim_1 → right-click a testbench →
+*Set as Top* → *Run Simulation → Run Behavioral Simulation*; the run goes to the end and the Tcl console shows the
+`Expected / Actual / PASS|FAIL` lines. Checked 2026-09-26: tb_uart_tx 37/37, tb_debug 97/97, tb_debug_rom 11/11,
+tb_button_conditioner 22/22, tb_top_debug_demo 15/15, tb_debug_waves 24 bytes.
+
+**Only the demo waveform bench:**
+
 From the repository root (ASCII path, Vivado `bin` on `PATH`):
 
 ```text
