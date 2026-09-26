@@ -9,8 +9,9 @@ listed here. Status: **UNVERIFIED → VERIFIED** (with evidence) or **REJECTED**
 - **Statement:** The Basys-3 FPGA is the XC7A35T-1CPG236C (Artix-7).
 - **Reason:** Digilent's published Basys-3 specification.
 - **Source:** General knowledge of Digilent documentation — not yet checked against our board.
-- **Status:** UNVERIFIED
-- **How to verify:** Vivado Hardware Manager auto-detect on our board; chip marking; Basys-3 Reference Manual.
+- **Status:** **VERIFIED** 2026-09-26 — Vivado Hardware Manager auto-detects `xc7a35t` (device `xc7a35t_0`) on our board; the
+  bitstream for xc7a35tcpg236-1 configures and runs (HW-DEBUG-02…05). Package/speed grade are not reported by JTAG; they
+  follow from the Basys-3 documentation.
 
 ### ASSUMPTION-002 — Board revision
 - **Statement:** Board revision is irrelevant for our pins as long as Digilent's current `Basys3_Master.xdc` is used.
@@ -46,7 +47,7 @@ listed here. Status: **UNVERIFIED → VERIFIED** (with evidence) or **REJECTED**
 
 ### ASSUMPTION-009 — FT2232HQ link works at 1 000 000 baud
 - **Statement:** FT2232HQ + Windows VCP driver + MATLAB `serialport` work reliably at 1 000 000 baud (DEC-005). Supporting evidence: the reference design used this rate.
-- **Status:** UNVERIFIED · **How to verify:** FT2232H datasheet + AN232B-05; hardware test at each rate.
+- **Status:** **VERIFIED** 2026-09-26 at 1 000 000 baud — HW-DEBUG-02…05 (≈ 20 full transfers, 0 byte errors) on Eren's PC (R2023b). Lab PC not yet tested.
 
 ### ASSUMPTION-010 — ADC sample RAM address width
 - **Statement:** Lab-ADC sample RAM is addressed with 14 bits (≤ 16 384 samples), because `frame_addr_out` is 14 bits.
@@ -71,7 +72,7 @@ listed here. Status: **UNVERIFIED → VERIFIED** (with evidence) or **REJECTED**
 
 | # | Parameter | Needed by stage | Resolved by | Status |
 |---|---|---|---|---|
-| U-01 | Exact FPGA part / board revision | DEBUG | ASSUMPTION-001/002 | UNVERIFIED |
+| U-01 | Exact FPGA part / board revision | DEBUG | ASSUMPTION-001/002 | **PART VERIFIED** (xc7a35t via JTAG); board revision not recorded |
 | U-02 | Team-wide Vivado / MATLAB versions | DEBUG | DEC-008 | RESOLVED — Vivado 2025.2 (DEC-008); MATLAB not pinned |
 | U-03 | Byte order in 32-bit word | DEBUG | Q-02 | **RESOLVED** — MSB byte first |
 | U-04 | Baud rate | DEBUG | DEC-005 | **RESOLVED** — 1 000 000 baud, fixed for all labs (team decision) |

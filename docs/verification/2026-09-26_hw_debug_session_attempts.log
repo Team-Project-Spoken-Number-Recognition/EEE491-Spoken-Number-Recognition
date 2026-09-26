@@ -1,0 +1,36 @@
+# Hardware session — earlier attempts (NOT the evidence run), kept for honesty
+# Date      : 2026-09-26 (before 17:08 and 17:08), Eren, Basys-3, top_debug_demo.bit, COM4, MATLAB R2023b
+# Script    : matlab/tests/hw_debug_session.m (AI-0012)
+# Source    : console output copied by Eren (the log file is overwritten by every new session)
+# Evidence run: docs/verification/2026-09-26_hw_debug_session.log (17:11, HW_RESULT: PASS 14/14)
+#
+# Analysis (docs/verification/2026-09-26_HW-DEBUG.md §3): every deviation is ONE extra, complete,
+# correct frame caused by an additional BTNU press after LD6 was on again (operator, confirmed by Eren
+# for attempt 2). No corrupted frame: every frame read from its first byte matched the COE.
+#   Attempt 1, step 1: extra = 48 960; step 2 read the remaining 16 584 bytes of that extra frame plus
+#                      48 960 bytes of the next one -> "Start word is 2FCFD030" (decoder error path
+#                      working as designed, REQ-SW-003); step 2 extra = 16 584. 48 960 + 16 584 = 65 544.
+#   Attempt 2, step 12: extra = 65 544 = one extra full frame (Eren pressed once more after LD6 was on).
+
+## Attempt 1 (console excerpt)
+>>> Step  1/14  [HW-DEBUG-03]  PRESS BTNU ONCE
+    HW-DEBUG-03  step  1: PASS      (expected PASS     ) bytes=65544 mismatches=0 extra=48960 transfer=0.621 s  => NOT OK
+>>> Step  2/14  [HW-DEBUG-03]  PRESS BTNU ONCE
+    decode error: Start word is 2FCFD030, expected 55AACC03.
+    HW-DEBUG-03  step  2: FAIL      (expected PASS     ) bytes=65544 mismatches=NaN extra=16584 transfer=2.143 s  => NOT OK
+>>> Step  3/14 ... Step 10/14: PASS, extra=0 (transfer 0.608 ... 0.671 s)
+>>> Step 11/14  [HW-DEBUG-04a]  PASS, extra=0, transfer=0.608 s  => OK
+>>> Step 12/14  [HW-DEBUG-04b]  PASS, extra=65544, transfer=0.611 s  => NOT OK
+>>> Step 13/14  [HW-DEBUG-05a]  TRUNCATED (expected TRUNCATED) bytes=25504 extra=0  => OK
+>>> Step 14/14  [HW-DEBUG-05b]  PASS, extra=0, transfer=0.612 s  => OK
+# Transfer time (PASS steps): min 0.608 s, mean 0.632 s, max 0.671 s (n = 10)
+HW_RESULT: FAIL (11/14 steps as expected)
+
+## Attempt 2 (17:08)
+>>> Steps 1-11: PASS, extra=0 (transfer 0.607 ... 0.655 s)  => OK
+>>> Step 12/14  [HW-DEBUG-04b]  PRESS BTNU, THEN PRESS IT 3-4 MORE TIMES WHILE LD6 IS OFF
+    HW-DEBUG-04b step 12: PASS      (expected PASS     ) bytes=65544 mismatches=0 extra=65544 transfer=0.609 s  => NOT OK
+>>> Step 13/14  [HW-DEBUG-05a]  TRUNCATED (expected TRUNCATED) bytes=18672 extra=0  => OK
+>>> Step 14/14  [HW-DEBUG-05b]  PASS, extra=0, transfer=0.607 s  => OK
+# Transfer time (PASS steps): min 0.607 s, mean 0.624 s, max 0.655 s (n = 12)
+HW_RESULT: FAIL (13/14 steps as expected)
