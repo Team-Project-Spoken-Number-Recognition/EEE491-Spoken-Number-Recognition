@@ -22,8 +22,8 @@ listed here. Status: **UNVERIFIED → VERIFIED** (with evidence) or **REJECTED**
 - **Status:** **VERIFIED (official documentation)** — Digilent `Basys-3-Master.xdc` (digilent-xdc commit `69d3501`): `RsTx` = A18, `RsRx` = B18. Also used by the reference design. Hardware confirmation in HW-DEBUG-01.
 
 ### ASSUMPTION-004 — Vivado version
-- **Statement:** Team uses Vivado ML Standard **2025.2** with Artix-7 support (DEC-008, updated 2026-09-26).
-- **Status:** PARTLY VERIFIED — Hande and Eren run 2025.2 (Eren's install checked: xc7a35t parts present). Ömer and the lab PC still to confirm · **How to verify:** `Help → About` + `get_parts xc7a35t*`.
+- **Statement:** Team uses Vivado ML Standard 2023.2 (observed on one member's PC; Block Memory Generator 8.4 in the manual screenshots is consistent).
+- **Status:** UNVERIFIED · **How to verify:** Each member + lab PC report `Help → About`.
 
 ### ASSUMPTION-005 — MATLAB version and serial API
 - **Statement:** MATLAB R2023b (observed on one PC); `serialport` (base MATLAB, R2019b+) is available.
@@ -72,7 +72,7 @@ listed here. Status: **UNVERIFIED → VERIFIED** (with evidence) or **REJECTED**
 | # | Parameter | Needed by stage | Resolved by | Status |
 |---|---|---|---|---|
 | U-01 | Exact FPGA part / board revision | DEBUG | ASSUMPTION-001/002 | UNVERIFIED |
-| U-02 | Team-wide Vivado / MATLAB versions | DEBUG | DEC-008 | **PARTLY RESOLVED** — Vivado 2025.2 (Ömer, lab PC to confirm); MATLAB open |
+| U-02 | Team-wide Vivado / MATLAB versions | DEBUG | DEC-008 | UNKNOWN |
 | U-03 | Byte order in 32-bit word | DEBUG | Q-02 | **RESOLVED** — MSB byte first |
 | U-04 | Baud rate | DEBUG | DEC-005 | **RESOLVED** — 1 000 000 baud, fixed for all labs (team decision) |
 | U-05 | Block RAM latency of demo ROM | DEBUG | IP summary | UNKNOWN |
