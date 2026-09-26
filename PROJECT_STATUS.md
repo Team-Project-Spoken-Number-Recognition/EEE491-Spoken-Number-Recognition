@@ -1,13 +1,13 @@
 # Project Status
 
-_Last updated: 2026-09-26 — TA answers integrated (AI-assisted, pending team review)_
+_Last updated: 2026-09-26 — Lab-DEBUG RTL + testbenches in PR #4, simulation PASS (AI-0006, pending team review)_
 
 ## 1. Stage overview
 
 | Stage | Manual | Manual status | Stage status |
 |---|---|---|---|
 | Phase 1 — initialisation | syllabus | Released | **DONE — pending team review** |
-| Lab-DEBUG | `docs/manuals/Lab-DEBUG_Assignment.pdf` | Released, analysed | **CURRENT — NOT STARTED (design)** |
+| Lab-DEBUG | `docs/manuals/Lab-DEBUG_Assignment.pdf` | Released, analysed | **CURRENT — RTL + TB done (sim PASS), PR #4 in review; top level, synthesis, HW open** |
 | Lab-CTRL | `docs/manuals/Lab-CTRL_Assignment.pdf` | Released, analysed (DEC-003) | NOT STARTED |
 | Lab-ADC | `docs/manuals/pending/Lab-ADC_Assignment_v4.pdf` | Received, not released | — |
 | Lab-WINDOW | `docs/manuals/pending/Lab-WINDOW_Assignment.pdf` | Received, not released | — |
@@ -24,7 +24,7 @@ _Last updated: 2026-09-26 — TA answers integrated (AI-assisted, pending team r
 Current Stage:   Lab-DEBUG (Lab-CTRL not needed for its demo — TA Q-04)
 Official Manual: docs/manuals/Lab-DEBUG_Assignment.pdf
 Analysis:        docs/manual_analysis/Lab-DEBUG_analysis.md
-Status:          IN PROGRESS — requirements documented; design not started
+Status:          IN PROGRESS — design v0.2 merged (PR #3); RTL + TBs in PR #4, sim PASS 2026-09-26
 Due:             Wed Sep 30 2026 (confirmed by team, 2026-09-25)
 ```
 
@@ -33,20 +33,20 @@ Due:             Wed Sep 30 2026 (confirmed by team, 2026-09-25)
 ```text
 [x] Manual requirements understood          (docs/manual_analysis/Lab-DEBUG_analysis.md — pending team review)
 [x] Requirements documented                 (REQUIREMENTS.md §1.2)
-[ ] Architecture defined                    (docs/architecture/subsystems/debug.md — TODO)
-[ ] Implementation completed
-[ ] VHDL/MATLAB code reviewed
-[ ] Testbench created
-[ ] Functional simulation completed
-[ ] Expected vs actual results compared
-[ ] Synthesis completed
+[x] Architecture defined                    (docs/architecture/subsystems/debug.md v0.2, reviewed in PR #3)
+[~] Implementation completed                (debug + uart_tx in PR #4; demo top level + ROM still open — Eren)
+[ ] VHDL/MATLAB code reviewed               (PR #4 awaiting approving review; MATLAB receiver not yet written)
+[x] Testbench created                       (tb_uart_tx, tb_debug — self-checking, DEC-011)
+[~] Functional simulation completed         (block level PASS; TB-TOPDBG-01 with the demo top open)
+[x] Expected vs actual results compared     (37/37, 97/97 PASS — simulation/results/2026-09-26_tb_*.log)
+[ ] Synthesis completed                     (Vivado synthesis not yet run)
 [ ] Hardware test completed
 [ ] Lab demonstration completed
 [ ] Known issues documented
-[ ] Results documented
-[ ] HANDOFF.md updated
-[ ] PROJECT_STATUS.md updated
-[ ] AI interaction documented
+[~] Results documented                      (TEST_PLAN, REQUIREMENTS, TRACEABILITY_MATRIX updated 2026-09-26)
+[~] HANDOFF.md updated                      (2026-09-26, block-level RTL)
+[~] PROJECT_STATUS.md updated               (2026-09-26, block-level RTL)
+[~] AI interaction documented               (AI-0004 record + AI-0006; chat export still to be added by Hande)
 ```
 
 ### Completion checklist — Lab-CTRL
@@ -55,12 +55,12 @@ Due:             Wed Sep 30 2026 (confirmed by team, 2026-09-25)
 [x] Manual requirements understood          (docs/manual_analysis/Lab-CTRL_analysis.md — pending team review)
 [x] Requirements documented                 (REQUIREMENTS.md §1.3)
 [ ] Architecture defined
-[ ] Implementation completed
+[~] Implementation completed                (debug + uart_tx in PR #4; demo top level + ROM still open — Eren)
 [ ] Code reviewed
-[ ] Testbench created
+[x] Testbench created                       (tb_uart_tx, tb_debug — self-checking, DEC-011)
 [ ] Functional simulation completed (framing + sequence waveforms)
-[ ] Expected vs actual results compared
-[ ] Synthesis completed
+[x] Expected vs actual results compared     (37/37, 97/97 PASS — simulation/results/2026-09-26_tb_*.log)
+[ ] Synthesis completed                     (Vivado synthesis not yet run)
 [ ] Hardware test completed (button start, LEDs)
 [ ] Lab demonstration completed
 [ ] Known issues / results documented
@@ -73,10 +73,14 @@ Due:             Wed Sep 30 2026 (confirmed by team, 2026-09-25)
 | Area | Total | OPEN | IN PROGRESS | IMPL. — NOT VERIFIED | VERIFIED |
 |---|---|---|---|---|---|
 | SYS | 6 | 6 | 0 | 0 | 0 |
-| DEBUG | 20 | 20 | 0 | 0 | 0 |
+| DEBUG | 20 | 8 | 0 | 8 | 4 |
 | CTRL | 10 | 10 | 0 | 0 | 0 |
-| IF | 7 | 7 | 0 | 0 | 0 |
-| PERF / HW / SW / VER / DOC / PROC | 21 | 19 | 2 | 0 | 0 |
+| IF | 7 | 3 | 4 | 0 | 0 |
+| PERF / HW / SW / VER / DOC / PROC | 21 | 18 | 2 | 0 | 1 |
+
+2026-09-26: DEBUG/IF/PERF changes come from the block-level simulation of PR #4 only (VERIFIED = all
+listed methods are simulation/analysis; IMPLEMENTED — NOT VERIFIED = hardware or inspection still open).
+Details: `docs/requirements/TRACEABILITY_MATRIX.md`.
 
 ## 4. Risk register
 
@@ -110,3 +114,4 @@ Due:             Wed Sep 30 2026 (confirmed by team, 2026-09-25)
 | Repo location | Inside OneDrive (`...\OneDrive\Masaüstü\EEE391 Project`) | **Risk R-03** |
 | GitHub remote | `Team-Project-Spoken-Number-Recognition/EEE491-Spoken-Number-Recognition`, private, org on free plan | DEC-015 |
 | Branch protection | Enabled on `main` 2026-09-25 (PR + 1 approval, admins included) | Lost if repo goes private on free plan |
+| Hande's PC (2026-09-26) | Vivado **2025.2** (XSim batch mode works); MATLAB R2025b; `gh` not installed; no GHDL | **Version differs from 2023.2 above → DEC-008 / R-04** (IP `.xci` for the demo ROM is version-specific) |
