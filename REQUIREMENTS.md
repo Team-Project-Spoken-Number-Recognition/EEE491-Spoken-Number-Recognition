@@ -62,7 +62,7 @@ corresponding manual is released.**
 | REQ-DEBUG-012 | `reset_in` shall reset the FSM registers. | Defined start-up | DBG §1 ¶6 | S | VERIFIED (sim: TB-DEBUG-01/06, 2026-09-26) | Hande |
 | REQ-DEBUG-013 | `start_in` is active high, asserted for a **single clock cycle**; it only takes the debugger out of its wait state and starts a transfer (see REQ-IF-007). | Common handshake | DBG §1 ¶6 + waveform; TA Q-03 | S | VERIFIED (sim: TB-DEBUG-02/05, 2026-09-26) | Hande |
 | REQ-DEBUG-014 | `ready_out` is active high; it shall be '1' after reset, go **low just after** `start_in` is asserted and return high when all data has been transferred (see REQ-IF-006). | Common handshake | DBG §1 ¶6 + waveform; TA Q-03 | S | VERIFIED (sim: TB-DEBUG-01/02, 2026-09-26) | Hande |
-| REQ-DEBUG-015 | On the PC, MATLAB shall extract the bytes between start and end word and concatenate every four bytes into one 32-bit integer. | PC-side decoding | DBG §1 ¶4 | S (MATLAB test), H | OPEN | Ömer |
+| REQ-DEBUG-015 | On the PC, MATLAB shall extract the bytes between start and end word and concatenate every four bytes into one 32-bit integer. | PC-side decoding | DBG §1 ¶4 | S (MATLAB test), H | IMPLEMENTED — NOT VERIFIED (MATLAB tests PASS: MT-DEBUG-01/02, 2026-09-26; HW-DEBUG-02 open) | Ömer |
 | REQ-DEBUG-016 | Demo design: Lab-DEBUG instantiated in a **top module** that drives `start_in` and observes `ready_out` (Lab-CTRL **not required** — TA Q-04), connected to a ROM from Vivado *Block Memory Generator* (Single-Port ROM, 14-bit address, 32-bit data, initialised from a COE file); N = 14. | Demo requirement | DBG §2 bullet 3, relaxed by TA Q-04 | I, D | OPEN | Hande, Eren |
 | REQ-DEBUG-017 | The design shall be implemented on the FPGA and the ROM content transferred to MATLAB and verified there. | Demo requirement | DBG §2 bullets 1, 4 | H, D | OPEN | Hande, Ömer |
 | REQ-DEBUG-018 | The debugger shall be integrable with any sub-system to transfer that sub-system's RAM data to MATLAB. | Reuse in all later labs | DBG §1 ¶7, ¶4 | I (at each later stage) | OPEN | Hande |
@@ -118,9 +118,9 @@ Released together with Lab-DEBUG because the Lab-DEBUG demo requires Lab-CTRL (D
 
 | ID | Description | Rationale | Source | Verif. | Status | Owner |
 |---|---|---|---|---|---|---|
-| REQ-SW-001 | A MATLAB script shall receive the UART data from the USB port. | PC receiver | DBG §3 | H | OPEN | Ömer |
+| REQ-SW-001 | A MATLAB script shall receive the UART data from the USB port. | PC receiver | DBG §3 | H | IMPLEMENTED — NOT VERIFIED (`receive_debug_frame.m`; HW-DEBUG-02 open) | Ömer |
 | REQ-SW-002 | A terminal program shall be used during bring-up to observe raw bytes. | Incremental bring-up | DBG §3 | H | OPEN | Ömer |
-| REQ-SW-003 | The MATLAB receiver shall read a fixed number of bytes (8 + 4·2^N) and use the start/end words as **validation**, not as the only delimiter (payload may contain the delimiter values). | Robust parsing | DERIVED — design choice, see DEC-010 | S (MATLAB test), H | OPEN | Ömer |
+| REQ-SW-003 | The MATLAB receiver shall read a fixed number of bytes (8 + 4·2^N) and use the start/end words as **validation**, not as the only delimiter (payload may contain the delimiter values). | Robust parsing | DERIVED — design choice, see DEC-010 | S (MATLAB test), H | IMPLEMENTED — NOT VERIFIED (MATLAB tests PASS: MT-DEBUG-02/03, 2026-09-26; HW-DEBUG-02 open) | Ömer |
 
 ## 6. Verification Requirements
 

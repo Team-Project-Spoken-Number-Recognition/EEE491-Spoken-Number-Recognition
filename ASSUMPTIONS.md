@@ -55,7 +55,7 @@ listed here. Status: **UNVERIFIED → VERIFIED** (with evidence) or **REJECTED**
 ### ASSUMPTION-011 — Memory read latency of the demo ROM
 - **Statement:** Block Memory Generator ROM latency is 1 cycle without, 2 cycles with the primitive output register.
 - **Source:** DBG §3 ("usually one or two clock cycles, check the summary tab").
-- **Status:** UNVERIFIED · **How to verify:** Read the IP *Summary* tab after configuration; record value in the subsystem doc.
+- **Status:** VERIFIED 2026-09-26 for the demo ROM `debug_rom` (primitive output register ON): **2 clock edges**, measured in simulation (TB-ROM-01, `simulation/results/2026-09-26_tb_debug_rom.log`); recorded in `debug.md` §12. Cross-check in the IP *Summary* tab when the IP is opened in the GUI.
 
 ### ASSUMPTION-012 — RECORD & NUMBER switches
 - **Statement:** They select template-recording mode and the number being recorded for Lab-COMPARE.

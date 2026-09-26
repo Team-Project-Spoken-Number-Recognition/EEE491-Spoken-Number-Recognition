@@ -40,15 +40,18 @@ XSim batch mode (AI-0006); the batch logs are in `simulation/results/2026-09-26_
 | TB-DEBUG-08 | Payload containing delimiter values (0x55AACC03, 0xAA5503CC), 0x00000000, 0xFFFFFFFF, walking-ones | Sent unchanged | DEC-010 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_tb_debug.log) |
 | TB-DEBUG-09 | Two consecutive transfers | Second frame identical and complete | REQ-DEBUG-001 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_tb_debug.log) |
 | TB-TOPDBG-01 | Demo top (button conditioning + ROM IP simulation model + DEBUG; no CTRL) with a small COE | Button pulse → one complete frame; ROM content matches COE | REQ-DEBUG-016 | PLANNED |
+| TB-ROM-01 | Demo ROM IP `debug_rom`: address change → new word on `douta` | Read latency = 2 clock edges (= `G_MEM_LATENCY` default of `debug`) | REQ-DEBUG-019, ASSUMPTION-011 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_tb_debug_rom.log) |
+| TB-ROM-02 | Demo ROM IP: read all 16 384 addresses | Every word equals `fpga/ip/debug_rom.coe` | REQ-DEBUG-016 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_tb_debug_rom.log) |
+| TB-ROM-03 | Demo ROM IP: test-pattern addresses 0–5, 16382, 16383 | Expected / Actual printed, all equal | REQ-DEBUG-016, DEC-010 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_tb_debug_rom.log) |
 
 ## 2. Lab-DEBUG — MATLAB tests (no hardware)
 
 | ID | Test | Expected | Req. | Status |
 |---|---|---|---|---|
-| MT-DEBUG-01 | Decode a synthetic byte vector (built in MATLAB) | Words equal the source words | REQ-DEBUG-015 | PLANNED |
-| MT-DEBUG-02 | Synthetic stream with delimiter values inside the payload | Correct decode, no truncation | DEC-010 | PLANNED |
-| MT-DEBUG-03 | Corrupted header / short stream | Clear error message, no silent wrong data | REQ-SW-003 | PLANNED |
-| MT-DEBUG-04 | COE generator writes a file that Vivado accepts and MATLAB reads back identically | Round-trip identical | REQ-DEBUG-016 | PLANNED |
+| MT-DEBUG-01 | Decode a synthetic byte vector (built in MATLAB) | Words equal the source words | REQ-DEBUG-015 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_mt_debug.log) |
+| MT-DEBUG-02 | Synthetic stream with delimiter values inside the payload | Correct decode, no truncation | DEC-010 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_mt_debug.log) |
+| MT-DEBUG-03 | Corrupted header / short stream | Clear error message, no silent wrong data | REQ-SW-003 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_mt_debug.log) |
+| MT-DEBUG-04 | COE generator writes a file that Vivado accepts and MATLAB reads back identically | Round-trip identical | REQ-DEBUG-016 | PASS 2026-09-26 — MATLAB round trip + format ([log](simulation/results/2026-09-26_mt_debug.log)); Vivado accepts the COE and the ROM holds it exactly (TB-ROM-02, [log](simulation/results/2026-09-26_tb_debug_rom.log)) |
 
 ## 3. Lab-DEBUG — hardware tests (Basys-3)
 

@@ -1,0 +1,78 @@
+# Simulation log — tb_debug_rom (TB-ROM-01..03)
+# Date      : 2026-09-26
+# Simulator : Vivado 2025.2 XSim (launch_simulation -scripts_only, then compile/elaborate/simulate.bat)
+# Sources   : fpga/ip/debug_rom/debug_rom.xci (blk_mem_gen 8.4, from fpga/ip/create_debug_rom.tcl),
+#             fpga/ip/debug_rom.coe, fpga/tb/debug/tb_debug_rom.vhd
+# Run by    : Claude Code session (AI-0007) on Ömer's PC
+# Command   : vivado -mode batch -source fpga/vivado/sim_debug_rom.tcl
+# Redacted  : host name, process ID, CPU/memory details (public repository, TEAM_MANUAL §9)
+# Mutation  : re-elaborated with -generic_top G_EXPECTED_LATENCY=1 -> TB_RESULT: FAIL (10 of 11
+#             checks failed); every word read one clock early returns the previous address's
+#             word (shift-by-one), so the testbench detects a wrong latency assumption.
+# ------------------------------------------------------------------------------
+#-----------------------------------------------------------
+# xsim v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sat Sep 26 15:31:33 2026
+# Process ID         : [REDACTED]
+# Current directory  : <repo>/fpga/vivado/build/sim_debug_rom/sim_debug_rom.sim/sim_1/behav/xsim
+# Command line       : xsim.exe -log simulate.log -mode tcl -source {xsim.dir/tb_debug_rom_behav/xsim_script.tcl}
+# Log file           : <repo>/fpga/vivado/build/sim_debug_rom/sim_debug_rom.sim/sim_1/behav/xsim/simulate.log
+# Journal file       : <repo>/fpga/vivado/build/sim_debug_rom/sim_debug_rom.sim/sim_1/behav/xsim\xsim.jou
+# Running On         : [REDACTED]
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : [REDACTED]
+# CPU Frequency      : [REDACTED]
+# CPU Physical cores : [REDACTED]
+# CPU Logical cores  : [REDACTED]
+# Host memory        : [REDACTED]
+# Swap memory        : [REDACTED]
+# Total Virtual      : 36200 MB
+# Available Virtual  : 17345 MB
+#-----------------------------------------------------------
+source xsim.dir/tb_debug_rom_behav/xsim_script.tcl
+# xsim {tb_debug_rom_behav} -autoloadwcfg -tclbatch {tb_debug_rom.tcl} -key {Behavioral:sim_1:Functional:tb_debug_rom}
+Time resolution is 1 ps
+source tb_debug_rom.tcl
+## set curr_wave [current_wave_config]
+## if { [string length $curr_wave] == 0 } {
+##   if { [llength [get_objects]] > 0} {
+##     add_wave /
+##     set_property needs_save false [current_wave_config]
+##   } else {
+##      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+##   }
+## }
+## run all
+ Block Memory Generator module loading initial data...
+ Block Memory Generator data initialization complete.
+Block Memory Generator module tb_debug_rom.dut.inst.native_mem_module.blk_mem_gen_v8_4_12_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
+Note: COE word count  Expected: 16384  Actual: 16384  PASS
+Time: 0 ps  Iteration: 0  Process: /tb_debug_rom/stimulus  File: <repo>/fpga/tb/debug/tb_debug_rom.vhd
+Note: TB-ROM-01 read latency (clock edges)  Expected: 2  Actual: 2  PASS
+Time: 66 ns  Iteration: 0  Process: /tb_debug_rom/stimulus  File: <repo>/fpga/tb/debug/tb_debug_rom.vhd
+Note: TB-ROM-03 addr 0  Expected: 0000FFFF  Actual: 0000FFFF  PASS
+Time: 86 ns  Iteration: 0  Process: /tb_debug_rom/stimulus  File: <repo>/fpga/tb/debug/tb_debug_rom.vhd
+Note: TB-ROM-03 addr 1  Expected: 55AACC03  Actual: 55AACC03  PASS
+Time: 106 ns  Iteration: 0  Process: /tb_debug_rom/stimulus  File: <repo>/fpga/tb/debug/tb_debug_rom.vhd
+Note: TB-ROM-03 addr 2  Expected: AA5503CC  Actual: AA5503CC  PASS
+Time: 126 ns  Iteration: 0  Process: /tb_debug_rom/stimulus  File: <repo>/fpga/tb/debug/tb_debug_rom.vhd
+Note: TB-ROM-03 addr 3  Expected: 00000000  Actual: 00000000  PASS
+Time: 146 ns  Iteration: 0  Process: /tb_debug_rom/stimulus  File: <repo>/fpga/tb/debug/tb_debug_rom.vhd
+Note: TB-ROM-03 addr 4  Expected: FFFFFFFF  Actual: FFFFFFFF  PASS
+Time: 166 ns  Iteration: 0  Process: /tb_debug_rom/stimulus  File: <repo>/fpga/tb/debug/tb_debug_rom.vhd
+Note: TB-ROM-03 addr 5  Expected: 0005FFFA  Actual: 0005FFFA  PASS
+Time: 186 ns  Iteration: 0  Process: /tb_debug_rom/stimulus  File: <repo>/fpga/tb/debug/tb_debug_rom.vhd
+Note: TB-ROM-03 addr 16382  Expected: 55AACC03  Actual: 55AACC03  PASS
+Time: 206 ns  Iteration: 0  Process: /tb_debug_rom/stimulus  File: <repo>/fpga/tb/debug/tb_debug_rom.vhd
+Note: TB-ROM-03 addr 16383  Expected: AA5503CC  Actual: AA5503CC  PASS
+Time: 226 ns  Iteration: 0  Process: /tb_debug_rom/stimulus  File: <repo>/fpga/tb/debug/tb_debug_rom.vhd
+Note: TB-ROM-02 words equal to COE  Expected: 16384 match  Actual: 16384 match  PASS
+Time: 327906 ns  Iteration: 0  Process: /tb_debug_rom/stimulus  File: <repo>/fpga/tb/debug/tb_debug_rom.vhd
+Note: TB_RESULT: PASS (11/11 checks)
+Time: 327906 ns  Iteration: 0  Process: /tb_debug_rom/stimulus  File: <repo>/fpga/tb/debug/tb_debug_rom.vhd
+## quit
+INFO: [Common 17-206] Exiting xsim at Sat Sep 26 15:31:35 2026...
