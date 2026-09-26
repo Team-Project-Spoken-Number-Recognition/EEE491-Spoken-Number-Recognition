@@ -22,7 +22,7 @@ for speed, except TB-UART-02 which uses the real 100 MHz / 1 000 000 divider (10
 | TB-UART-02 | Real divider: measure bit period | 100 clocks ± 0 (1.00 µs); frame = 10 bit periods | REQ-DEBUG-009, REQ-PERF-001 | PLANNED |
 | TB-UART-03 | Back-to-back bytes | No glitch between stop bit and next start bit; stop bit ≥ 1 bit period | REQ-DEBUG-008 | PLANNED |
 | TB-DEBUG-01 | Reset: assert `reset_in` | `txd_out` = '1', `ready_out` = '1', FSM idle | REQ-DEBUG-012, REQ-IF-006 | PLANNED |
-| TB-DEBUG-02 | Handshake: 1-cycle `start_in` | `ready_out` falls one cycle after start, stays low until the last stop bit, then rises | REQ-DEBUG-013/014, REQ-IF-002/003 | PLANNED |
+| TB-DEBUG-02 | Handshake: 1-cycle `start_in` | `ready_out` is cleared at the edge that samples `start_in` = '1' (low one clock after `start_in` rose), stays low until the last stop bit, then rises | REQ-DEBUG-013/014, REQ-IF-002/003 | PLANNED |
 | TB-DEBUG-03 | Full frame, N small, known memory pattern | Byte stream = 55 AA CC 03, words 0..2^N−1 MSB-byte first, AA 55 03 CC; count = 8 + 4·2^N | REQ-DEBUG-004..007 | PLANNED |
 | TB-DEBUG-04 | Address sequence | `mem_addr_out` visits 0 … 2^N−1 exactly once, in order; no out-of-range address | REQ-DEBUG-003/004 | PLANNED |
 | TB-DEBUG-05 | `start_in` while busy | Ignored; stream unchanged | REQ-IF-007 | PLANNED |

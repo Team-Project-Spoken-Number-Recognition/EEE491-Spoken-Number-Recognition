@@ -39,8 +39,9 @@ ready_out  ‾‾‾‾‾‾‾|___________________ ... ___|‾‾‾‾‾‾ 
 Clarified by the TA (Q-03, 2026-09-26):
 - `ready_out` = '1' after reset; '1' = idle/waiting, '0' = working (REQ-IF-006).
 - `start_in` only leaves the wait state; pulses while working are ignored (REQ-IF-007).
-- "Low just after start": **PROPOSED:** `ready_out` is low from the first rising edge after the edge
-  that sampled `start_in` = '1' (i.e. registered, 1-cycle response).
+- "Low just after start": `ready_out` is a register that is cleared **at the same rising edge that samples
+  `start_in` = '1'**, so it is low one clock after `start_in` rose (manual waveform DBG §1 / CTRL §1).
+  Corrected 2026-09-26 (CORR-0002); design: `docs/architecture/subsystems/debug.md` §9.
 
 ## 3. Lab-DEBUG (manual: DBG §1) — current stage
 
@@ -63,7 +64,7 @@ Clarified by the TA (Q-03, 2026-09-26):
 | `N` | 14 | Memory address width → 2^N words. Named literally `N` and declared at the top of the code (TA Q-07, DEC-012) |
 | `G_CLK_FREQ_HZ` | 100_000_000 | Clock frequency |
 | `G_BAUD_RATE` | 1_000_000 | Baud rate — fixed for the whole project (DEC-005); divider 100 000 000 / 1 000 000 = 100 (exact) |
-| `G_MEM_LATENCY` | from IP summary (1 or 2) | Clock cycles from address to valid data (REQ-DEBUG-019) |
+| `G_MEM_LATENCY` | 2 | Clock cycles from address to valid data (REQ-DEBUG-019). 2 is safe for Block Memory Generator with or without the output register (waiting longer is harmless, shorter shifts every word); set to the IP-summary value and record it (debug.md §12) |
 
 Simulation will override `N` and the baud divider to keep run-time short; one test keeps
 the real divider (see `TEST_PLAN.md`).
