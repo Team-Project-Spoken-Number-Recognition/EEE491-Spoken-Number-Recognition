@@ -5,7 +5,7 @@ Owner:        Hande (coordinator, DEBUG RTL)      Reviewer: Eren, Ömer
 Stage / manual: Lab-DEBUG — docs/manuals/Lab-DEBUG_Assignment.pdf (DBG)
 Status:       DRAFT (v0.1, 2026-09-26) — to be REVIEWED before any RTL is written
 Requirements: REQ-DEBUG-001…020, REQ-IF-001…003, REQ-IF-005…007, REQ-PERF-001/002, REQ-VER-002
-AI-assisted:  yes — Claude Opus 5.5 (claude.ai chat, 2026-09-26); log ID to be assigned (next free: AI-0004)
+AI-assisted:  yes — Claude Opus 5.5 (claude.ai chat, 2026-09-26); AI-0004 (review: AI-0005)
 ```
 
 Sources used: `REQUIREMENTS.md` §1.2, `INTERFACES.md` §1–3 and §6, `DECISIONS.md` (DEC-005/006/007/010/011/012/018),
@@ -180,9 +180,9 @@ txd_out    ‾‾‾‾‾‾‾‾|__start__|b0|b1|...                 start bi
 ```
 
 - `ready_out` falls at the **same edge that samples `start_in` = '1'**, i.e. one clock after `start_in`
-  rose. This matches the manual waveform and TB-DEBUG-02; it refines the PROPOSED wording in
-  INTERFACES §2 ("first rising edge after the edge that sampled start") — reviewers please align the
-  wording in INTERFACES.md.
+  rose. This matches the manual waveform and TB-DEBUG-02. INTERFACES §2 had a wrong wording ("first
+  rising edge after the edge that sampled start"); it was aligned with this document in review
+  (CORR-0002).
 - One UART byte: start bit + 8 data bits + stop bit, each exactly C clocks → 10·C clocks on the line.
 - Gap between bytes of the same word: the FSM needs 2 extra clocks (`tx_done` → `S_SEND_BYTE` →
   accepted), so the stop bit is effectively C + 2 clocks long. Stop bit ≥ 1 bit period is guaranteed
@@ -305,9 +305,9 @@ constant byte → `debug` FSM + TB-DEBUG → demo top level + ROM.
 - Transmit only, no flow control, no parity, fixed 8N1 (REQ-DEBUG-002).
 - A transfer cannot be paused; reset is the only way to abort it.
 - `start_in` must be a clean one-cycle pulse (see §15).
-- **1 000 000 baud is not yet verified on hardware** (ASSUMPTION-009), and the TA answered "No" to Q-06;
-  the team's interpretation is recorded in DEC-005. Fallback: set `G_BAUD_RATE` = 115 200
-  (C = 868, +0.006 % error), re-run TB-UART-02 — no other change needed.
+- **1 000 000 baud (DEC-005, ACCEPTED) is not yet verified on hardware** (ASSUMPTION-009) → HW-DEBUG-01.
+  Contingency only, if the hardware link fails: set `G_BAUD_RATE` = 115 200 (C = 868, +0.006 % error)
+  and re-run TB-UART-02 — no other change needed.
 - The design assumes the memory output is stable while the address is unchanged (true for Block
   Memory Generator ROM/RAM read ports with enable = '1').
 
@@ -316,3 +316,4 @@ constant byte → `debug` FSM + TB-DEBUG → demo top level + ROM.
 | Version | Date | Author | Change |
 |---|---|---|---|
 | 0.1 | 2026-09-26 | Hande (AI-assisted, Claude Opus 5.5) | First draft for review |
+| 0.2 | 2026-09-26 | Review (Eren + Claude, AI-0005) | Log ID filled in; §9 note resolved (INTERFACES §2 corrected, CORR-0002); §18 baud wording aligned with DEC-005 |
