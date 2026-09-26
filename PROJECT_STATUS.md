@@ -46,7 +46,7 @@ Due:             Wed Sep 30 2026 (confirmed by team, 2026-09-25)
 [~] Results documented                      (TEST_PLAN, REQUIREMENTS, TRACEABILITY_MATRIX updated 2026-09-26)
 [~] HANDOFF.md updated                      (2026-09-26, AI-0007: MATLAB + ROM IP)
 [~] PROJECT_STATUS.md updated               (2026-09-26, AI-0007: MATLAB + ROM IP)
-[~] AI interaction documented               (AI-0004, AI-0006, AI-0007 records; chat exports of AI-0004 (Hande) and AI-0007 (Ömer) still to add)
+[~] AI interaction documented               (AI-0004, AI-0006, AI-0007 records; AI-0007 chat export added; AI-0004 (Hande) still to add)
 ```
 
 ### Completion checklist — Lab-CTRL

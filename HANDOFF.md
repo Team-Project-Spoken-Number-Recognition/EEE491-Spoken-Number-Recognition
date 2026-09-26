@@ -84,8 +84,8 @@ None.
    changes); get the Basys-3 back from Hande (Mon); install the FTDI VCP driver; find the COM port.
 4. Tuesday (Hande + Ömer): HW-DEBUG-01 (terminal, 1 Mbaud), then `run_debug_demo("COMx")` for
    HW-DEBUG-02…05; evidence into `docs/verification/`. Tuesday evening: freeze.
-5. Session exports: AI-0004 (Hande), AI-0007 (Ömer — this session) into `ai/sessions/` after the personal-data
-   check (the chat contains pasted group messages with phone numbers → redact).
+5. Session exports: AI-0004 (Hande) still to add. AI-0007 (Ömer) added, redacted, group chats omitted — keep the
+   same rule for other exports (no pasted WhatsApp messages or phone numbers in the public repo).
 6. Wed Sep 30: demo, tag `lab-debug-demo`, release with bitstream.
 
 ## Blockers
