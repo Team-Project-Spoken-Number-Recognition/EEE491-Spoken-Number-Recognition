@@ -39,5 +39,6 @@ Warnings: 1× IP file moved (expected, the build copies the `.xci` into the buil
 (host name and build path redacted, DEC-016).
 
 ## Notes / follow-up
-- Estimate was 16 RAMB36; the IP packs 16 384 × 32 bit into 14.5 tiles.
+- The first design-doc estimate was 16 RAMB36. The IP's own estimate in `debug_rom.xci` (`C_COUNT_36K_BRAM = 14`,
+  `C_COUNT_18K_BRAM = 1`, Minimum_Area packing incl. parity bits, pointed out by Ömer) matches the post-route result: 14.5 tiles.
 - Next: HW-DEBUG-01…05 on the board with `run_debug_demo("COMx")`.

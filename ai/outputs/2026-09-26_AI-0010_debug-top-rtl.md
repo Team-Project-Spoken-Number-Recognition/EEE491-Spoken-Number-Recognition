@@ -43,6 +43,16 @@ Purpose:       Implement the reviewed design top_debug_demo.md (PR #7) — "Appr
 ## Reference design use (DEC-018)
 None in this step (debounce deviation already recorded in DEC-019).
 
+## Follow-up AI-0011 — Ömer's §12 review comment (PR #7)
+Ömer reviewed §12 in a PR comment at 13:06 (before the RTL commits). **The AI did not check the PR for new
+comments before continuing and missed it** until Eren asked. Items: (1) BRAM estimate 16 → IP estimate
+14 RAMB36 + 1 RAMB18 — accepted, confirmed in `debug_rom.xci` and by the post-route report; SYN-TOPDBG
+criterion had already been changed in v0.3; (2) pattern example `k = 5 → 0005FFFA` — accepted; (3) changing N
+also needs a new COE + TB-ROM re-run — accepted; (4) "6.6 M cycles, not 6.7 M" — **partly disputed**: 6.55 M
+counts only the bits; with the 2-clock byte gap and the 4-clock word overhead it is 6.75 M, matching the
+simulated 67.5 ms — formula written into §12. Design doc v0.4.
+Lesson: re-read PR reviews/comments before every push to a PR branch.
+
 ## Human Review / Detected Issues / Final Decision
 _PENDING — reviewers of PR #7 (Ömer, Hande)._
 
