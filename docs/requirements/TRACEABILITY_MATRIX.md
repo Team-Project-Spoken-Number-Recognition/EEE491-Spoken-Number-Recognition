@@ -20,7 +20,7 @@ to committed evidence.
 | REQ-DEBUG-012 | DBG §1 ¶6 | fpga/rtl/debug/debug.vhd, uart_tx.vhd | TB-DEBUG-01/06, HW-DEBUG-05 | PASS 2026-09-26, [tb_debug log](../../simulation/results/2026-09-26_tb_debug.log) | open (HW-DEBUG-04/05, not required for status) | PR #4 (`d6bdd94`) | VERIFIED (sim) |
 | REQ-DEBUG-013 | DBG §1 ¶6 | fpga/rtl/debug/debug.vhd, uart_tx.vhd | TB-DEBUG-02/05, HW-DEBUG-04 | PASS 2026-09-26, [tb_debug log](../../simulation/results/2026-09-26_tb_debug.log) | open (HW-DEBUG-04/05, not required for status) | PR #4 (`d6bdd94`) | VERIFIED (sim) |
 | REQ-DEBUG-014 | DBG §1 ¶6 | fpga/rtl/debug/debug.vhd, uart_tx.vhd | TB-DEBUG-02 | PASS 2026-09-26, [tb_debug log](../../simulation/results/2026-09-26_tb_debug.log) | n/a | PR #4 (`d6bdd94`) | VERIFIED (sim) |
-| REQ-DEBUG-015 | DBG §1 ¶4 | matlab/debug/ | MT-DEBUG-01..03, HW-DEBUG-02 | | | | OPEN |
+| REQ-DEBUG-015 | DBG §1 ¶4 | matlab/debug/decode_debug_frame.m | MT-DEBUG-01..03, HW-DEBUG-02 | PASS 2026-09-26, [mt_debug log](../../simulation/results/2026-09-26_mt_debug.log) | open (HW-DEBUG-02) | PR #5 | IMPLEMENTED — NOT VERIFIED |
 | REQ-DEBUG-016 | DBG §2 | top, IP, COE | TB-TOPDBG-01, MT-DEBUG-04 | | | | OPEN |
 | REQ-DEBUG-017 | DBG §2 | | HW-DEBUG-02/03 | n/a | | | OPEN |
 | REQ-DEBUG-018 | DBG §1 ¶8 | | later stages | | | | OPEN |

@@ -45,10 +45,10 @@ XSim batch mode (AI-0006); the batch logs are in `simulation/results/2026-09-26_
 
 | ID | Test | Expected | Req. | Status |
 |---|---|---|---|---|
-| MT-DEBUG-01 | Decode a synthetic byte vector (built in MATLAB) | Words equal the source words | REQ-DEBUG-015 | PLANNED |
-| MT-DEBUG-02 | Synthetic stream with delimiter values inside the payload | Correct decode, no truncation | DEC-010 | PLANNED |
-| MT-DEBUG-03 | Corrupted header / short stream | Clear error message, no silent wrong data | REQ-SW-003 | PLANNED |
-| MT-DEBUG-04 | COE generator writes a file that Vivado accepts and MATLAB reads back identically | Round-trip identical | REQ-DEBUG-016 | PLANNED |
+| MT-DEBUG-01 | Decode a synthetic byte vector (built in MATLAB) | Words equal the source words | REQ-DEBUG-015 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_mt_debug.log) |
+| MT-DEBUG-02 | Synthetic stream with delimiter values inside the payload | Correct decode, no truncation | DEC-010 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_mt_debug.log) |
+| MT-DEBUG-03 | Corrupted header / short stream | Clear error message, no silent wrong data | REQ-SW-003 | PASS 2026-09-26 — [log](simulation/results/2026-09-26_mt_debug.log) |
+| MT-DEBUG-04 | COE generator writes a file that Vivado accepts and MATLAB reads back identically | Round-trip identical | REQ-DEBUG-016 | PARTIAL 2026-09-26 — MATLAB round trip + format PASS ([log](simulation/results/2026-09-26_mt_debug.log)); Vivado acceptance open (ROM IP) |
 
 ## 3. Lab-DEBUG — hardware tests (Basys-3)
 
