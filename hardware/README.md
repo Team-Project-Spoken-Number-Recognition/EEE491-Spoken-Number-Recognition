@@ -5,7 +5,7 @@
 | Document | Needed for | Source | Stored as | Status |
 |---|---|---|---|---|
 | Basys-3 Reference Manual | UART section, buttons, LEDs, part number | Digilent website | `datasheets/` or link | TODO |
-| `Basys3_Master.xdc` | Pin constraints | Digilent GitHub (digilent-xdc) | `fpga/constraints/Basys3_Master.xdc` (unmodified copy) | TODO |
+| `Basys3_Master.xdc` | Pin constraints | Digilent GitHub (digilent-xdc, MIT), commit `69d3501` | `fpga/constraints/Basys3_Master.xdc` (unmodified copy) | DONE 2026-09-26 |
 | FT2232H datasheet | UART interface, max baud | FTDI website | `datasheets/` | TODO |
 | AN232B-05 Baud Rates | Baud rate selection | FTDI website | `datasheets/` | TODO |
 | FTDI VCP driver | PC connection | FTDI website | install only | TODO |
